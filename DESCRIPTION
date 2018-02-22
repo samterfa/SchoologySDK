@@ -9,3 +9,5 @@ Description: See https://developers.schoology.com/api-documentation/rest-api-v1/
 License: none
 Encoding: UTF-8
 LazyData: true
+URL: http://github.com/sterfa02/SchoologyAPI
+BugReports: http://github.com/sterfa02/SchoologyAPI/issues
