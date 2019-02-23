@@ -38,6 +38,75 @@ getObject <- function(endpointWithQuery, consumerKey = myConsumerKey, consumerSe
      }
 }
 
+makeOauthSignature <- function(url, method, authHeader, consumerSecret, tokenSecret){
+  
+  # Separate url and query.
+  if(regexpr('?', url, fixed = T) > 0){
+    query <- substr(url, regexpr('?', url, fixed = T) + 1, nchar(url))
+    queries <- strsplit(query, '&', fixed = T)[[1]]
+    url <- substr(url, 1, regexpr('?', url, fixed = T) - 1)
+  }
+  
+  baseString <- paste0(toupper(method), '&', URLencode(tolower(url), reserved = T), '&')
+  
+  authList <- strsplit(authHeader, ',')[[1]][-1]
+  oauth_config <- authList[grep('method', authList)]
+  authList <- authList[c(1, 3, 5, 4, 2, 6)]
+  oauth_config <- substr(authList[[3]], regexpr('=', authList[[3]]) + 1, nchar(authList[[3]]))
+  
+  params <- append(authList, queries)
+  params <- params[order(params)]
+  
+  baseString <- paste0(baseString, URLencode(paste(params, collapse = '&'), reserved = T))
+  
+  oauthString <- paste0(consumerSecret, '&', tokenSecret)
+  
+  if(oauth_config == 'PLAINTEXT'){
+    return(oauthString)
+  }
+  
+  if(oauth_config == 'HMAC-SHA1'){
+    signature <- URLencode(hmac_sha1(oauthString, baseString), reserved = F)
+    return(signature)
+  }
+  stop('Did not recognize oauth_signature_method')
+}
+
+getObject2 <- function(endpointWithQuery, consumerKey = myConsumerKey, consumerSecret = myConsumerSecret, token = '', tokenSecret = ''){
+  
+  require(httr)
+  require(jsonlite)
+ 
+  url <- paste0(baseUrl, endpointWithQuery)
+  method <- 'GET'
+  oauth_config <- 'HMAC-SHA1'
+  
+  timestamp <-  as.numeric(Sys.time())
+  nonce <- timestamp
+  
+  authHeader <- paste0('OAuth ',
+                       'realm=Schoology API',
+                       ',oauth_consumer_key=', consumerKey,
+                       ',oauth_token=', token,
+                       ',oauth_nonce=', nonce,
+                       ',oauth_timestamp=', timestamp,
+                       ',oauth_signature_method=', oauth_config,
+                       ',oauth_version=1.0'
+                        )
+  
+  signature <- makeOauthSignature(url, method, authHeader, consumerSecret, tokenSecret)
+  authHeader <- paste0(authHeader, ',oauth_signature=', URLencode(signature, reserved = T))
+  
+  response <- GET(url, add_headers(Authorization = authHeader))
+  
+  # If we receive a 2## response...
+  if(round(response$status_code, digits = -2) == 200){
+    return(content(response))
+  }else{
+    return(response)
+  }
+}
+
 updateObject <- function(endpointWithQuery, payload, consumerKey = myConsumerKey, consumerSecret = myConsumerSecret, token = '', tokenSecret = ''){
      
      require(httr)
