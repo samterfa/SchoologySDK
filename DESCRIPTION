@@ -1,4 +1,4 @@
-Package: SchoologySDK
+Package: schoologysdk
 Type: Package
 Title: Creates R Functions for Schoology API Functions
 Version: 0.1.0
