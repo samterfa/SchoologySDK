@@ -9,10 +9,11 @@ Description: See https://developers.schoology.com/api-documentation/rest-api-v1/
 License: GPL-2
 Encoding: UTF-8
 LazyData: true
-URL: http://github.com/sterfa02/SchoologySDK
-BugReports: http://github.com/sterfa02/SchoologySDK/issues
+URL: http://github.com/sterfa02/schoologysdk
+BugReports: http://github.com/sterfa02/schoologysdk/issues
 Imports:
   tidyverse
+  jsonlite
 Remotes: 
   
   
