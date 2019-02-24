@@ -1,5 +1,8 @@
 # SEE https://developers.schoology.com/api-documentation/rest-api-v1/user FOR MORE DETAILS.
 
+require(jsonlite)
+source('R/Helper Functions.R')
+
 # This function creates a User object. NOTE: Documentation is incorrect. id NOT school_uid is required for bulk updating users.
 createUserObject = function(id = NULL, school_id = NULL, building_id = NULL, school_uid = NULL, name_title = NULL, name_title_show = NULL, name_first = NULL, name_first_preferred = NULL, name_middle = NULL, name_middle_show = NULL, name_last = NULL, name_display = NULL, username = NULL, primary_email = NULL, position = NULL, gender = NULL, grad_year = NULL, birthday_date = NULL, password = NULL, role_id = NULL, email_login_info = NULL, profiel_url = NULL, tz_name = NULL, parents = NULL, parent_uids = NULL, advisor_uids = NULL, child_uids = NULL, send_message = NULL, synced = NULL, profile_picture_fid = NULL, additional_buildings = NULL){
      
@@ -25,7 +28,7 @@ createUser = function(object = createUserObject()){
 createUsers = function(userObjects = list(createUserObject()), update_existing = 0, ignore_email_conflicts = 0, email_conflict_resolution = 1){
      
      require(jsonlite)
-     source('~/Google Drive/2017-2018/SchoologyApi/Helper Functions.R')
+     source('R/Helper Functions.R')
      
      params = as.list(environment())[-1]
      
@@ -56,7 +59,7 @@ createUsers = function(userObjects = list(createUserObject()), update_existing =
 listUsers = function(active = TRUE, start = 0, limit = 200, building_id = NULL, role_ids = NULL, parent_access_codes = NULL, school_uids = NULL, extended = NULL){
      
      require(jsonlite)
-     source('~/Google Drive/2017-2018/SchoologyApi/Helper Functions.R')
+     source('R/Helper Functions.R')
      
      params = as.list(environment())[-1]
      
@@ -84,7 +87,7 @@ listUsers = function(active = TRUE, start = 0, limit = 200, building_id = NULL, 
 viewUser = function(userId, active = TRUE, extended = FALSE){
      
      require(jsonlite)
-     source('~/Google Drive/2017-2018/SchoologyApi/Helper Functions.R')
+     source('R/Helper Functions.R')
      
      if(active){
           endpoint = paste0('users/', userId)
@@ -115,7 +118,7 @@ viewUser = function(userId, active = TRUE, extended = FALSE){
 updateUser = function(userObject = createUserObject()){
     
      require(jsonlite)
-     source('~/Google Drive/2017-2018/SchoologyApi/Helper Functions.R')
+     source('R/Helper Functions.R')
      
      endpoint = paste0('users/', id)
      
@@ -128,7 +131,7 @@ updateUser = function(userObject = createUserObject()){
 updateUsers = function(userObjects = list(createUserObject())){
      
      require(jsonlite)
-     source('~/Google Drive/2017-2018/SchoologyApi/Helper Functions.R')
+     source('R/Helper Functions.R')
      
      indicesToRemove = integer()
      for(i in 1:length(userObjects)){
@@ -191,7 +194,7 @@ createAssociationObject = function(student_school_uid = NULL, adult_school_uid =
 createAssociations = function(associationObjects = list(createAssociationObject()), adultType = c('advisor', 'parent')){
      
      require(jsonlite)
-     source('~/Google Drive/2017-2018/SchoologyApi/Helper Functions.R')
+     source('R/Helper Functions.R')
      
      indicesToRemove = integer()
      for(i in 1:length(associationObjects)){
@@ -218,10 +221,9 @@ createAssociations = function(associationObjects = list(createAssociationObject(
 viewApiUser = function(currentAccessToken, currentAccessTokenSecret, currentConsumerKey, currentConsumerSecret){
      
      require(jsonlite)
-     source('~/Google Drive/2017-2018/SchoologyApi/Helper Functions.R')
+     source('R/Helper Functions.R')
      
-     endpoint = 'users/me'
-  #   endpoint = 'app-user-info'   
+     endpoint = 'users/me'  
      resource = getObject(endpoint, consumerKey = currentConsumerKey, consumerSecret = currentConsumerSecret, token = currentAccessToken, tokenSecret = currentAccessTokenSecret)
   
      # If there's no error...
@@ -240,7 +242,6 @@ viewApiUser = function(currentAccessToken, currentAccessTokenSecret, currentCons
 viewAppUserInfo = function(currentAccessToken, currentAccessTokenSecret, currentConsumerKey, currentConsumerSecret){
      
      require(jsonlite)
-     source('~/Google Drive/2017-2018/SchoologyApi/Helper Functions.R')
      
      endpoint = 'app-user-info'   
      resource = getObject(endpoint, consumerKey = currentConsumerKey, consumerSecret = currentConsumerSecret, token = currentAccessToken, tokenSecret = currentAccessTokenSecret)
@@ -261,7 +262,7 @@ viewAppUserInfo = function(currentAccessToken, currentAccessTokenSecret, current
 listLanguages = function(){
      
      require(jsonlite)
-     source('~/Google Drive/2017-2018/SchoologyApi/Helper Functions.R')
+     source('R/Helper Functions.R')
      
      endpoint = 'users/languages'
      resource = getObject(endpoint)

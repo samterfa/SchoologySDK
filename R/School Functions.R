@@ -15,8 +15,7 @@ listSchools = function(start = 0, limit = 200){
 
      endpoint = 'schools'
 
-   #  resource = getObject(addParameters(endpoint, params))
-     resource = getObject2(addParameters(endpoint, params))
+     resource = getObject(addParameters(endpoint, params))
 
      # If there's no error...
      if(!exists('status_code', where = resource)){

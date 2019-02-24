@@ -1,42 +1,15 @@
 signatureMethod <- 'PLAINTEXT' ## This is the signature generation method used for Oauth. For https connection, plaintext works fine. See https://developers.schoology.com/api-documentation/authentication for details. 
 baseUrl <- 'https://api.schoology.com/v1/' ## API calls are made to urls which start this way.
 authVersion <- '1.0' ## Current Oauth version used.
-appConsumerKey <- '266de2520e08b212cbe0a6c9e24b0b9f058274804'
-appConsumerSecret <- '5845ba0845a3a72dc469f865ead8f5e2'
+#appConsumerKey <- '266de2520e08b212cbe0a6c9e24b0b9f058274804'
+appConsumerKey <- '28aca4dffadb8ef4e19d80ac566d7f5305836499f'
+#appConsumerSecret <- '5845ba0845a3a72dc469f865ead8f5e2'
+appConsumerSecret <- '0a52488fdf16d6ebd3c38403e2940fd3'
 myConsumerKey <- '44da8dffeba4f148bd9a2e9ff6f35b65056e0a579' ## Can be found at http://schoology.yourDomainName.whatever/api
 myConsumerSecret <- 'f8ab24b57199616c140530c32a303dae' ## Can be found at http://schoology.yourDomainName.whatever/api
 currentToken <- 'fd8a2c443487d6e90f29277b9c7fdc7c05a7b0af9'
 currentTokenSecret <- 'c3b5be8e51a875c47f9d1e480ba522cf'
-
-
-getObject <- function(endpointWithQuery, consumerKey = myConsumerKey, consumerSecret = myConsumerSecret, token = '', tokenSecret = ''){
-     
-     require(httr)
-     require(jsonlite)
-     
-     url <- paste0(baseUrl, endpointWithQuery)
-     
-     timestamp <-  as.numeric(Sys.time())
-     nonce <- timestamp
-     authHeader <- paste0('OAuth ',
-                          'realm=Schoology API',
-                          ',oauth_consumer_key=', consumerKey,
-                          ',oauth_token=', token,
-                          ',oauth_nonce=', nonce,
-                          ',oauth_timestamp=', timestamp,
-                          ',oauth_signature_method=PLAINTEXT',
-                          ',oauth_version=1.0',
-                          ',oauth_signature=', consumerSecret, '%26', tokenSecret)
-     
-     response <- GET(url, add_headers(Authorization = authHeader))
-     
-     # If we receive a 2## response...
-     if(round(response$status_code, digits = -2) == 200){
-          return(content(response))
-     }else{
-          return(response)
-     }
-}
+myAppId <- '890866238'
 
 makeOauthSignature <- function(url, method, authHeader, consumerSecret, tokenSecret){
   
@@ -54,7 +27,11 @@ makeOauthSignature <- function(url, method, authHeader, consumerSecret, tokenSec
   authList <- authList[c(1, 3, 5, 4, 2, 6)]
   oauth_config <- substr(authList[[3]], regexpr('=', authList[[3]]) + 1, nchar(authList[[3]]))
   
-  params <- append(authList, queries)
+  if(exists('queries', inherits = F)){
+    authList <- append(authList, queries)
+  }else{
+    params <- authList
+  }
   params <- params[order(params)]
   
   baseString <- paste0(baseString, URLencode(paste(params, collapse = '&'), reserved = T))
@@ -67,12 +44,14 @@ makeOauthSignature <- function(url, method, authHeader, consumerSecret, tokenSec
   
   if(oauth_config == 'HMAC-SHA1'){
     signature <- URLencode(hmac_sha1(oauthString, baseString), reserved = F)
+    
     return(signature)
   }
+  
   stop('Did not recognize oauth_signature_method')
 }
 
-getObject2 <- function(endpointWithQuery, consumerKey = myConsumerKey, consumerSecret = myConsumerSecret, token = '', tokenSecret = ''){
+getObject <- function(endpointWithQuery, consumerKey = myConsumerKey, consumerSecret = myConsumerSecret, token = '', tokenSecret = ''){
   
   require(httr)
   require(jsonlite)
@@ -326,4 +305,10 @@ getAccessToken <- function(userId,oauth_token, oauth_secret, consumerKey = appCo
      content <- content(response)
      
      return(response)
+}
+
+getCurrentUser <- function(){
+  
+  httr::GET('https://api.schoology.com/v1/users/me')
+  
 }
