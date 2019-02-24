@@ -4,4 +4,4 @@ createAssignmentcommentsObject = function(uid  = NULL, comment  = NULL, created 
 object = as.list(environment()) 
  object = userObject[as.character(userObject) != "NULL"] 
  return(userObject) 
- }
+}
