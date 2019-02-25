@@ -22,6 +22,58 @@ checkAuthentication <- function(){
   }
 }
 
+# This function properly formats parameter sfor inclusion in a Schoology API request.
+addParameters <- function(endpoint, params){
+  
+  params = params[as.character(params) != 'NULL']
+  
+  paramsString = ''
+  for(i in 1:length(params)){
+    if(i == 1){
+      paramsString = '?'
+    }else{
+      paramsString = paste0(paramsString, '&')
+    }
+    newString = paste0(names(params)[[i]], '=', params[[i]])
+    paramsString = paste0(paramsString, newString)
+  }
+  
+  return(paste0(endpoint, paramsString))
+}
+
+# This function converts a dataframe of varying classes to all character.
+characterizeDataFrame = function(df){
+  
+  # Remove empty columns
+  df = df[!(as.logical(lapply(df, length) == 0))]
+  df = data.frame(df, stringsAsFactors = FALSE)
+  
+  # Convert columns to character vectors
+  for(i in 1:length(names(df))){
+    
+    df[,i] = as.character(df[,i])
+  }
+  
+  return(data.frame(df, stringsAsFactors = FALSE))
+}
+
+# This function consistently flattens a json list into a dataframe.
+flattenJsonList = function(jsonList){
+  
+  for(item in jsonList){
+    
+    item = data.frame(item)
+    
+    if(!exists('df', inherits = FALSE)){
+      df <- flatten(item)
+    }else{
+      df <- bind_rows(df, flatten(item))
+    }
+  }
+  return(df)
+}
+
+
 # This function creates an oauth_signature for an API call.
 makeOauthSignature <- function(url, method, authHeader, consumerSecret, tokenSecret){
   
@@ -224,55 +276,6 @@ deleteObject <- function(endpointWithQuery, consumerKey = myConsumerKey, consume
           return(response)
      }
 }
-
-addParameters <- function(endpoint, params){
-     
-     params = params[as.character(params) != 'NULL']
-     
-     paramsString = ''
-     for(i in 1:length(params)){
-          if(i == 1){
-               paramsString = '?'
-          }else{
-               paramsString = paste0(paramsString, '&')
-          }
-          newString = paste0(names(params)[[i]], '=', params[[i]])
-          paramsString = paste0(paramsString, newString)
-     }
-     
-     return(paste0(endpoint, paramsString))
-}
-
-characterizeDataFrame = function(df){
-     
-     # Remove empty columns
-     df = df[!(as.logical(lapply(df, length) == 0))]
-     df = data.frame(df, stringsAsFactors = FALSE)
-     
-     # Convert columns to character vectors
-     for(i in 1:length(names(df))){
-          
-          df[,i] = as.character(df[,i])
-     }
-     
-     return(data.frame(df, stringsAsFactors = FALSE))
-}
-
-flattenJsonList = function(jsonList){
-     
-     for(item in jsonList){
-          
-          item = data.frame(item)
-          
-          if(!exists('df', inherits = FALSE)){
-               df <- flatten(item)
-          }else{
-               df <- bind_rows(df, flatten(item))
-          }
-     }
-     return(df)
-}
-
 
 
 getRequestToken <- function(userId, consumerKey, consumerSecret){

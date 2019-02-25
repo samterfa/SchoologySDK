@@ -1,4 +1,4 @@
-source('R/HelperFunctions.R')
+source('R/AuthenticationFunctions.R')
 
 #' Create School Object
 #' 
