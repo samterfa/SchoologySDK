@@ -12,6 +12,6 @@ LazyData: true
 URL: http://github.com/sterfa02/schoologysdk
 BugReports: http://github.com/sterfa02/schoologysdk/issues
 Imports:
-  tidyverse,jsonlite
+  tidyverse,jsonlite,httr
 Remotes: 
 RoxygenNote: 6.1.1

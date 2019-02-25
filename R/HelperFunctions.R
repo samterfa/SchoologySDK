@@ -2,12 +2,13 @@ baseUrl <- 'https://api.schoology.com/v1/' ## API calls are made to urls which s
 authVersion <- '1.0' ## Current Oauth version used.
 oauth_config <- 'HMAC-SHA1'
 
-require(httr)
-require(jsonlite)
-require(dplyr)
-
 ### This function checks for authentication-related options which must be set using the "options" function.
 checkAuthentication <- function(){
+  
+  require(httr)
+  require(jsonlite)
+  require(dplyr)
+  
   ops <- options()
   requiredOptions <- c("consumerKey", "consumerSecret", "token", "tokenSecret", "appId", "appUrl")
   for(option in requiredOptions){

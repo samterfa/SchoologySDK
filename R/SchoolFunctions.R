@@ -1,3 +1,5 @@
+source('R/HelperFunctions.R')
+
 #' Create School Object
 #' 
 #' This function creates a schoology school (district) object.
