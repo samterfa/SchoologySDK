@@ -9,6 +9,7 @@
 #' @return A named list of school attributes.
 #' @section References:
 #' \href{https://developers.schoology.com/api-documentation/rest-api-v1/school}{API Documentation}
+#' @export
 createSchoolObject = function(title = NULL, address1 = NULL, address2 = NULL, city = NULL, state = NULL, postal_code = NULL, country = NULL, website = NULL, phone = NULL, fax = NULL, picture_url = NULL){
 
      schoolObject = as.list(environment())[-1]
@@ -29,6 +30,7 @@ createSchoolObject = function(title = NULL, address1 = NULL, address2 = NULL, ci
 #' @return A dataframe of school details.
 #' @section References:
 #' \href{https://developers.schoology.com/api-documentation/rest-api-v1/school}{API Documentation}
+#' @export
 listSchools = function(start = 0, limit = 200){
 
      params = as.list(environment())
@@ -49,18 +51,18 @@ listSchools = function(start = 0, limit = 200){
      }
 }
 
-
 #' Get School Details
 #' 
 #' This function returns details about a school (district).
 #' 
-#' @param schoolId Can be found by navigating to the Schoology district information page.
-#' @return A dataframe of school details.
+#' @param id Can be found by navigating to the Schoology school (district) information page.
+#' @return A dataframe of school (district) details.
 #' @section References:
 #' \href{https://developers.schoology.com/api-documentation/rest-api-v1/school}{API Documentation}
-viewSchool = function(schoolId){
+#' @export
+viewSchool = function(id){
 
-     endpoint = paste0('schools/', schoolId)
+     endpoint = paste0('schools/', id)
 
      resource = getObject(endpoint)
 
@@ -76,8 +78,16 @@ viewSchool = function(schoolId){
      }
 }
 
-"
-# This function modifies one or more attributes of a school.
+#' Update School Details
+#' 
+#' This function modifies one or more attributes of a school (district).
+#' 
+#' @param id Can be found by navigating to the Schoology district information page.
+#' @param object Must be created via createSchoolObject().
+#' @return A dataframe of updated school details.
+#' @section References:
+#' \href{https://developers.schoology.com/api-documentation/rest-api-v1/school}{API Documentation}
+#' @export
 updateSchool = function(id, object = createSchoolObject()){
 
      if(length(object) == 0){
@@ -87,11 +97,31 @@ updateSchool = function(id, object = createSchoolObject()){
      endpoint = paste0('schools/', id)
 
      response = updateObject(endpoint, fromJSON(toJSON(object, pretty = TRUE)))
-
-     return(response)
+     
+     # If there's no error...
+     if(response$status_code > 200){
+       # ... Return updated school info.
+       response2 <- viewSchool(id)
+      
+       # If there's no error...
+       if(!exists('status_code', where = response2)){
+         # ... Return resource.
+       
+         resource = fromJSON(toJSON(response2), flatten = TRUE)
+         resource = characterizeDataFrame(resource)
+         return(resource)
+     }else{
+       # Otherwise return server response if there's an error.
+       return(response2)
+     }
+     }
+       else{
+         # Otherwise return server response if there's an error.
+         return(response)
+       }
 }
 
-# Returns 403 error.
+# This function SHOULD create a school. Returns 403 error.
 createSchool = function(title, address1 = NULL, address2 = NULL, city = NULL, state = NULL, postal_code = NULL, country = NULL, website = NULL, phone = NULL, fax = NULL, picture_url = NULL){
 
      newObject = as.list(environment())
@@ -104,7 +134,7 @@ createSchool = function(title, address1 = NULL, address2 = NULL, city = NULL, st
      return(response)
 }
 
-# Never tested. Afraid to test! # This function deletes a school.
+# This function deletes a school. I have never tested this. Use at your own risk!
 deleteSchool = function(id){
 
      endpoint = paste0('schools/', id)
@@ -122,4 +152,3 @@ deleteSchool = function(id){
 
      return(response)
 }
-"

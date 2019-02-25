@@ -4,13 +4,13 @@
 \alias{viewSchool}
 \title{Get School Details}
 \usage{
-viewSchool(schoolId)
+viewSchool(id)
 }
 \arguments{
-\item{schoolId}{Can be found by navigating to the Schoology district information page.}
+\item{id}{Can be found by navigating to the Schoology school (district) information page.}
 }
 \value{
-A dataframe of school details.
+A dataframe of school (district) details.
 }
 \description{
 This function returns details about a school (district).
