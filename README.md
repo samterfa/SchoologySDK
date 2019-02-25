@@ -1,5 +1,5 @@
 # SchoologySDK
 
-**THIS IS A WORK IN PROGRESS AND SHOULD NOT BE USED!**
+### This is an R package providing an SDK to the Schoology API.
 
-This repo will contain an R package for Schoology app development in R.
+**This is a work in progress! Use at your own risk!**
