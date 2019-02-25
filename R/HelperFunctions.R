@@ -5,48 +5,67 @@ require(httr)
 require(jsonlite)
 require(dplyr)
 
+# This function creates an oauth_signature for an API call.
+makeOauthSignature <- function(url, method, authHeader, consumerSecret, tokenSecret){
+  
+  # Separate url and query.
+  if(regexpr('?', url, fixed = T) > 0){
+    query <- substr(url, regexpr('?', url, fixed = T) + 1, nchar(url))
+    queries <- strsplit(query, '&', fixed = T)[[1]]
+    url <- substr(url, 1, regexpr('?', url, fixed = T) - 1)
+  }
+  
+  baseString <- paste0(toupper(method), '&', URLencode(tolower(url), reserved = T), '&')
+  
+  authList <- strsplit(authHeader, ',')[[1]][-1]
+  oauth_config <- authList[grep('method', authList)]
+  authList <- authList[c(1, 3, 5, 4, 2, 6)]
+  oauth_config <- substr(authList[[3]], regexpr('=', authList[[3]]) + 1, nchar(authList[[3]]))
+  
+  if(exists('queries', inherits = F)){
+    params <- append(authList, queries)
+  }else{
+    params <- authList
+  }
+  params <- params[order(params)]
+  
+  baseString <- paste0(baseString, URLencode(paste(params, collapse = '&'), reserved = T))
+  
+  oauthString <- paste0(consumerSecret, '&', tokenSecret)
+  
+  if(oauth_config == 'PLAINTEXT'){
+    return(oauthString)
+  }
+  
+  if(oauth_config == 'HMAC-SHA1'){
+    signature <- URLencode(hmac_sha1(oauthString, baseString), reserved = F)
+    
+    return(signature)
+  }
+  
+  stop('Did not recognize oauth_signature_method')
+}
+
+#' Perform Schoology GET Request
+#' 
+#' GET Request for a Schoology Endpoint
+#' 
+#' This function is called by any Schoology SDK function requiring a GET request.
+#' You will, in general, not need to call this function directly.
+#' @param endpointWithQuery See \href{https://developers.schoology.com/api-documentation/rest-api-v1/}{API Documentation}
+#' for a list of endpoints.
+#' @param consumerKey,consumerSecret For 2-legged authentication (on your behalf), these values can
+#' be found at School Management -> Integration.  For 3-legged authentication (on behalf of someone else via
+#' your application), these values can be found at (yourSchoologyDomain)/apps/publisher.
+#' See \href{https://developers.schoology.com/api-documentation/authentication}{Authentication Documentation} for details.
+#' @param token,tokenSecret For 2-legged authentication, these should be left blank. 
+#' For 3-legged authentication, these are stored values for the current user.
+#' See \href{https://developers.schoology.com/api-documentation/authentication}{Authentication Documentation} for details.
+#' @return The content of the GET request response.
+#' @section References:
+#' \href{https://developers.schoology.com/api-documentation/rest-api-v1/school}{API Documentation}
 getObject <- function(endpointWithQuery, consumerKey, consumerSecret, token = '', tokenSecret = ''){
   
-  makeOauthSignature <- function(url, method, authHeader, consumerSecret, tokenSecret){
-    
-    # Separate url and query.
-    if(regexpr('?', url, fixed = T) > 0){
-      query <- substr(url, regexpr('?', url, fixed = T) + 1, nchar(url))
-      queries <- strsplit(query, '&', fixed = T)[[1]]
-      url <- substr(url, 1, regexpr('?', url, fixed = T) - 1)
-    }
-    
-    baseString <- paste0(toupper(method), '&', URLencode(tolower(url), reserved = T), '&')
-    
-    authList <- strsplit(authHeader, ',')[[1]][-1]
-    oauth_config <- authList[grep('method', authList)]
-    authList <- authList[c(1, 3, 5, 4, 2, 6)]
-    oauth_config <- substr(authList[[3]], regexpr('=', authList[[3]]) + 1, nchar(authList[[3]]))
-    
-    if(exists('queries', inherits = F)){
-      params <- append(authList, queries)
-    }else{
-      params <- authList
-    }
-    params <- params[order(params)]
-    
-    baseString <- paste0(baseString, URLencode(paste(params, collapse = '&'), reserved = T))
-    
-    oauthString <- paste0(consumerSecret, '&', tokenSecret)
-    
-    if(oauth_config == 'PLAINTEXT'){
-      return(oauthString)
-    }
-    
-    if(oauth_config == 'HMAC-SHA1'){
-      signature <- URLencode(hmac_sha1(oauthString, baseString), reserved = F)
-      
-      return(signature)
-    }
-    
-    stop('Did not recognize oauth_signature_method')
-  }
- 
   url <- paste0(baseUrl, endpointWithQuery)
   method <- 'GET'
   oauth_config <- 'HMAC-SHA1'
@@ -77,6 +96,7 @@ getObject <- function(endpointWithQuery, consumerKey, consumerSecret, token = ''
   }
 }
 
+"
 updateObject <- function(endpointWithQuery, payload, consumerKey = myConsumerKey, consumerSecret = myConsumerSecret, token = '', tokenSecret = ''){
      
      url <- paste0(baseUrl, endpointWithQuery)
@@ -272,3 +292,4 @@ getAccessToken <- function(userId,oauth_token, oauth_secret, consumerKey = appCo
      
      return(response)
 }
+"

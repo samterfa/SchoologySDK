@@ -7,16 +7,16 @@
 listSchools(start = 0, limit = 200)
 }
 \arguments{
-\item{start}{integer. First record to return. Min value is 0.}
+\item{start}{Index of first record to return. Min value is 0.}
 
-\item{limit}{integer. Number of records to return. 
+\item{limit}{Number of records to return. 
 Default is 20. Max value is 200.}
 }
 \value{
 A dataframe of school details.
 }
 \description{
-Lists all schools for a district.
+This function lists all schools for a district.
 }
 \details{
 A "school" is a district in Schoology so this will simply

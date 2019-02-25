@@ -7,16 +7,13 @@
 viewSchool(schoolId)
 }
 \arguments{
-\item{schoolId}{character. (SchoologyURL)/school/(schoolId)}
+\item{schoolId}{Can be found by navigating to the Schoology district information page.}
 }
 \value{
 A dataframe of school details.
 }
 \description{
-View details about a school (district).
-}
-\details{
-(none)
+This function returns details about a school (district).
 }
 \section{References}{
 

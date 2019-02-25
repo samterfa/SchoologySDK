@@ -1,6 +1,6 @@
 #' Create School Object
 #' 
-#' Creates a Schoology school object.
+#' This function creates a schoology school (district) object.
 #' 
 #' A school object is necessary for creation and modification of a Schoology school (district). 
 #' @param title,address1,address2,city,state,postal_code,country,website,phone,fax,picture_url
@@ -19,12 +19,12 @@ createSchoolObject = function(title = NULL, address1 = NULL, address2 = NULL, ci
 
 #' List Schools for District
 #' 
-#' Lists all schools for a district.
+#' This function lists all schools for a district.
 #' 
 #' A "school" is a district in Schoology so this will simply
 #'    return details about the school district. 
-#' @param start integer. First record to return. Min value is 0.
-#' @param limit integer. Number of records to return. 
+#' @param start Index of first record to return. Min value is 0.
+#' @param limit Number of records to return. 
 #' Default is 20. Max value is 200.
 #' @return A dataframe of school details.
 #' @section References:
@@ -52,10 +52,9 @@ listSchools = function(start = 0, limit = 200){
 
 #' Get School Details
 #' 
-#' View details about a school (district).
+#' This function returns details about a school (district).
 #' 
-#' (none) 
-#' @param schoolId character. (SchoologyURL)/school/(schoolId)
+#' @param schoolId Can be found by navigating to the Schoology district information page.
 #' @return A dataframe of school details.
 #' @section References:
 #' \href{https://developers.schoology.com/api-documentation/rest-api-v1/school}{API Documentation}

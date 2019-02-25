@@ -16,7 +16,7 @@ of each parameter.}
 A named list of school attributes.
 }
 \description{
-Creates a Schoology school object.
+This function creates a schoology school (district) object.
 }
 \details{
 A school object is necessary for creation and modification of a Schoology school (district).
