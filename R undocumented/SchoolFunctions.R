@@ -1,34 +1,22 @@
-#' Create School Object
-#' 
-#' Creates a Schoology school object.
-#' 
-#' A school object is necessary for creation and modification of a Schoology school (district). 
-#' @param title,address1,address2,city,state,postal_code,country,website,phone,fax,picture_url
-#' See \href{https://developers.schoology.com/api-documentation/rest-api-v1/school}{API Documentation} for a description 
-#' of each parameter.
-#' @return A named list of school attributes.
-#' @section References:
-#' \href{https://developers.schoology.com/api-documentation/rest-api-v1/school}{API Documentation}
+"# This function creates a school object which can be used to create or update a school.
 createSchoolObject = function(title = NULL, address1 = NULL, address2 = NULL, city = NULL, state = NULL, postal_code = NULL, country = NULL, website = NULL, phone = NULL, fax = NULL, picture_url = NULL){
 
      schoolObject = as.list(environment())[-1]
      schoolObject = schoolObject[as.character(schoolObject) != 'NULL']
 
-     return(schoolObject)
 }
+"
 
-#' List Schools for District
+
+#' List Schools for District.
 #' 
-#' Lists all schools for a district.
+#' \code{sum} lists all schools for a district.
 #' 
 #' A "school" is a district in Schoology so this will simply
 #'    return details about the school district. 
-#' @param start integer. First record to return. Min value is 0.
-#' @param limit integer. Number of records to return. 
-#' Default is 20. Max value is 200.
-#' @return A dataframe of school details.
-#' @section References:
-#' \href{https://developers.schoology.com/api-documentation/rest-api-v1/school}{API Documentation}
+#' @section References
+#' 
+#' \url{https://developers.schoology.com/api-documentation/rest-api-v1/school}
 listSchools = function(start = 0, limit = 200){
 
      params = as.list(environment())
@@ -40,8 +28,8 @@ listSchools = function(start = 0, limit = 200){
      # If there's no error...
      if(!exists('status_code', where = resource)){
           # ... Return resource.
-          resource <- fromJSON(toJSON(resource$school), flatten = TRUE)
-          resource <- characterizeDataFrame(resource)
+          resource = fromJSON(toJSON(resource$school), flatten = TRUE)
+          resource = characterizeDataFrame(resource)
           return(resource)
      }else{
           # Otherwise return server response if there's an error.
@@ -49,16 +37,8 @@ listSchools = function(start = 0, limit = 200){
      }
 }
 
-
-#' Get School Details
-#' 
-#' View details about a school (district).
-#' 
-#' (none) 
-#' @param schoolId character. (SchoologyURL)/school/(schoolId)
-#' @return A dataframe of school details.
-#' @section References:
-#' \href{https://developers.schoology.com/api-documentation/rest-api-v1/school}{API Documentation}
+"
+# This function returns details about a school.
 viewSchool = function(schoolId){
 
      endpoint = paste0('schools/', schoolId)
@@ -77,7 +57,6 @@ viewSchool = function(schoolId){
      }
 }
 
-"
 # This function modifies one or more attributes of a school.
 updateSchool = function(id, object = createSchoolObject()){
 
