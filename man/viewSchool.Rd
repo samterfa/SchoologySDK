@@ -4,7 +4,7 @@
 \alias{viewSchool}
 \title{Get School Details}
 \usage{
-viewSchool(id)
+viewSchool(schoolId)
 }
 \arguments{
 \item{id}{Can be found by navigating to the Schoology school (district) information page.}

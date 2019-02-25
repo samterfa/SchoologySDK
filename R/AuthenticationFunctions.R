@@ -121,7 +121,7 @@ makeOauthSignature <- function(url, method, authHeader, consumerSecret, tokenSec
 #' 
 #' This function is called by any Schoology SDK function requiring a GET request.
 #' You will, in general, not need to call this function directly.
-#' @param endpointWithQuery See \href{https://developers.schoology.com/api-documentation/rest-api-v1/}{API Documentation}
+#' @param endpointWithQuery See \href{https://developers.schoology.com/api-documentation/rest-api-v1/}{API documentation}
 #' for a list of endpoints.
 #' @section Additional Arguments: These arguments must be set via the "options" function prior to use of this function. e.g. options(consumerKey = "12345")\cr\cr
 #' \strong{consumerKey and consumerSecret}\cr\cr For 2-legged authentication (on your behalf), these values can
@@ -129,10 +129,10 @@ makeOauthSignature <- function(url, method, authHeader, consumerSecret, tokenSec
 #' your application), these values can be found at (yourSchoologyDomain)/apps/publisher.\cr\cr
 #' \strong{token and tokenSecret}\cr\cr For 2-legged authentication, these should be left blank.\cr\cr
 #' For 3-legged authentication, these are stored values for the current user.\cr\cr
-#' See \href{https://developers.schoology.com/api-documentation/authentication}{Authentication Documentation} for details.
+#' See \href{https://developers.schoology.com/api-documentation/authentication}{authentication documentation} for details.
 #' @return The content of the GET request response.
 #' @section References:
-#' \href{https://developers.schoology.com/api-documentation/rest-api-v1/school}{API Documentation}
+#' \href{https://developers.schoology.com/api-documentation/rest-api-v1/}{Schoology Rest API Documentation}
 #' @export
 getObject <- function(endpointWithQuery){
   
@@ -177,7 +177,7 @@ getObject <- function(endpointWithQuery){
 #' 
 #' This function is called by any Schoology SDK function requiring a PUT request.
 #' You will, in general, not need to call this function directly.
-#' @param endpointWithQuery See \href{https://developers.schoology.com/api-documentation/rest-api-v1/}{API Documentation}
+#' @param endpointWithQuery See \href{https://developers.schoology.com/api-documentation/rest-api-v1/}{API documentation}
 #' for a list of endpoints.
 #' @param payload A json-formatted payload for this object.
 #' @section Additional Arguments: These arguments must be set via the "options" function prior to use of this function. e.g. options(consumerKey = "12345")\cr\cr
@@ -186,10 +186,10 @@ getObject <- function(endpointWithQuery){
 #' your application), these values can be found at (yourSchoologyDomain)/apps/publisher.\cr\cr
 #' \strong{token and tokenSecret}\cr\cr For 2-legged authentication, these should be left blank.\cr\cr
 #' For 3-legged authentication, these are stored values for the current user.\cr\cr
-#' See \href{https://developers.schoology.com/api-documentation/authentication}{Authentication Documentation} for details.
+#' See \href{https://developers.schoology.com/api-documentation/authentication}{authentication documentation} for details.
 #' @return The PUT request response.
 #' @section References:
-#' \href{https://developers.schoology.com/api-documentation/rest-api-v1/school}{API Documentation}
+#' \href{https://developers.schoology.com/api-documentation/rest-api-v1/}{Schoology Rest API Documentation}
 #' @export
 updateObject <- function(endpointWithQuery, payload){
      
@@ -210,10 +210,8 @@ updateObject <- function(endpointWithQuery, payload){
                       ',oauth_token=', token,
                       ',oauth_nonce=', nonce,
                       ',oauth_timestamp=', timestamp,
-                      ',oauth_signature_method=PLAINTEXT',
-                      ',oauth_version=1.0',
-                      ',oauth_signature=', consumerSecret, '%26', tokenSecret)
-     
+                      ',oauth_signature_method=', oauth_config,
+                      ',oauth_version=1.0')
   
   signature <- makeOauthSignature(url, method, authHeader, consumerSecret, tokenSecret)
   authHeader <- paste0(authHeader, ',oauth_signature=', URLencode(signature, reserved = T))
@@ -223,61 +221,116 @@ updateObject <- function(endpointWithQuery, payload){
   return(response)
 }
 
-"
-createObject <- function(endpointWithQuery, payload, consumerKey = myConsumerKey, consumerSecret = myConsumerSecret, token = '', tokenSecret = ''){
+#' Create Schoology Object
+#' 
+#' This function creates a Schoology object using a POST request.
+#' 
+#' This function is called by any Schoology SDK function requiring a POST request.
+#' You will, in general, not need to call this function directly.
+#' @param endpointWithQuery See \href{https://developers.schoology.com/api-documentation/rest-api-v1/}{API documentation}
+#' for a list of endpoints.
+#' @param payload A json-formatted payload for this object.
+#' @section Additional Arguments: These arguments must be set via the "options" function prior to use of this function. e.g. options(consumerKey = "12345")\cr\cr
+#' \strong{consumerKey and consumerSecret}\cr\cr For 2-legged authentication (on your behalf), these values can
+#' be found at School Management -> Integration.\cr\cr For 3-legged authentication (on behalf of someone else via
+#' your application), these values can be found at (yourSchoologyDomain)/apps/publisher.\cr\cr
+#' \strong{token and tokenSecret}\cr\cr For 2-legged authentication, these should be left blank.\cr\cr
+#' For 3-legged authentication, these are stored values for the current user.\cr\cr
+#' See \href{https://developers.schoology.com/api-documentation/authentication}{authentication documentation} for details.
+#' @return The newly created object.
+#' @section References:
+#' \href{https://developers.schoology.com/api-documentation/rest-api-v1/}{Schoology Rest API Documentation}
+#' @export
+createObject <- function(endpointWithQuery, payload){
      
-     url <- paste0(baseUrl, endpointWithQuery)
+  checkAuthentication()
+  consumerKey <- getOption('consumerKey')
+  consumerSecret <- getOption('consumerSecret')
+  token <- getOption('token')
+  tokenSecret <- getOption('tokenSecret')
+  
+  url <- paste0(baseUrl, endpointWithQuery)
+  method <- 'POST'
      
-     timestamp <-  as.numeric(Sys.time())
-     nonce <- timestamp
-     authHeader <- paste0('OAuth ',
-                          'realm=Schoology API',
-                          ',oauth_consumer_key=', consumerKey,
-                          ',oauth_token=', token,
-                          ',oauth_nonce=', nonce,
-                          ',oauth_timestamp=', timestamp,
-                          ',oauth_signature_method=PLAINTEXT',
-                          ',oauth_version=1.0',
-                          ',oauth_signature=', consumerSecret, '%26', tokenSecret)
+  timestamp <-  as.numeric(Sys.time())
+  nonce <- timestamp
+  authHeader <- paste0('OAuth ',
+                      'realm=Schoology API',
+                      ',oauth_consumer_key=', consumerKey,
+                      ',oauth_token=', token,
+                      ',oauth_nonce=', nonce,
+                      ',oauth_timestamp=', timestamp,
+                      ',oauth_signature_method=', oauth_config,
+                      ',oauth_version=1.0')
      
-     response <- POST(url, add_headers(Authorization = authHeader), body = payload, encode = 'json')
+  signature <- makeOauthSignature(url, method, authHeader, consumerSecret, tokenSecret)
+  authHeader <- paste0(authHeader, ',oauth_signature=', URLencode(signature, reserved = T))
      
-     # If we receive a 2## response...
-     if(round(response$status_code, digits = -2) == 200){
-          return(content(response))
-     }else{
-          return(response)
-     }
+  response <- POST(url, add_headers(Authorization = authHeader), body = payload, encode = 'json')
+     
+  # If we receive a 2## response...
+  if(round(response$status_code, digits = -2) == 200){
+    return(content(response))
+  }else{
+    stop(content(response))
+  }
 }
 
-
+#' Delete Schoology Object
+#' 
+#' This function deletes a Schoology object using a DELETE request.
+#' 
+#' This function is called by any Schoology SDK function requiring a DELETE request.
+#' You will, in general, not need to call this function directly.
+#' @param endpointWithQuery See \href{https://developers.schoology.com/api-documentation/rest-api-v1/}{API documentation}
+#' for a list of endpoints.
+#' @section Additional Arguments: These arguments must be set via the "options" function prior to use of this function. e.g. options(consumerKey = "12345")\cr\cr
+#' \strong{consumerKey and consumerSecret}\cr\cr For 2-legged authentication (on your behalf), these values can
+#' be found at School Management -> Integration.\cr\cr For 3-legged authentication (on behalf of someone else via
+#' your application), these values can be found at (yourSchoologyDomain)/apps/publisher.\cr\cr
+#' \strong{token and tokenSecret}\cr\cr For 2-legged authentication, these should be left blank.\cr\cr
+#' For 3-legged authentication, these are stored values for the current user.\cr\cr
+#' See \href{https://developers.schoology.com/api-documentation/authentication}{authentication documentation} for details.
+#' @return The DELETE request response.
+#' @section References:
+#' \href{https://developers.schoology.com/api-documentation/rest-api-v1/}{Schoology Rest API Documentation}
+#' @export
 deleteObject <- function(endpointWithQuery, consumerKey = myConsumerKey, consumerSecret = myConsumerSecret, token = '', tokenSecret = ''){
      
-     url <- paste0(baseUrl, endpointWithQuery)
+  checkAuthentication()
+  consumerKey <- getOption('consumerKey')
+  consumerSecret <- getOption('consumerSecret')
+  token <- getOption('token')
+  tokenSecret <- getOption('tokenSecret')
+  
+  url <- paste0(baseUrl, endpointWithQuery)
+  method <- 'DELETE'
      
-     timestamp <-  as.numeric(Sys.time())
-     nonce <- timestamp
-     authHeader <- paste0('OAuth ',
-                          'realm=Schoology API',
-                          ',oauth_consumer_key=', consumerKey,
-                          ',oauth_token=', token,
-                          ',oauth_nonce=', nonce,
-                          ',oauth_timestamp=', timestamp,
-                          ',oauth_signature_method=PLAINTEXT',
-                          ',oauth_version=1.0',
-                          ',oauth_signature=', consumerSecret, '%26', tokenSecret)
+  timestamp <-  as.numeric(Sys.time())
+  nonce <- timestamp
+  authHeader <- paste0('OAuth ',
+                      'realm=Schoology API',
+                      ',oauth_consumer_key=', consumerKey,
+                      ',oauth_token=', token,
+                      ',oauth_nonce=', nonce,
+                      ',oauth_timestamp=', timestamp,
+                      ',oauth_signature_method=', oauth_config,
+                      ',oauth_version=1.0')
+  
+  signature <- makeOauthSignature(url, method, authHeader, consumerSecret, tokenSecret)
+  authHeader <- paste0(authHeader, ',oauth_signature=', URLencode(signature, reserved = T))
+  
+  response <- DELETE(url, add_headers(Authorization = authHeader), encode = 'json')
      
-     response <- DELETE(url, add_headers(Authorization = authHeader), encode = 'json')
-     
-     # If we receive a 2## response...
-     if(round(response$status_code, digits = -2) == 200){
-          return(content(response))
-     }else{
-          return(response)
-     }
+  # If we receive a 2## response...
+  if(round(response$status_code, digits = -2) == 200){
+    return(response)
+  }else{
+    stop(content(response))
+  }
 }
 
-
+"
 getRequestToken <- function(userId, consumerKey, consumerSecret){
      
      signatureMethod <- 'PLAINTEXT' ## This is the signature generation method used for Oauth. For https connection, plaintext works fine. See https://developers.schoology.com/api-documentation/authentication for details. 

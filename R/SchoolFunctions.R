@@ -62,9 +62,9 @@ listSchools = function(start = 0, limit = 200){
 #' @section References:
 #' \href{https://developers.schoology.com/api-documentation/rest-api-v1/school}{API Documentation}
 #' @export
-viewSchool = function(id){
+viewSchool = function(schoolId){
 
-     endpoint = paste0('schools/', id)
+     endpoint = paste0('schools/', schoolId)
 
      resource = getObject(endpoint)
 
@@ -90,20 +90,20 @@ viewSchool = function(id){
 #' @section References:
 #' \href{https://developers.schoology.com/api-documentation/rest-api-v1/school}{API Documentation}
 #' @export
-updateSchool = function(id, object = createSchoolObject()){
+updateSchool = function(schoolId, object = createSchoolObject()){
 
      if(length(object) == 0){
-          return('ERROR: No changes requested.')
+          stop('ERROR: No changes requested.')
      }
 
-     endpoint = paste0('schools/', id)
+     endpoint = paste0('schools/', schoolId)
 
      response = updateObject(endpoint, fromJSON(toJSON(object, pretty = TRUE)))
      
      # If there's no error...
      if(response$status_code > 200){
        # ... Return updated school info.
-       response2 <- viewSchool(id)
+       response2 <- viewSchool(schoolId)
       
        # If there's no error...
        if(!exists('status_code', where = response2)){

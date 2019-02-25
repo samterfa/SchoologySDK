@@ -7,7 +7,7 @@
 updateObject(endpointWithQuery, payload)
 }
 \arguments{
-\item{endpointWithQuery}{See \href{https://developers.schoology.com/api-documentation/rest-api-v1/}{API Documentation}
+\item{endpointWithQuery}{See \href{https://developers.schoology.com/api-documentation/rest-api-v1/}{API documentation}
 for a list of endpoints.}
 
 \item{payload}{A json-formatted payload for this object.}
@@ -29,11 +29,11 @@ be found at School Management -> Integration.\cr\cr For 3-legged authentication 
 your application), these values can be found at (yourSchoologyDomain)/apps/publisher.\cr\cr
 \strong{token and tokenSecret}\cr\cr For 2-legged authentication, these should be left blank.\cr\cr
 For 3-legged authentication, these are stored values for the current user.\cr\cr
-See \href{https://developers.schoology.com/api-documentation/authentication}{Authentication Documentation} for details.
+See \href{https://developers.schoology.com/api-documentation/authentication}{authentication documentation} for details.
 }
 
 \section{References}{
 
-\href{https://developers.schoology.com/api-documentation/rest-api-v1/school}{API Documentation}
+\href{https://developers.schoology.com/api-documentation/rest-api-v1/}{Schoology Rest API Documentation}
 }
 

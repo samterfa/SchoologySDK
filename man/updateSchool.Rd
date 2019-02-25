@@ -4,12 +4,12 @@
 \alias{updateSchool}
 \title{Update School Details}
 \usage{
-updateSchool(id, object = createSchoolObject())
+updateSchool(schoolId, object = createSchoolObject())
 }
 \arguments{
-\item{id}{Can be found by navigating to the Schoology district information page.}
-
 \item{object}{Must be created via createSchoolObject().}
+
+\item{id}{Can be found by navigating to the Schoology district information page.}
 }
 \value{
 A dataframe of updated school details.
