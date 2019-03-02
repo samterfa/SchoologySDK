@@ -7,7 +7,7 @@
 viewSchool(schoolId)
 }
 \arguments{
-\item{id}{Can be found by navigating to the Schoology school (district) information page.}
+\item{schoolId}{Can be found by navigating to the Schoology school (district) information page.}
 }
 \value{
 A dataframe of school (district) details.

@@ -14,7 +14,7 @@ source('R/AuthenticationFunctions.R')
 #' @export
 createSchoolObject = function(title = NULL, address1 = NULL, address2 = NULL, city = NULL, state = NULL, postal_code = NULL, country = NULL, website = NULL, phone = NULL, fax = NULL, picture_url = NULL){
 
-     schoolObject = as.list(environment())[-1]
+   #  schoolObject = as.list(environment())[-1]
      schoolObject = schoolObject[as.character(schoolObject) != 'NULL']
 
      return(schoolObject)
@@ -25,7 +25,7 @@ createSchoolObject = function(title = NULL, address1 = NULL, address2 = NULL, ci
 #' This function lists all schools for a district.
 #' 
 #' A "school" is a district in Schoology so this will simply
-#'    return details about the school district. 
+#'    return details about the (one) school district. 
 #' @param start Index of first record to return. Min value is 0.
 #' @param limit Number of records to return. 
 #' Default is 20. Max value is 200.
@@ -57,7 +57,7 @@ listSchools = function(start = 0, limit = 200){
 #' 
 #' This function returns details about a school (district).
 #' 
-#' @param id Can be found by navigating to the Schoology school (district) information page.
+#' @param schoolId Can be found by navigating to the Schoology school (district) information page.
 #' @return A dataframe of school (district) details.
 #' @section References:
 #' \href{https://developers.schoology.com/api-documentation/rest-api-v1/school}{API Documentation}
@@ -84,7 +84,7 @@ viewSchool = function(schoolId){
 #' 
 #' This function modifies one or more attributes of a school (district).
 #' 
-#' @param id Can be found by navigating to the Schoology district information page.
+#' @param schoolId Can be found by navigating to the Schoology district information page.
 #' @param object Must be created via createSchoolObject().
 #' @return A dataframe of updated school details.
 #' @section References:
@@ -123,8 +123,8 @@ updateSchool = function(schoolId, object = createSchoolObject()){
        }
 }
 
-# This function SHOULD create a school. Returns 403 error.
-createSchool = function(title, address1 = NULL, address2 = NULL, city = NULL, state = NULL, postal_code = NULL, country = NULL, website = NULL, phone = NULL, fax = NULL, picture_url = NULL){
+# This function creates a school. I am not able to test. Returns 403 error.
+createSchool = function(object = createSchoolObject()){
 
      newObject = as.list(environment())
      newObject = newObject[as.character(newObject) != 'NULL']
@@ -137,16 +137,16 @@ createSchool = function(title, address1 = NULL, address2 = NULL, city = NULL, st
 }
 
 # This function deletes a school. I have never tested this. Use at your own risk!
-deleteSchool = function(id){
+deleteSchool = function(schoolId){
 
-     endpoint = paste0('schools/', id)
+     endpoint = paste0('schools/', schoolId)
 
      schools = listSchools();
-     school = schools$title[which(schools$id == id)]
+     school = schools$title[which(schools$id == schoolId)]
 
      userResponse = readline(prompt = paste0('Are you SURE you want to delete ', school, '? This cannot be undone! Type Y to delete, anything else not to delete.'))
 
-     if(userResponse == 'Y'){
+     if(tolower(userResponse) == 'y'){
           response = deleteObject(endpoint)
      }else{
           return('School deletion canceled.')

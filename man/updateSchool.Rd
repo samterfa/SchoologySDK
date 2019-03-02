@@ -7,9 +7,9 @@
 updateSchool(schoolId, object = createSchoolObject())
 }
 \arguments{
-\item{object}{Must be created via createSchoolObject().}
+\item{schoolId}{Can be found by navigating to the Schoology district information page.}
 
-\item{id}{Can be found by navigating to the Schoology district information page.}
+\item{object}{Must be created via createSchoolObject().}
 }
 \value{
 A dataframe of updated school details.

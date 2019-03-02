@@ -20,7 +20,7 @@ This function lists all schools for a district.
 }
 \details{
 A "school" is a district in Schoology so this will simply
-   return details about the school district.
+   return details about the (one) school district.
 }
 \section{References}{
 
