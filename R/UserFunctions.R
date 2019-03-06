@@ -257,7 +257,33 @@ createUsers = function(userObjects = list(createUserObject()), update_existing =
   return(response)
 }
 
-
+#' Deletes a User.
+#' 
+#' @param userId The ID of the user which will be deleted.
+#' @return The success status of the DELETE request.
+#' @section References:
+#' \href{https://developers.schoology.com/api-documentation/rest-api-v1/user}{API Documentation}
+#' @export
+deleteUser = function(userId, option_comment = '', option_keep_enrollments = 1, email_notification = 0){
+  
+  params = as.list(environment())[-1]
+  
+  endpoint = paste0('users/', userId)
+  
+  resource = getObject(addParameters(endpoint, params))
+  
+  userName = viewUser(userId)$display_name
+  
+  userResponse = readline(prompt = paste0("Are you SURE you want to delete ", userName, "? This cannot be undone! \nPress enter to continue."))
+  
+  if(userResponse == ''){
+    
+    response = deleteObject(resource)
+    return(paste(userName, 'successfully deleted.'))
+  }else{
+    return("User deletion canceled.")
+  }
+}
 
 # This function deletes a user.
 deleteUser = function(userId, option_comment = '', option_keep_enrollments = 1, email_notification = 0){
