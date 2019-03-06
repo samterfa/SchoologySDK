@@ -22,7 +22,7 @@ checkAuthentication <- function(){
   }
 }
 
-# This function properly formats parameter sfor inclusion in a Schoology API request.
+# This function properly formats parameters for inclusion in a Schoology API request.
 addParameters <- function(endpoint, params){
   
   params = params[as.character(params) != 'NULL']
@@ -85,7 +85,7 @@ makeOauthSignature <- function(url, method, authHeader, consumerSecret, tokenSec
   }
   
   baseString <- paste0(toupper(method), '&', URLencode(tolower(url), reserved = T), '&')
-  
+ 
   authList <- strsplit(authHeader, ',')[[1]][-1]
   oauth_config <- authList[grep('method', authList)]
   authList <- authList[c(1, 3, 5, 4, 2, 6)]
@@ -99,7 +99,6 @@ makeOauthSignature <- function(url, method, authHeader, consumerSecret, tokenSec
   params <- params[order(params)]
   
   baseString <- paste0(baseString, URLencode(paste(params, collapse = '&'), reserved = T))
-  
   oauthString <- paste0(consumerSecret, '&', tokenSecret)
   
   if(oauth_config == 'PLAINTEXT'){
@@ -107,8 +106,10 @@ makeOauthSignature <- function(url, method, authHeader, consumerSecret, tokenSec
   }
   
   if(oauth_config == 'HMAC-SHA1'){
-    signature <- URLencode(hmac_sha1(oauthString, baseString), reserved = F)
+    # Fixes comma-separated values in request.
+    baseString <- sub('%2C', '%252C', baseString, fixed = T)
     
+    signature <- URLencode(hmac_sha1(oauthString, baseString), reserved = F)
     return(signature)
   }
   
@@ -164,7 +165,7 @@ getObject <- function(endpointWithQuery){
   response <- GET(url, add_headers(Authorization = authHeader))
   
   # If we receive a 2## response...
-  if(round(response$status_code, digits = -2) == 200){
+  if(floor(response$status_code) == 200){
     return(content(response))
   }else{
     stop(content(response))
