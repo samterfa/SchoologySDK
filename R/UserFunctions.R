@@ -115,7 +115,7 @@ updateUser = function(userId, object = createUserObject()){
   response = updateObject(endpoint, fromJSON(toJSON(object, pretty = TRUE)))
   
   # If there's no error...
-  if(response$status_code > 200){
+  if(substr(response$status_code, 1, 1) == '2'){
     # ... Return updated user info.
     response2 <- viewUser(userId)
     
@@ -166,13 +166,13 @@ updateUsers = function(userObjects = list(createUserObject())){
      
      response = updateObject(endpoint, fromJSON(userObjects))
      
-     resource <- content(response) #$user.school_uid
+     resource <- content(response)
      resource = fromJSON(toJSON(resource), flatten = TRUE)
      resource = characterizeDataFrame(resource)
      schoolUIDs <- resource$user.school_uid
      
      # If there's no error...
-     if(response$status_code > 200){
+     if(substr(response$status_code, 1, 1) == '2'){
        # ... Return updated user info.
        response2 <- listUsers(school_uids = paste(schoolUIDs, collapse = ','))
        
