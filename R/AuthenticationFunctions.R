@@ -221,7 +221,14 @@ updateObject <- function(endpointWithQuery, payload){
   
   response <- PUT(url, add_headers(Authorization = authHeader), body = payload, encode = 'json')
      
-  return(response)
+  # If we receive a 2## response...
+  if(substr(response$status_code, 1, 1) == '2'){
+    
+    # There's typically no response content for update requests.
+    return(response)
+  }else{
+    stop(content(response))
+  }
 }
 
 #' Create Schoology Object
