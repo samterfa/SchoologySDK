@@ -9,6 +9,8 @@ checkAuthentication <- function(){
   require(jsonlite)
   require(dplyr)
   
+  source('../Schoology Credentials.R')
+  
   ops <- options()
   requiredOptions <- c("consumerKey", "consumerSecret", "token", "tokenSecret", "appId", "appUrl")
   for(option in requiredOptions){
@@ -209,7 +211,7 @@ getObjectOLD <- function(endpointWithQuery){
   response <- GET(url, add_headers(Authorization = authHeader))
   
   # If we receive a 2## response...
-  if(floor(response$status_code) == 200){
+  if(substr(response$status_code, 1, 1) == '2'){
     return(content(response))
   }else{
     stop(content(response))
@@ -263,7 +265,14 @@ updateObject <- function(endpointWithQuery, payload){
   
   response <- PUT(url, add_headers(Authorization = authHeader), body = payload, encode = 'json')
      
-  return(response)
+  # If we receive a 2## response...
+  if(substr(response$status_code, 1, 1) == '2'){
+    
+    # There's typically no response content for update requests.
+    return(response)
+  }else{
+    stop(content(response))
+  }
 }
 
 #' Create Schoology Object
@@ -314,7 +323,7 @@ createObject <- function(endpointWithQuery, payload){
   response <- POST(url, add_headers(Authorization = authHeader), body = payload, encode = 'json')
      
   # If we receive a 2## response...
-  if(round(response$status_code, digits = -2) == 200){
+  if(substr(response$status_code, 1, 1) == '2'){
     return(content(response))
   }else{
     stop(content(response))
@@ -368,7 +377,7 @@ deleteObject <- function(endpointWithQuery, consumerKey = myConsumerKey, consume
   response <- DELETE(url, add_headers(Authorization = authHeader), encode = 'json')
      
   # If we receive a 2## response...
-  if(round(response$status_code, digits = -2) == 200){
+  if(substr(response$status_code, 1, 1) == '2'){
     return(response)
   }else{
     stop(content(response))

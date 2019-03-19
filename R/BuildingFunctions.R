@@ -90,7 +90,7 @@ updateBuilding = function(buildingId, object = createBuildingObject()){
   response = updateObject(endpoint, fromJSON(toJSON(object, pretty = TRUE)))
   
   # If there's no error...
-  if(response$status_code > 200){
+  if(substr(response$status_code, 1, 1) == '2'){
     # ... Return updated school info.
     response2 <- viewSchool(schoolId)
     
