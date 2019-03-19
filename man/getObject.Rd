@@ -7,8 +7,11 @@
 getObject(endpoint, query = NULL)
 }
 \arguments{
-\item{endpointWithQuery}{See \href{https://developers.schoology.com/api-documentation/rest-api-v1/}{API documentation}
+\item{endpoint}{See \href{https://developers.schoology.com/api-documentation/rest-api-v1/}{API documentation}
 for a list of endpoints.}
+
+\item{query}{See \href{https://developers.schoology.com/api-documentation/rest-api-v1/}{API documentation}
+for a list of query parameters.}
 }
 \value{
 The content of the GET request response.

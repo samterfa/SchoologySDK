@@ -34,7 +34,7 @@ getToken <- function(){
   TokenZeroLeg <- R6::R6Class("TokenZeroLeg", inherit = Token, list(
     init_credentials = function() {},
     sign = function(method, url) {
-      oauth <- oauth_signature(url, method, self$app, NULL, "")
+      oauth <- oauth_signature(url, method, self$app, token = NULL, token_secret = "")
       
       c(httr:::request(url = url), oauth_header(oauth))
     }
@@ -53,23 +53,6 @@ getToken <- function(){
   myToken <- oauth_zero_leg_token(myApp)
   
   return(myToken)
-}
-
-# This function properly formats parameters for inclusion in a Schoology API request.
-addParameters <- function(endpoint, params){
-  
-  paramsString = ''
-  for(i in 1:length(params)){
-    if(i == 1){
-      paramsString = '?'
-    }else{
-      paramsString = paste0(paramsString, '&')
-    }
-    newString = paste0(names(params)[[i]], '=', params[[i]])
-    paramsString = paste0(paramsString, newString)
-  }
-  
-  return(paste0(endpoint, paramsString))
 }
 
 # This function converts a dataframe of varying classes to all character.
@@ -105,47 +88,64 @@ flattenJsonList = function(jsonList){
 }
 
 
-# This function creates an oauth_signature for an API call.
-makeOauthSignature <- function(url, method, authHeader, consumerSecret, tokenSecret){
-  
-  # Separate url and query.
-  if(regexpr('?', url, fixed = T) > 0){
-    query <- substr(url, regexpr('?', url, fixed = T) + 1, nchar(url))
-    queries <- strsplit(query, '&', fixed = T)[[1]]
-    url <- substr(url, 1, regexpr('?', url, fixed = T) - 1)
-  }
-  
-  baseString <- paste0(toupper(method), '&', URLencode(tolower(url), reserved = T), '&')
- 
-  authList <- strsplit(authHeader, ',')[[1]][-1]
-  oauth_config <- authList[grep('method', authList)]
-  authList <- authList[c(1, 3, 5, 4, 2, 6)]
-  oauth_config <- substr(authList[[3]], regexpr('=', authList[[3]]) + 1, nchar(authList[[3]]))
-  
-  if(exists('queries', inherits = F)){
-    params <- append(authList, queries)
-  }else{
-    params <- authList
-  }
-  params <- params[order(params)]
-  
-  baseString <- paste0(baseString, URLencode(paste(params, collapse = '&'), reserved = T))
-  oauthString <- paste0(consumerSecret, '&', tokenSecret)
-  
-  if(oauth_config == 'PLAINTEXT'){
-    return(oauthString)
-  }
-  
-  if(oauth_config == 'HMAC-SHA1'){
-    # Fixes comma-separated values in request.
-    baseString <- sub('%2C', '%252C', baseString, fixed = T)
-    
-    signature <- URLencode(hmac_sha1(oauthString, baseString), reserved = F)
-    return(signature)
-  }
-  
-  stop('Did not recognize oauth_signature_method')
-}
+# # This function properly formats parameters for inclusion in a Schoology API request.
+# addParametersOLD <- function(endpoint, params){
+#   
+#   paramsString = ''
+#   for(i in 1:length(params)){
+#     if(i == 1){
+#       paramsString = '?'
+#     }else{
+#       paramsString = paste0(paramsString, '&')
+#     }
+#     newString = paste0(names(params)[[i]], '=', params[[i]])
+#     paramsString = paste0(paramsString, newString)
+#   }
+#   
+#   return(paste0(endpoint, paramsString))
+# }
+# 
+# # This function creates an oauth_signature for an API call.
+# makeOauthSignatureOLD <- function(url, method, authHeader, consumerSecret, tokenSecret){
+#   
+#   # Separate url and query.
+#   if(regexpr('?', url, fixed = T) > 0){
+#     query <- substr(url, regexpr('?', url, fixed = T) + 1, nchar(url))
+#     queries <- strsplit(query, '&', fixed = T)[[1]]
+#     url <- substr(url, 1, regexpr('?', url, fixed = T) - 1)
+#   }
+#   
+#   baseString <- paste0(toupper(method), '&', URLencode(tolower(url), reserved = T), '&')
+#  
+#   authList <- strsplit(authHeader, ',')[[1]][-1]
+#   oauth_config <- authList[grep('method', authList)]
+#   authList <- authList[c(1, 3, 5, 4, 2, 6)]
+#   oauth_config <- substr(authList[[3]], regexpr('=', authList[[3]]) + 1, nchar(authList[[3]]))
+#   
+#   if(exists('queries', inherits = F)){
+#     params <- append(authList, queries)
+#   }else{
+#     params <- authList
+#   }
+#   params <- params[order(params)]
+#   
+#   baseString <- paste0(baseString, URLencode(paste(params, collapse = '&'), reserved = T))
+#   oauthString <- paste0(consumerSecret, '&', tokenSecret)
+#   
+#   if(oauth_config == 'PLAINTEXT'){
+#     return(oauthString)
+#   }
+#   
+#   if(oauth_config == 'HMAC-SHA1'){
+#     # Fixes comma-separated values in request.
+#     baseString <- sub('%2C', '%252C', baseString, fixed = T)
+#     
+#     signature <- URLencode(hmac_sha1(oauthString, baseString), reserved = F)
+#     return(signature)
+#   }
+#   
+#   stop('Did not recognize oauth_signature_method')
+# }
 
 #' Get Schoology Object
 #' 
@@ -153,8 +153,10 @@ makeOauthSignature <- function(url, method, authHeader, consumerSecret, tokenSec
 #' 
 #' This function is called by any Schoology SDK function requiring a GET request.
 #' You will, in general, not need to call this function directly.
-#' @param endpointWithQuery See \href{https://developers.schoology.com/api-documentation/rest-api-v1/}{API documentation}
+#' @param endpoint See \href{https://developers.schoology.com/api-documentation/rest-api-v1/}{API documentation}
 #' for a list of endpoints.
+#' @param query See \href{https://developers.schoology.com/api-documentation/rest-api-v1/}{API documentation}
+#' for a list of query parameters.
 #' @section Additional Arguments: These arguments must be set via the "options" function prior to use of this function. e.g. options(consumerKey = "12345")\cr\cr
 #' \strong{consumerKey and consumerSecret}\cr\cr For 2-legged authentication (on your behalf), these values can
 #' be found at School Management -> Integration.\cr\cr For 3-legged authentication (on behalf of someone else via
@@ -181,42 +183,42 @@ getObject <- function(endpoint, query = NULL){
 
 
 
-getObjectOLD <- function(endpointWithQuery){
-  
-  checkAuthentication()
-  consumerKey <- getOption('consumerKey')
-  consumerSecret <- getOption('consumerSecret')
-  token <- getOption('token')
-  tokenSecret <- getOption('tokenSecret')
-  
-  url <- paste0(baseUrl, endpointWithQuery)
-  method <- 'GET'
-  
-  timestamp <-  as.numeric(Sys.time())
-  nonce <- timestamp
-  
-  authHeader <- paste0('OAuth ',
-                       'realm=Schoology API',
-                       ',oauth_consumer_key=', consumerKey,
-                       ',oauth_token=', token,
-                       ',oauth_nonce=', nonce,
-                       ',oauth_timestamp=', timestamp,
-                       ',oauth_signature_method=', oauth_config,
-                       ',oauth_version=1.0'
-                        )
-  
-  signature <- makeOauthSignature(url, method, authHeader, consumerSecret, tokenSecret)
-  authHeader <- paste0(authHeader, ',oauth_signature=', URLencode(signature, reserved = T))
-  
-  response <- GET(url, add_headers(Authorization = authHeader))
-  
-  # If we receive a 2## response...
-  if(substr(response$status_code, 1, 1) == '2'){
-    return(content(response))
-  }else{
-    stop(content(response))
-  }
-}
+# getObjectOLD <- function(endpointWithQuery){
+#   
+#   checkAuthentication()
+#   consumerKey <- getOption('consumerKey')
+#   consumerSecret <- getOption('consumerSecret')
+#   token <- getOption('token')
+#   tokenSecret <- getOption('tokenSecret')
+#   
+#   url <- paste0(baseUrl, endpointWithQuery)
+#   method <- 'GET'
+#   
+#   timestamp <-  as.numeric(Sys.time())
+#   nonce <- timestamp
+#   
+#   authHeader <- paste0('OAuth ',
+#                        'realm=Schoology API',
+#                        ',oauth_consumer_key=', consumerKey,
+#                        ',oauth_token=', token,
+#                        ',oauth_nonce=', nonce,
+#                        ',oauth_timestamp=', timestamp,
+#                        ',oauth_signature_method=', oauth_config,
+#                        ',oauth_version=1.0'
+#                         )
+#   
+#   signature <- makeOauthSignature(url, method, authHeader, consumerSecret, tokenSecret)
+#   authHeader <- paste0(authHeader, ',oauth_signature=', URLencode(signature, reserved = T))
+#   
+#   response <- GET(url, add_headers(Authorization = authHeader))
+#   
+#   # If we receive a 2## response...
+#   if(substr(response$status_code, 1, 1) == '2'){
+#     return(content(response))
+#   }else{
+#     stop(content(response))
+#   }
+# }
 
 #' Update Schoology Object
 #' 
