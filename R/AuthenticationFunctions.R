@@ -22,10 +22,39 @@ checkAuthentication <- function(){
   }
 }
 
+# This function retrieves a token for use in calling the API.
+getToken <- function(){
+  
+  checkAuthentication()
+  
+  require(httr)
+  
+  TokenZeroLeg <- R6::R6Class("TokenZeroLeg", inherit = Token, list(
+    init_credentials = function() {},
+    sign = function(method, url) {
+      oauth <- oauth_signature(url, method, self$app, NULL, "")
+      
+      c(httr:::request(url = url), oauth_header(oauth))
+    }
+  ))
+  
+  oauth_zero_leg_token <- function(app) {
+    TokenZeroLeg$new(
+      app = app, 
+      endpoint = NULL,
+      credentials = list(),
+      cache_path = FALSE
+    )
+  }
+  
+  myApp <- oauth_app("Schoology", key = getOption('consumerKey'), secret = getOption('consumerSecret'))
+  myToken <- oauth_zero_leg_token(myApp)
+  
+  return(myToken)
+}
+
 # This function properly formats parameters for inclusion in a Schoology API request.
 addParameters <- function(endpoint, params){
-  
-  params = params[as.character(params) != 'NULL']
   
   paramsString = ''
   for(i in 1:length(params)){
@@ -135,7 +164,22 @@ makeOauthSignature <- function(url, method, authHeader, consumerSecret, tokenSec
 #' @section References:
 #' \href{https://developers.schoology.com/api-documentation/rest-api-v1/}{Schoology Rest API Documentation}
 #' @export
-getObject <- function(endpointWithQuery){
+getObject <- function(endpoint, query = NULL){
+  
+  require(httr)
+ 
+  response <- GET(paste0(baseUrl, endpoint), config(token = getToken()), query = query, accept_json())
+  
+  if(response$status_code < 300){
+    return(content(response))
+  }else{
+    stop(content(response))
+  }
+}
+
+
+
+getObjectOLD <- function(endpointWithQuery){
   
   checkAuthentication()
   consumerKey <- getOption('consumerKey')

@@ -25,20 +25,17 @@ createBuildingObject = function(title = NULL, address1 = NULL, address2 = NULL, 
 #' This function lists all buildings for a school district.
 #' 
 #' A building is like a campus of a school district. 
-#' @param start Index of first record to return. Min value is 0.
-#' @param limit Number of records to return. 
-#' Default is 20. Max value is 200.
+#' @param schoolId The ID of the school (district) for which to list buildings.
 #' @return A dataframe of building details.
 #' @section References:
 #' \href{https://developers.schoology.com/api-documentation/rest-api-v1/building}{API Documentation}
 #' @export
-listBuildings = function(schoolId, start = 0, limit = 200){
-  
-  params = as.list(environment())
+listBuildings = function(schoolId){
   
   endpoint = paste0('schools/', schoolId, '/buildings')
   
-  resource = getObject(addParameters(endpoint, params))
+  resource = getObject(endpoint)
+  
   resource <- fromJSON(toJSON(resource), flatten = TRUE)
   resource <- characterizeDataFrame(resource)
   

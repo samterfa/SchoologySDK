@@ -26,20 +26,15 @@ createSchoolObject = function(title = NULL, address1 = NULL, address2 = NULL, ci
 #' 
 #' A "school" is a district in Schoology so this will simply
 #'    return details about the (one) school district. 
-#' @param start Index of first record to return. Min value is 0.
-#' @param limit Number of records to return. 
-#' Default is 20. Max value is 200.
 #' @return A dataframe of school details.
 #' @section References:
 #' \href{https://developers.schoology.com/api-documentation/rest-api-v1/school}{API Documentation}
 #' @export
-listSchools = function(start = 0, limit = 200){
-
-     params = as.list(environment())
+listSchools = function(){
 
      endpoint = 'schools'
 
-     resource = getObject(addParameters(endpoint, params))
+     resource = getObject(endpoint)
 
      # If there's no error...
      if(!exists('status_code', where = resource)){

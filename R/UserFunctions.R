@@ -44,7 +44,7 @@ createUserObject = function(id = NULL, school_id = NULL, building_id = NULL, sch
 # This function returns a data frame of users.
 listUsers <- function(active = T, start = 0, limit = 200, building_id = NULL, role_ids = NULL, parent_access_codes = NULL, school_uids = NULL, extended = NULL){
   
-  params = as.list(environment())[-1]
+  params <- as.list(environment())[-1]
   
   if(active){
     endpoint = paste0('/users')
@@ -52,7 +52,7 @@ listUsers <- function(active = T, start = 0, limit = 200, building_id = NULL, ro
     endpoint = paste0('/users/inactive')
   }
   
-  resource = getObject(addParameters(endpoint, params))
+  resource = getObject(endpoint, params)
   
   # ... Return resource.
   resource = fromJSON(toJSON(resource), flatten = TRUE)
@@ -84,7 +84,7 @@ viewUser = function(userId, active = T, extended = F){
     resource = getObject(endpoint)
   }else{
     params = as.list(environment())['extended']
-    resource = getObject(addParameters(endpoint, params))
+    resource = getObject(endpoint, params)
   }
   
   # ... Return resource.
@@ -269,8 +269,8 @@ deleteUser = function(userId, option_comment = '', option_keep_enrollments = 1, 
   params = as.list(environment())[-1]
   
   endpoint = paste0('users/', userId)
-  
-  resource = getObject(addParameters(endpoint, params))
+   
+  resource = getObject(endpoint, params)
   
   userName = viewUser(userId)$display_name
   
@@ -292,7 +292,7 @@ deleteUser = function(userId, option_comment = '', option_keep_enrollments = 1, 
      
      params = as.list(environment())[-1]
      
-     resource = getObject(addParameters(endpoint, params))
+     resource = getObject(endpoint, params)
      
      response = deleteObject(resource)
      

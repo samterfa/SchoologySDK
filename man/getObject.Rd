@@ -4,7 +4,7 @@
 \alias{getObject}
 \title{Get Schoology Object}
 \usage{
-getObject(endpointWithQuery)
+getObject(endpoint, query = NULL)
 }
 \arguments{
 \item{endpointWithQuery}{See \href{https://developers.schoology.com/api-documentation/rest-api-v1/}{API documentation}
