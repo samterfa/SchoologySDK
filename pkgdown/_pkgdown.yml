@@ -3,10 +3,6 @@ url: https://samterfa.github.io/SchoologySDK/
 author: Sam Terfa
 
 reference:
-  - title: Requests
-    desc:  Functions involving Schoology requests.
-    contents:
-    - has_concept("Requests")
   - title: Users
     desc:  Functions involving Schoology users.
     contents:
@@ -19,4 +15,7 @@ reference:
     desc:  Functions involving Schoology Buildings.
     contents:
     - has_concept("Buildings")
-    
+  - title: Requests
+    desc:  Functions involving Schoology requests.
+    contents:
+    - has_concept("Requests")

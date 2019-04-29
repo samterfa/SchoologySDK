@@ -8,6 +8,7 @@ source('R/AuthenticationFunctions.R')
 #' @param id,school_id,building_id,school_uid,name_title,name_title_show,name_first,name_first_preferred,name_middle,name_middle_show,name_last,name_display,username,primary_email,position,gender,grad_year,birthday_date,password,role_id,email_login_info,profiel_url,tz_name,parents,parent_uids,advisor_uids,child_uids,send_message,synced,profile_picture_fid,additional_buildings
 #' See \href{https://developers.schoology.com/api-documentation/rest-api-v1/user}{API Documentation} for a description 
 #' of each parameter.
+#' @concept Users
 #' @return A named list of user attributes.
 #' @section References:
 #' \href{https://developers.schoology.com/api-documentation/rest-api-v1/user}{API Documentation}
@@ -37,6 +38,7 @@ createUserObject = function(id = NULL, school_id = NULL, building_id = NULL, sch
 #' @param school_uids Specifies whether school uids should be returned for students.
 #' @param extended Whether to return extended details about a user.
 #' 
+#' @concept Users
 #' @return A dataframe of user details.
 #' @section References:
 #' \href{https://developers.schoology.com/api-documentation/rest-api-v1/user}{API Documentation}
@@ -68,6 +70,7 @@ listUsers <- function(active = T, start = 0, limit = 200, building_id = NULL, ro
 #' @param userId Can be found by navigating to the Schoology user's information page.
 #' @param active Whether to return active users only. Defaults to true.
 #' @param extended Whether to return extended details about a user. Defaults to false.
+#' @concept Users
 #' @return A dataframe of user details.
 #' @section References:
 #' \href{https://developers.schoology.com/api-documentation/rest-api-v1/user}{API Documentation}
@@ -100,6 +103,7 @@ viewUser = function(userId, active = T, extended = F){
 #' 
 #' @param userId Can be found by navigating to the Schoology user information page.
 #' @param object Must be created via createUserObject().
+#' @concept Users
 #' @return A dataframe of updated user details.
 #' @section References:
 #' \href{https://developers.schoology.com/api-documentation/rest-api-v1/user}{API Documentation}
@@ -142,6 +146,7 @@ updateUser = function(userId, object = createUserObject()){
 #' This function modifies one or more attributes of up to 50 users at once.
 #' 
 #' @param userObjects A list of userObjects. These must be created via createUserObject().
+#' @concept Users
 #' @return A dataframe of updated user details for each user modified.
 #' @section References:
 #' \href{https://developers.schoology.com/api-documentation/rest-api-v1/user}{API Documentation}
@@ -202,6 +207,7 @@ updateUsers = function(userObjects = list(createUserObject())){
 #' This function creates a new Schoology user.
 #' 
 #' @param object Must be created via createUserObject().
+#' @concept Users
 #' @return A dataframe of details for the newly created user.
 #' @section References:
 #' \href{https://developers.schoology.com/api-documentation/rest-api-v1/user}{API Documentation}
@@ -234,6 +240,7 @@ createUser = function(object = createUserObject()){
 #' 
 #' @param userObjects A list of userObjects. These must be created via createUserObject().
 #' @param update_existing 
+#' @concept Users
 #' @return A dataframe of updated user details for each user created.
 #' @section References:
 #' \href{https://developers.schoology.com/api-documentation/rest-api-v1/user}{API Documentation}
@@ -289,6 +296,7 @@ createUsers = function(userObjects = list(createUserObject()), update_existing =
 #' Deletes a User.
 #' 
 #' @param userId The ID of the user which will be deleted.
+#' @concept Users
 #' @return The success status of the DELETE request.
 #' @section References:
 #' \href{https://developers.schoology.com/api-documentation/rest-api-v1/user}{API Documentation}
@@ -312,20 +320,6 @@ deleteUser = function(userId, option_comment = '', option_keep_enrollments = 1, 
   }else{
     return("User deletion canceled.")
   }
-}
-
-# This function deletes a user.
-deleteUser = function(userId, option_comment = '', option_keep_enrollments = 1, email_notification = 0){
-     
-     endpoint = paste0('users/', userId)
-     
-     params = as.list(environment())[-1]
-     
-     resource = getObject(addParameters(endpoint, params))
-     
-     response = deleteObject(resource)
-     
-     return(response)
 }
 
 # This function deletes up to 50 users at once.
