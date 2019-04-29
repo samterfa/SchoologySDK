@@ -4,13 +4,10 @@
 \alias{listBuildings}
 \title{List Buildings for School}
 \usage{
-listBuildings(schoolId, start = 0, limit = 200)
+listBuildings(schoolId)
 }
 \arguments{
-\item{start}{Index of first record to return. Min value is 0.}
-
-\item{limit}{Number of records to return. 
-Default is 20. Max value is 200.}
+\item{schoolId}{The ID of the school (district) for which to list buildings.}
 }
 \value{
 A dataframe of building details.
@@ -26,3 +23,4 @@ A building is like a campus of a school district.
 \href{https://developers.schoology.com/api-documentation/rest-api-v1/building}{API Documentation}
 }
 
+\concept{Buildings}

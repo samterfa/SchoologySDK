@@ -22,3 +22,4 @@ This function modifies one or more attributes of a school (district).
 \href{https://developers.schoology.com/api-documentation/rest-api-v1/school}{API Documentation}
 }
 
+\concept{Schools}

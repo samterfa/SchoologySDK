@@ -26,3 +26,4 @@ A building object is necessary for creation and modification of a Schoology buil
 \href{https://developers.schoology.com/api-documentation/rest-api-v1/building}{API Documentation}
 }
 
+\concept{Buildings}

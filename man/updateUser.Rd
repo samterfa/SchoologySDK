@@ -22,3 +22,4 @@ This function modifies one or more attributes of a user.
 \href{https://developers.schoology.com/api-documentation/rest-api-v1/user}{API Documentation}
 }
 
+\concept{Users}

@@ -20,3 +20,4 @@ This function returns details about a school (district).
 \href{https://developers.schoology.com/api-documentation/rest-api-v1/school}{API Documentation}
 }
 
+\concept{Schools}

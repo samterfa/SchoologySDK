@@ -4,13 +4,7 @@
 \alias{listSchools}
 \title{List Schools for District}
 \usage{
-listSchools(start = 0, limit = 200)
-}
-\arguments{
-\item{start}{Index of first record to return. Min value is 0.}
-
-\item{limit}{Number of records to return. 
-Default is 20. Max value is 200.}
+listSchools()
 }
 \value{
 A dataframe of school details.
@@ -27,3 +21,4 @@ A "school" is a district in Schoology so this will simply
 \href{https://developers.schoology.com/api-documentation/rest-api-v1/school}{API Documentation}
 }
 
+\concept{Schools}

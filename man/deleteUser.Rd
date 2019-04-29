@@ -21,3 +21,7 @@ Deletes a User.
 \href{https://developers.schoology.com/api-documentation/rest-api-v1/user}{API Documentation}
 }
 
+<<<<<<< HEAD
+=======
+\concept{Users}
+>>>>>>> 473c3bbe25deb07bb28997a7eaaf789c1e421a4e

@@ -20,3 +20,4 @@ This function creates a new Schoology user.
 \href{https://developers.schoology.com/api-documentation/rest-api-v1/user}{API Documentation}
 }
 
+\concept{Users}

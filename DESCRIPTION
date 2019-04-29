@@ -3,14 +3,14 @@ Type: Package
 Title: Creates R Functions for Schoology API Functions
 Version: 0.1.0
 Author: Sam Terfa
-Maintainer: The package maintainer <samterfa@gmail.com>
+Maintainer: Sam Terfa <samterfa@gmail.com>
 Description: See https://developers.schoology.com/api-documentation/rest-api-v1/ for more details.
     This package creates an R SDK for the Schoology API.
 License: GPL-2
 Encoding: UTF-8
 LazyData: true
-URL: http://github.com/sterfa02/schoologysdk
-BugReports: http://github.com/sterfa02/schoologysdk/issues
+URL: http://github.com/samterfa/schoologysdk
+BugReports: http://github.com/samterfa/schoologysdk/issues
 Imports:
   tidyverse,jsonlite,httr
 Remotes: 

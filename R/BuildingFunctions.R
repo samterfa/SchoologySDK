@@ -8,6 +8,7 @@ source('R/AuthenticationFunctions.R')
 #' @param title,address1,address2,city,state,postal_code,country,website,phone,fax,picture_url
 #' See \href{https://developers.schoology.com/api-documentation/rest-api-v1/building}{API Documentation} for a description 
 #' of each parameter.
+#' @concept Buildings
 #' @return A named list of building attributes.
 #' @section References:
 #' \href{https://developers.schoology.com/api-documentation/rest-api-v1/building}{API Documentation}
@@ -25,20 +26,18 @@ createBuildingObject = function(title = NULL, address1 = NULL, address2 = NULL, 
 #' This function lists all buildings for a school district.
 #' 
 #' A building is like a campus of a school district. 
-#' @param start Index of first record to return. Min value is 0.
-#' @param limit Number of records to return. 
-#' Default is 20. Max value is 200.
+#' @param schoolId The ID of the school (district) for which to list buildings.
+#' @concept Buildings
 #' @return A dataframe of building details.
 #' @section References:
 #' \href{https://developers.schoology.com/api-documentation/rest-api-v1/building}{API Documentation}
 #' @export
-listBuildings = function(schoolId, start = 0, limit = 200){
-  
-  params = as.list(environment())
+listBuildings = function(schoolId){
   
   endpoint = paste0('schools/', schoolId, '/buildings')
   
-  resource = getObject(addParameters(endpoint, params))
+  resource = getObject(endpoint)
+  
   resource <- fromJSON(toJSON(resource), flatten = TRUE)
   resource <- characterizeDataFrame(resource)
   
@@ -50,6 +49,7 @@ listBuildings = function(schoolId, start = 0, limit = 200){
 #' This function returns details about a building: a campus of a school district.
 #' 
 #' @param buildingId Can be found by navigating to the Schoology building information page.
+#' @concept Buildings
 #' @return A dataframe of building details.
 #' @section References:
 #' \href{https://developers.schoology.com/api-documentation/rest-api-v1/building}{API Documentation}
@@ -78,6 +78,7 @@ viewBuilding = function(buildingId){
 #' 
 #' @param buildingId Can be found by navigating to the Schoology building information page.
 #' @param object Must be created via createBuildingObject().
+#' @concept Buildings
 #' @return A dataframe of updated building details.
 #' @section References:
 #' \href{https://developers.schoology.com/api-documentation/rest-api-v1/building}{API Documentation}
@@ -121,6 +122,7 @@ updateBuilding = function(buildingId, object = createBuildingObject()){
 #' 
 #' @param schoolId The ID of the school to which the building will be added.
 #' @param object Must be created via createBuildingObject().
+#' @concept Buildings
 #' @return A dataframe of details for the newly created building.
 #' @section References:
 #' \href{https://developers.schoology.com/api-documentation/rest-api-v1/building}{API Documentation}
@@ -151,6 +153,7 @@ createBuilding = function(schoolId, object = createBuildingObject()){
 #' Deletes a school building.
 #' 
 #' @param buildingId The ID of the building which will be deleted.
+#' @concept Buildings
 #' @return The success status of the DELETE request.
 #' @section References:
 #' \href{https://developers.schoology.com/api-documentation/rest-api-v1/building}{API Documentation}

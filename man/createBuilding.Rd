@@ -22,3 +22,4 @@ This function creates a new school building.
 \href{https://developers.schoology.com/api-documentation/rest-api-v1/building}{API Documentation}
 }
 
+\concept{Buildings}
