@@ -122,6 +122,9 @@ updateSchool = function(schoolId, object = createSchoolObject()){
        }
 }
 
+
+######################## EXPERIMENTAL!!! ##################################
+
 # This function creates a school. I am not able to test. Returns 403 error.
 createSchool = function(object = createSchoolObject()){
 

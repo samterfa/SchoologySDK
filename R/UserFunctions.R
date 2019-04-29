@@ -166,14 +166,15 @@ updateUsers = function(userObjects = list(createUserObject())){
      
      response = updateObject(endpoint, fromJSON(userObjects))
      
-     resource <- content(response)
-     resource = fromJSON(toJSON(resource), flatten = TRUE)
-     resource = characterizeDataFrame(resource)
-     schoolUIDs <- resource$user.school_uid
-     
      # If there's no error...
      if(substr(response$status_code, 1, 1) == '2'){
+       
        # ... Return updated user info.
+       resource <- content(response)
+       resource = fromJSON(toJSON(resource), flatten = TRUE)
+       resource = characterizeDataFrame(resource)
+       schoolUIDs <- resource$user.school_uid
+       
        response2 <- listUsers(school_uids = paste(schoolUIDs, collapse = ','))
        
        # If there's no error...
@@ -227,14 +228,21 @@ createUser = function(object = createUserObject()){
   }
 }
 
-# This function creates up to 50 users at once.
-createUsers = function(userObjects = list(createUserObject()), update_existing = 0, ignore_email_conflicts = 0, email_conflict_resolution = 1){
-  
-  require(jsonlite)
-  source('R/Helper Functions.R')
+#' Create Multiple Users
+#' 
+#' This function creates one or more attributes of up to 50 users at once.
+#' 
+#' @param userObjects A list of userObjects. These must be created via createUserObject().
+#' @param update_existing 
+#' @return A dataframe of updated user details for each user created.
+#' @section References:
+#' \href{https://developers.schoology.com/api-documentation/rest-api-v1/user}{API Documentation}
+#' @export
+createUsers = function(userObjects = list(createUserObject()), update_existing = F, ignore_email_conflicts = F, email_conflict_resolution = T){
   
   params = as.list(environment())[-1]
-  
+  params <- lapply(params, function(x) ifelse(x, 1, 0))
+ 
   indicesToRemove = integer()
   for(i in 1:length(userObjects)){
     if(length(userObjects[[i]]) == 0){
@@ -249,10 +257,31 @@ createUsers = function(userObjects = list(createUserObject()), update_existing =
   userObjects = paste0('{"users":{"user":', toJSON(userObjects), '}}')
   
   endpoint = 'users/'
+  endpoint = addParameters(endpoint, params)
   
-  resource = addParameters(endpoint, params)
+  response = createObject(endpoint, fromJSON(userObjects))
   
-  response = createObject(resource, fromJSON(userObjects))
+  # If there's no error...
+  if(!exists('status_code', where = response)){
+    # ... Return resource.
+    resource = fromJSON(toJSON(response), flatten = TRUE)
+    resource = characterizeDataFrame(resource)
+    schoolUIDs <- resource$user.school_uid
+    
+    response2 <- listUsers(school_uids = paste(schoolUIDs, collapse = ','))
+    
+    # If there's no error...
+    if(!exists('status_code', where = response2)){
+      # ... Return resource.
+      
+      resource = fromJSON(toJSON(response2), flatten = TRUE)
+      resource = characterizeDataFrame(resource)
+      return(resource)
+    }else{
+      # Otherwise return server response if there's an error.
+      return(response2)
+    }
+  }
   
   return(response)
 }
