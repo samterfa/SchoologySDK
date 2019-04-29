@@ -8,6 +8,7 @@ source('R/AuthenticationFunctions.R')
 #' @param title,address1,address2,city,state,postal_code,country,website,phone,fax,picture_url
 #' See \href{https://developers.schoology.com/api-documentation/rest-api-v1/school}{API Documentation} for a description 
 #' of each parameter.
+#' @concept Schools
 #' @return A named list of school attributes.
 #' @section References:
 #' \href{https://developers.schoology.com/api-documentation/rest-api-v1/school}{API Documentation}
@@ -25,6 +26,7 @@ createSchoolObject = function(title = NULL, address1 = NULL, address2 = NULL, ci
 #' 
 #' A "school" is a district in Schoology so this will simply
 #'    return details about the (one) school district. 
+#' @concept Schools
 #' @return A dataframe of school details.
 #' @section References:
 #' \href{https://developers.schoology.com/api-documentation/rest-api-v1/school}{API Documentation}
@@ -52,6 +54,7 @@ listSchools = function(){
 #' This function returns details about a school (district).
 #' 
 #' @param schoolId Can be found by navigating to the Schoology school (district) information page.
+#' @concept Schools
 #' @return A dataframe of school (district) details.
 #' @section References:
 #' \href{https://developers.schoology.com/api-documentation/rest-api-v1/school}{API Documentation}
@@ -80,6 +83,7 @@ viewSchool = function(schoolId){
 #' 
 #' @param schoolId Can be found by navigating to the Schoology district information page.
 #' @param object Must be created via createSchoolObject().
+#' @concept Schools
 #' @return A dataframe of updated school details.
 #' @section References:
 #' \href{https://developers.schoology.com/api-documentation/rest-api-v1/school}{API Documentation}

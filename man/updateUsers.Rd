@@ -20,3 +20,4 @@ This function modifies one or more attributes of up to 50 users at once.
 \href{https://developers.schoology.com/api-documentation/rest-api-v1/user}{API Documentation}
 }
 
+\concept{Users}

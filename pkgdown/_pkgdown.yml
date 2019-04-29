@@ -1,0 +1,22 @@
+url: https://samterfa.github.io/SchoologySDK/
+
+author: Sam Terfa
+
+reference:
+  - title: Requests
+    desc:  Functions involving Schoology requests.
+    contents:
+    - has_concept("Requests")
+  - title: Users
+    desc:  Functions involving Schoology users.
+    contents:
+    - has_concept("Users")
+  - title: Schools
+    desc:  Functions involving Schoology Schools (Districts).
+    contents:
+    - has_concept("Schools")
+  - title: Buildings
+    desc:  Functions involving Schoology Buildings.
+    contents:
+    - has_concept("Buildings")
+    

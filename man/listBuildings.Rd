@@ -23,3 +23,4 @@ A building is like a campus of a school district.
 \href{https://developers.schoology.com/api-documentation/rest-api-v1/building}{API Documentation}
 }
 
+\concept{Buildings}

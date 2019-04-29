@@ -21,3 +21,4 @@ A "school" is a district in Schoology so this will simply
 \href{https://developers.schoology.com/api-documentation/rest-api-v1/school}{API Documentation}
 }
 
+\concept{Schools}

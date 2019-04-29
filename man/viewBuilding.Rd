@@ -20,3 +20,4 @@ This function returns details about a building: a campus of a school district.
 \href{https://developers.schoology.com/api-documentation/rest-api-v1/building}{API Documentation}
 }
 
+\concept{Buildings}

@@ -36,3 +36,4 @@ A user object is necessary for creation and modification of a Schoology user.
 NOTE: Documentation is incorrect. id NOT school_uid is required for bulk updating users.
 }
 
+\concept{Users}

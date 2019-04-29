@@ -26,3 +26,4 @@ A school object is necessary for creation and modification of a Schoology school
 \href{https://developers.schoology.com/api-documentation/rest-api-v1/school}{API Documentation}
 }
 
+\concept{Schools}

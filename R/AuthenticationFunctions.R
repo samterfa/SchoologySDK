@@ -164,6 +164,7 @@ flattenJsonList = function(jsonList){
 #' \strong{token and tokenSecret}\cr\cr For 2-legged authentication, these should be left blank.\cr\cr
 #' For 3-legged authentication, these are stored values for the current user.\cr\cr
 #' See \href{https://developers.schoology.com/api-documentation/authentication}{authentication documentation} for details.
+#' @concept Requests
 #' @return The content of the GET request response.
 #' @section References:
 #' \href{https://developers.schoology.com/api-documentation/rest-api-v1/}{Schoology Rest API Documentation}
@@ -236,6 +237,7 @@ getObject <- function(endpoint, query = NULL){
 #' \strong{token and tokenSecret}\cr\cr For 2-legged authentication, these should be left blank.\cr\cr
 #' For 3-legged authentication, these are stored values for the current user.\cr\cr
 #' See \href{https://developers.schoology.com/api-documentation/authentication}{authentication documentation} for details.
+#' @concept Requests
 #' @return The PUT request response.
 #' @section References:
 #' \href{https://developers.schoology.com/api-documentation/rest-api-v1/}{Schoology Rest API Documentation}
@@ -293,6 +295,7 @@ updateObject <- function(endpointWithQuery, payload){
 #' \strong{token and tokenSecret}\cr\cr For 2-legged authentication, these should be left blank.\cr\cr
 #' For 3-legged authentication, these are stored values for the current user.\cr\cr
 #' See \href{https://developers.schoology.com/api-documentation/authentication}{authentication documentation} for details.
+#' @concept Requests
 #' @return The newly created object.
 #' @section References:
 #' \href{https://developers.schoology.com/api-documentation/rest-api-v1/}{Schoology Rest API Documentation}
@@ -347,6 +350,7 @@ createObject <- function(endpointWithQuery, payload){
 #' \strong{token and tokenSecret}\cr\cr For 2-legged authentication, these should be left blank.\cr\cr
 #' For 3-legged authentication, these are stored values for the current user.\cr\cr
 #' See \href{https://developers.schoology.com/api-documentation/authentication}{authentication documentation} for details.
+#' @concept Requests
 #' @return The DELETE request response.
 #' @section References:
 #' \href{https://developers.schoology.com/api-documentation/rest-api-v1/}{Schoology Rest API Documentation}
