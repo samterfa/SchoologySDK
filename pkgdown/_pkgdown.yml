@@ -19,3 +19,7 @@ reference:
     desc:  Functions involving Schoology requests.
     contents:
     - has_concept("Requests")
+  - title: Sections
+    desc:  Functions involving Schoology sections.
+    contents:
+    - has_concept("Sections")

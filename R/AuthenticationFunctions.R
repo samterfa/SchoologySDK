@@ -10,7 +10,7 @@ checkAuthentication <- function(){
   require(tidyverse)
   
   ops <- Sys.getenv()
-  requiredOptions <- c("consumerKey", "consumerSecret", "apiUrl")
+  requiredOptions <- c("schoologyConsumerKey", "schoologyConsumerSecret")#, "apiUrl")
   
   for(option in requiredOptions){
     if(Sys.getenv(option) == ''){
@@ -44,7 +44,7 @@ getToken <- function(){
     )
   }
   
-  myApp <- oauth_app("Schoology", key = getOption('consumerKey'), secret = getOption('consumerSecret'))
+  myApp <- oauth_app("Schoology", key = getOption('schoologyConsumerKey'), secret = getOption('schoologyConsumerSecret'))
   myToken <- oauth_zero_leg_token(myApp)
   
   return(myToken)
@@ -74,9 +74,9 @@ flattenJsonList = function(jsonList){
     item = data.frame(item)
     
     if(!exists('df', inherits = FALSE)){
-      df <- flatten(item)
+      df <- jsonlite::flatten(item)
     }else{
-      df <- bind_rows(df, flatten(item))
+      df <- bind_rows(df, jsonlite::flatten(item))
     }
   }
   return(df)
@@ -176,45 +176,6 @@ getObject <- function(endpoint, query = NULL){
     stop(content(response))
   }
 }
-
-
-
-# getObjectOLD <- function(endpointWithQuery){
-#   
-#   checkAuthentication()
-#   consumerKey <- getOption('consumerKey')
-#   consumerSecret <- getOption('consumerSecret')
-#   token <- getOption('token')
-#   tokenSecret <- getOption('tokenSecret')
-#   
-#   url <- paste0(baseUrl, endpointWithQuery)
-#   method <- 'GET'
-#   
-#   timestamp <-  as.numeric(Sys.time())
-#   nonce <- timestamp
-#   
-#   authHeader <- paste0('OAuth ',
-#                        'realm=Schoology API',
-#                        ',oauth_consumer_key=', consumerKey,
-#                        ',oauth_token=', token,
-#                        ',oauth_nonce=', nonce,
-#                        ',oauth_timestamp=', timestamp,
-#                        ',oauth_signature_method=', oauth_config,
-#                        ',oauth_version=1.0'
-#                         )
-#   
-#   signature <- makeOauthSignature(url, method, authHeader, consumerSecret, tokenSecret)
-#   authHeader <- paste0(authHeader, ',oauth_signature=', URLencode(signature, reserved = T))
-#   
-#   response <- GET(url, add_headers(Authorization = authHeader))
-#   
-#   # If we receive a 2## response...
-#   if(substr(response$status_code, 1, 1) == '2'){
-#     return(content(response))
-#   }else{
-#     stop(content(response))
-#   }
-# }
 
 #' Update Schoology Object
 #' 

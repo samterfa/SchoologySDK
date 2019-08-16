@@ -22,6 +22,36 @@ createSectionObject = function(id = NULL, section_title = NULL, section_code = N
   return(sectionObject)
 }
 
+
+#' List Sections for a Course
+#' 
+#' This function returns a list of sections for a course past and present.
+#' 
+#' A section is a course meeting. 
+#' @param include_past Whether to return past sections or only current sections.
+#' 
+#' @concept Sections
+#' @return A dataframe of section details.
+#' @section References:
+#' \href{https://developers.schoology.com/api-documentation/rest-api-v1/course-section}{API Documentation}
+#' @export
+# This function returns a data frame of sections.
+listSections <- function(course_id, include_past = F){
+  
+  params = as.list(environment())[-1]
+
+  endpoint = paste0('/courses/', course_id, '/sections')
+  
+  resource = getObject(endpoint) #, params)
+  
+  # ... Return resource.
+  resource = jsonlite::fromJSON(toJSON(resource), flatten = TRUE)
+  resource = characterizeDataFrame(resource)
+  
+  return(resource)
+}
+
+
 #' Update Section Details
 #' 
 #' This function modifies one or more attributes of a section.
