@@ -7,19 +7,14 @@ checkAuthentication <- function(){
   
   require(httr)
   require(jsonlite)
-  require(dplyr)
+  require(tidyverse)
   
-  source('../Schoology Credentials.R')
+  ops <- Sys.getenv()
+  requiredOptions <- c("consumerKey", "consumerSecret", "apiUrl")
   
-  ops <- options()
-  requiredOptions <- c("consumerKey", "consumerSecret", "token", "tokenSecret", "appId", "appUrl")
   for(option in requiredOptions){
-    if(!exists(option, ops)){
-      if(regexpr('token', option) > 0 | regexpr('app', option) > 0){
-        eval(parse(text = paste0('options(', option, ' = "")')))
-      }else{
-        stop(paste0('Required option ', option, ' has not been set! Set its value using options(', option, ' = "', option, 'Value").'))
-      }
+    if(Sys.getenv(option) == ''){
+      stop(paste0('Required option ', option, ' has not been set! Set its value using Sys.setenv(', option, ' = "{', option, 'Value}").'))
     }
   }
 }
