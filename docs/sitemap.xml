@@ -7,16 +7,7 @@
     <loc>https://samterfa.github.io/SchoologySDK//reference/createBuilding.html</loc>
   </url>
   <url>
-    <loc>https://samterfa.github.io/SchoologySDK//reference/createBuildingObject.html</loc>
-  </url>
-  <url>
     <loc>https://samterfa.github.io/SchoologySDK//reference/createObject.html</loc>
-  </url>
-  <url>
-    <loc>https://samterfa.github.io/SchoologySDK//reference/createSchoolObject.html</loc>
-  </url>
-  <url>
-    <loc>https://samterfa.github.io/SchoologySDK//reference/createSectionObject.html</loc>
   </url>
   <url>
     <loc>https://samterfa.github.io/SchoologySDK//reference/createUser.html</loc>
@@ -43,6 +34,9 @@
     <loc>https://samterfa.github.io/SchoologySDK//reference/listBuildings.html</loc>
   </url>
   <url>
+    <loc>https://samterfa.github.io/SchoologySDK//reference/listCourses.html</loc>
+  </url>
+  <url>
     <loc>https://samterfa.github.io/SchoologySDK//reference/listSchools.html</loc>
   </url>
   <url>
@@ -52,7 +46,13 @@
     <loc>https://samterfa.github.io/SchoologySDK//reference/listUsers.html</loc>
   </url>
   <url>
+    <loc>https://samterfa.github.io/SchoologySDK//reference/makeRequest.html</loc>
+  </url>
+  <url>
     <loc>https://samterfa.github.io/SchoologySDK//reference/updateBuilding.html</loc>
+  </url>
+  <url>
+    <loc>https://samterfa.github.io/SchoologySDK//reference/updateCourse.html</loc>
   </url>
   <url>
     <loc>https://samterfa.github.io/SchoologySDK//reference/updateObject.html</loc>
@@ -73,7 +73,13 @@
     <loc>https://samterfa.github.io/SchoologySDK//reference/viewBuilding.html</loc>
   </url>
   <url>
+    <loc>https://samterfa.github.io/SchoologySDK//reference/viewCourse.html</loc>
+  </url>
+  <url>
     <loc>https://samterfa.github.io/SchoologySDK//reference/viewSchool.html</loc>
+  </url>
+  <url>
+    <loc>https://samterfa.github.io/SchoologySDK//reference/viewSection.html</loc>
   </url>
   <url>
     <loc>https://samterfa.github.io/SchoologySDK//reference/viewUser.html</loc>

@@ -4,12 +4,16 @@
 \alias{createBuilding}
 \title{Create a School Building}
 \usage{
-createBuilding(schoolId, object = createBuildingObject())
+createBuilding(schoolId, title = NULL, address1 = NULL,
+  address2 = NULL, city = NULL, state = NULL, postal_code = NULL,
+  country = NULL, website = NULL, phone = NULL, fax = NULL,
+  picture_url = NULL)
 }
 \arguments{
 \item{schoolId}{The ID of the school to which the building will be added.}
 
-\item{object}{Must be created via createBuildingObject().}
+\item{title, address1, address2, city, state, postal_code, country, website, phone, fax, picture_url}{See \href{https://developers.schoology.com/api-documentation/rest-api-v1/building}{API Documentation} for a description 
+of each parameter.}
 }
 \value{
 A dataframe of details for the newly created building.

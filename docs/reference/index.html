@@ -173,12 +173,6 @@
       <tr>
         
         <td>
-          <p><code><a href="createSchoolObject.html">createSchoolObject()</a></code> </p>
-        </td>
-        <td><p>Create School Object</p></td>
-      </tr><tr>
-        
-        <td>
           <p><code><a href="listSchools.html">listSchools()</a></code> </p>
         </td>
         <td><p>List Schools for District</p></td>
@@ -208,12 +202,6 @@
           <p><code><a href="createBuilding.html">createBuilding()</a></code> </p>
         </td>
         <td><p>Create a School Building</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="createBuildingObject.html">createBuildingObject()</a></code> </p>
-        </td>
-        <td><p>Create Building Object</p></td>
       </tr><tr>
         
         <td>
@@ -267,9 +255,41 @@
       </tr><tr>
         
         <td>
+          <p><code><a href="makeRequest.html">makeRequest()</a></code> </p>
+        </td>
+        <td><p>Perform API Request to Endpoint</p></td>
+      </tr><tr>
+        
+        <td>
           <p><code><a href="updateObject.html">updateObject()</a></code> </p>
         </td>
         <td><p>Update Schoology Object</p></td>
+      </tr>
+    </tbody><tbody>
+      <tr>
+        <th colspan="2">
+          <h2 id="section-courses" class="hasAnchor"><a href="#section-courses" class="anchor"></a>Courses</h2>
+          <p class="section-desc"><p>Functions involving Schoology courses.</p></p>
+        </th>
+      </tr>
+      <tr>
+        
+        <td>
+          <p><code><a href="listCourses.html">listCourses()</a></code> </p>
+        </td>
+        <td><p>List Courses for a School</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="updateCourse.html">updateCourse()</a></code> </p>
+        </td>
+        <td><p>Update Course Details</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="viewCourse.html">viewCourse()</a></code> </p>
+        </td>
+        <td><p>Get Course Details</p></td>
       </tr>
     </tbody><tbody>
       <tr>
@@ -281,21 +301,42 @@
       <tr>
         
         <td>
-          <p><code><a href="createSectionObject.html">createSectionObject()</a></code> </p>
-        </td>
-        <td><p>Create Section Object</p></td>
-      </tr><tr>
-        
-        <td>
           <p><code><a href="listSections.html">listSections()</a></code> </p>
         </td>
-        <td><p>List Sections for a Course</p></td>
+        <td><p>#' Create Section Object
+#' 
+#' This function creates a Schoology section object.
+#' 
+#' A section object is necessary for creation and modification of a Schoology section. 
+#' @param id,school_id,building_id,school_uid,name_title,name_title_show,name_first,name_first_preferred,name_middle,name_middle_show,name_last,name_display,sectionname,primary_email,position,gender,grad_year,birthday_date,password,role_id,email_login_info,profiel_url,tz_name,parents,parent_uids,advisor_uids,child_uids,send_message,synced,profile_picture_fid,additional_buildings
+#' See <a href='https://developers.schoology.com/api-documentation/rest-api-v1/course-section'>API Documentation</a> for a description 
+#' of each parameter.
+#' @concept Sections
+#' @return A named list of section attributes.
+#' @section References:
+#' <a href='https://developers.schoology.com/api-documentation/rest-api-v1/course-section'>API Documentation</a>
+#' 
+#' @export
+createSectionObject = function(id = NULL, section_title = NULL, section_code = NULL, section_school_code = NULL, access_code = NULL, grading_periods = NULL, description = NULL, profile_url = NULL, location = NULL, meeting_days = NULL, start_time = NULL, end_time = NULL, class_periods = NULL, synced = NULL)
+  
+  sectionObject = as.list(environment())
+  sectionObject = sectionObject[as.character(sectionObject) != 'NULL']
+  
+  return(sectionObject)
+
+List Sections for a Course</p></td>
       </tr><tr>
         
         <td>
           <p><code><a href="updateSection.html">updateSection()</a></code> </p>
         </td>
         <td><p>Update Section Details</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="viewSection.html">viewSection()</a></code> </p>
+        </td>
+        <td><p>Get Section Details</p></td>
       </tr>
     </tbody>
     </table>
@@ -308,6 +349,7 @@
       <li><a href="#section-schools">Schools</a></li>
       <li><a href="#section-buildings">Buildings</a></li>
       <li><a href="#section-requests">Requests</a></li>
+      <li><a href="#section-courses">Courses</a></li>
       <li><a href="#section-sections">Sections</a></li>
     </ul>
   </div>

@@ -6,7 +6,28 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>List Sections for a Course — listSections • schoologysdk</title>
+<title>#' Create Section Object
+#' 
+#' This function creates a Schoology section object.
+#' 
+#' A section object is necessary for creation and modification of a Schoology section. 
+#' @param id,school_id,building_id,school_uid,name_title,name_title_show,name_first,name_first_preferred,name_middle,name_middle_show,name_last,name_display,sectionname,primary_email,position,gender,grad_year,birthday_date,password,role_id,email_login_info,profiel_url,tz_name,parents,parent_uids,advisor_uids,child_uids,send_message,synced,profile_picture_fid,additional_buildings
+#' See <a href='https://developers.schoology.com/api-documentation/rest-api-v1/course-section'>API Documentation</a> for a description 
+#' of each parameter.
+#' @concept Sections
+#' @return A named list of section attributes.
+#' @section References:
+#' <a href='https://developers.schoology.com/api-documentation/rest-api-v1/course-section'>API Documentation</a>
+#' 
+#' @export
+createSectionObject = function(id = NULL, section_title = NULL, section_code = NULL, section_school_code = NULL, access_code = NULL, grading_periods = NULL, description = NULL, profile_url = NULL, location = NULL, meeting_days = NULL, start_time = NULL, end_time = NULL, class_periods = NULL, synced = NULL)
+  
+  sectionObject = as.list(environment())
+  sectionObject = sectionObject[as.character(sectionObject) != 'NULL']
+  
+  return(sectionObject)
+
+List Sections for a Course — listSections • schoologysdk</title>
 
 <!-- jquery -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
@@ -30,7 +51,28 @@
 
 
 
-<meta property="og:title" content="List Sections for a Course — listSections" />
+<meta property="og:title" content="#' Create Section Object
+#' 
+#' This function creates a Schoology section object.
+#' 
+#' A section object is necessary for creation and modification of a Schoology section. 
+#' @param id,school_id,building_id,school_uid,name_title,name_title_show,name_first,name_first_preferred,name_middle,name_middle_show,name_last,name_display,sectionname,primary_email,position,gender,grad_year,birthday_date,password,role_id,email_login_info,profiel_url,tz_name,parents,parent_uids,advisor_uids,child_uids,send_message,synced,profile_picture_fid,additional_buildings
+#' See <a href='https://developers.schoology.com/api-documentation/rest-api-v1/course-section'>API Documentation</a> for a description 
+#' of each parameter.
+#' @concept Sections
+#' @return A named list of section attributes.
+#' @section References:
+#' <a href='https://developers.schoology.com/api-documentation/rest-api-v1/course-section'>API Documentation</a>
+#' 
+#' @export
+createSectionObject = function(id = NULL, section_title = NULL, section_code = NULL, section_school_code = NULL, access_code = NULL, grading_periods = NULL, description = NULL, profile_url = NULL, location = NULL, meeting_days = NULL, start_time = NULL, end_time = NULL, class_periods = NULL, synced = NULL)
+  
+  sectionObject = as.list(environment())
+  sectionObject = sectionObject[as.character(sectionObject) != 'NULL']
+  
+  return(sectionObject)
+
+List Sections for a Course — listSections" />
 
 <meta property="og:description" content="This function returns a list of sections for a course past and present." />
 <meta name="twitter:card" content="summary" />
@@ -99,7 +141,28 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>List Sections for a Course</h1>
+    <h1>#' Create Section Object
+#' 
+#' This function creates a Schoology section object.
+#' 
+#' A section object is necessary for creation and modification of a Schoology section. 
+#' @param id,school_id,building_id,school_uid,name_title,name_title_show,name_first,name_first_preferred,name_middle,name_middle_show,name_last,name_display,sectionname,primary_email,position,gender,grad_year,birthday_date,password,role_id,email_login_info,profiel_url,tz_name,parents,parent_uids,advisor_uids,child_uids,send_message,synced,profile_picture_fid,additional_buildings
+#' See <a href='https://developers.schoology.com/api-documentation/rest-api-v1/course-section'>API Documentation</a> for a description 
+#' of each parameter.
+#' @concept Sections
+#' @return A named list of section attributes.
+#' @section References:
+#' <a href='https://developers.schoology.com/api-documentation/rest-api-v1/course-section'>API Documentation</a>
+#' 
+#' @export
+createSectionObject = function(id = NULL, section_title = NULL, section_code = NULL, section_school_code = NULL, access_code = NULL, grading_periods = NULL, description = NULL, profile_url = NULL, location = NULL, meeting_days = NULL, start_time = NULL, end_time = NULL, class_periods = NULL, synced = NULL)
+  
+  sectionObject = as.list(environment())
+  sectionObject = sectionObject[as.character(sectionObject) != 'NULL']
+  
+  return(sectionObject)
+
+List Sections for a Course</h1>
     <small class="dont-index">Source: <a href='https://github.com/samterfa/schoologysdk/blob/master/R/SectionFunctions.R'><code>R/SectionFunctions.R</code></a></small>
     <div class="hidden name"><code>listSections.Rd</code></div>
     </div>
@@ -110,7 +173,7 @@
     
     </div>
 
-    <pre class="usage"><span class='fu'>listSections</span>(<span class='no'>course_id</span>, <span class='kw'>include_past</span> <span class='kw'>=</span> <span class='no'>F</span>)</pre>
+    <pre class="usage"><span class='fu'>listSections</span>(<span class='no'>course_id</span>, <span class='kw'>include_past</span> <span class='kw'>=</span> <span class='fl'>0</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">

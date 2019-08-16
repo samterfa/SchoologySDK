@@ -3,6 +3,6 @@
 .RData
 .Ruserdata
 .Rbuildignore
-Credentials.R
+SchoologyCredentials.R
 scraping.R
 .DS_Store

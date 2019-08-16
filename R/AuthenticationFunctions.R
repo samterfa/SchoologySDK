@@ -83,22 +83,22 @@ flattenJsonList = function(jsonList){
 }
 
 
-# # This function properly formats parameters for inclusion in a Schoology API request.
-# addParametersOLD <- function(endpoint, params){
-#   
-#   paramsString = ''
-#   for(i in 1:length(params)){
-#     if(i == 1){
-#       paramsString = '?'
-#     }else{
-#       paramsString = paste0(paramsString, '&')
-#     }
-#     newString = paste0(names(params)[[i]], '=', params[[i]])
-#     paramsString = paste0(paramsString, newString)
-#   }
-#   
-#   return(paste0(endpoint, paramsString))
-# }
+# This function properly formats parameters for inclusion in a Schoology API request.
+addParameters <- function(endpoint, params){
+
+  paramsString = ''
+  for(i in 1:length(params)){
+    if(i == 1){
+      paramsString = '?'
+    }else{
+      paramsString = paste0(paramsString, '&')
+    }
+    newString = paste0(names(params)[[i]], '=', params[[i]])
+    paramsString = paste0(paramsString, newString)
+  }
+
+  return(paste0(endpoint, paramsString))
+}
 # 
 # # This function creates an oauth_signature for an API call.
 # makeOauthSignatureOLD <- function(url, method, authHeader, consumerSecret, tokenSecret){
@@ -141,6 +141,73 @@ flattenJsonList = function(jsonList){
 #   
 #   stop('Did not recognize oauth_signature_method')
 # }
+
+
+
+#' Perform API Request to Endpoint
+#' 
+#' This function performs an HTTP request to a Schoology API endpoint.
+#' 
+#' This function is called by all Schoology SDK functions.
+#' You will, in general, not need to call this function directly.
+#' @param endpt The endpoint URL for the request.
+#' @param paramsList A list of parameters primarily used as searchFields.
+#' @param verb An HTTP request, either GET, PUT, POST or DELETE.
+#' @param payload A json object used in PUT and POST requests. \cr Use fromJSON(toJSON(\{yourNamedList\}, pretty = T)).
+#' @concept Requests
+#' @return The content of the request response.
+#' @section References:
+#' \href{https://developers.schoology.com/api-documentation/rest-api-v1/}{Schoology Rest API Documentation}
+#' @export
+makeRequest <- function(endpt, paramsList = NULL, verb = 'GET', payload = NULL){
+  
+  require(httr)
+  require(jsonlite)
+  require(tidyverse)
+  
+  checkAuthentication()
+  
+  Sys.sleep(.1)  
+  
+  # See https://github.com/r-lib/httr/blob/master/demo/oauth1-nounproject.r for Oauth1.0 1-leg fix.
+  Schoology_app <- oauth_app("Schoology",
+                           key = Sys.getenv('schoologyConsumerKey'),
+                           secret = Sys.getenv('schoologyConsumerSecret')
+  )
+  
+  # Remove ending / if it's present.
+  endpt <- gsub('//', '/', ifelse(regexpr('./$', endpt) > 0, substr(endpt, 1, nchar(endpt)-1), endpt))
+  if(!is.null(paramsList) & length(paramsList) > 0) {
+    endpt <- addParameters(endpt, paramsList)
+  }
+  
+  # Make absolutely sure only one / between apiUrl and endpt.
+  apiUrl <- baseUrl
+  apiUrl <- ifelse(regexpr('./$', apiUrl) > 0, apiUrl, paste0(apiUrl, '/'))
+  endpt <- ifelse(substr(endpt, 1, 1) == '/', substr(endpt, 2, nchar(endpt)), endpt)
+  
+  url <- paste0(apiUrl, endpt)
+  
+  sig <- oauth_signature(url, method = verb, app = Schoology_app)
+  header_oauth <- oauth_header(sig)
+  eval(parse(text = paste0('response <- ', verb, '(url, header_oauth, body = payload, encode = "json", accept_json())')))
+  
+  if(response$status_code < 300){
+    return(content(response))
+  }else{
+    stop(content(response))
+  }
+}
+
+
+
+
+
+
+
+
+
+
 
 #' Get Schoology Object
 #' 

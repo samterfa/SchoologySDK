@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Create a School Building — createBuilding • schoologysdk</title>
+<title>Get Course Details — viewCourse • schoologysdk</title>
 
 <!-- jquery -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
@@ -30,9 +30,9 @@
 
 
 
-<meta property="og:title" content="Create a School Building — createBuilding" />
+<meta property="og:title" content="Get Course Details — viewCourse" />
 
-<meta property="og:description" content="This function creates a new school building." />
+<meta property="og:description" content="This function returns details about a Schoology course." />
 <meta name="twitter:card" content="summary" />
 
 
@@ -99,44 +99,36 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Create a School Building</h1>
-    <small class="dont-index">Source: <a href='https://github.com/samterfa/schoologysdk/blob/master/R/BuildingFunctions.R'><code>R/BuildingFunctions.R</code></a></small>
-    <div class="hidden name"><code>createBuilding.Rd</code></div>
+    <h1>Get Course Details</h1>
+    <small class="dont-index">Source: <a href='https://github.com/samterfa/schoologysdk/blob/master/R/CourseFunctions.R'><code>R/CourseFunctions.R</code></a></small>
+    <div class="hidden name"><code>viewCourse.Rd</code></div>
     </div>
 
     <div class="ref-description">
     
-    <p>This function creates a new school building.</p>
+    <p>This function returns details about a Schoology course.</p>
     
     </div>
 
-    <pre class="usage"><span class='fu'>createBuilding</span>(<span class='no'>schoolId</span>, <span class='kw'>title</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>address1</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>address2</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>city</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>state</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>postal_code</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>country</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>website</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>phone</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>fax</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>picture_url</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)</pre>
+    <pre class="usage"><span class='fu'>viewCourse</span>(<span class='no'>courseId</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>schoolId</th>
-      <td><p>The ID of the school to which the building will be added.</p></td>
-    </tr>
-    <tr>
-      <th>title, address1, address2, city, state, postal_code, country, website, phone, fax, picture_url</th>
-      <td><p>See <a href='https://developers.schoology.com/api-documentation/rest-api-v1/building'>API Documentation</a> for a description 
-of each parameter.</p></td>
+      <th>courseId</th>
+      <td><p>Can be found by navigating to the Schoology course's information page.</p></td>
     </tr>
     </table>
     
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>A dataframe of details for the newly created building.</p>
+    <p>A dataframe of course details.</p>
     
     <h2 class="hasAnchor" id="references"><a class="anchor" href="#references"></a>References</h2>
 
     
-    <p><a href='https://developers.schoology.com/api-documentation/rest-api-v1/building'>API Documentation</a></p>
+    <p><a href='https://developers.schoology.com/api-documentation/rest-api-v1/courses'>API Documentation</a></p>
     
 
   </div>

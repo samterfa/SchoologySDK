@@ -4,12 +4,16 @@
 \alias{updateBuilding}
 \title{Update Building Details}
 \usage{
-updateBuilding(buildingId, object = createBuildingObject())
+updateBuilding(buildingId, title = NULL, address1 = NULL,
+  address2 = NULL, city = NULL, state = NULL, postal_code = NULL,
+  country = NULL, website = NULL, phone = NULL, fax = NULL,
+  picture_url = NULL)
 }
 \arguments{
 \item{buildingId}{Can be found by navigating to the Schoology building information page.}
 
-\item{object}{Must be created via createBuildingObject().}
+\item{title, address1, address2, city, state, postal_code, country, website, phone, fax, picture_url}{See \href{https://developers.schoology.com/api-documentation/rest-api-v1/building}{API Documentation} for a description 
+of each parameter.}
 }
 \value{
 A dataframe of updated building details.

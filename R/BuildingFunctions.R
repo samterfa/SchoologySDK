@@ -1,26 +1,5 @@
 source('R/AuthenticationFunctions.R')
 
-#' Create Building Object
-#' 
-#' This function creates a Schoology building object.
-#' 
-#' A building object is necessary for creation and modification of a Schoology building. 
-#' @param title,address1,address2,city,state,postal_code,country,website,phone,fax,picture_url
-#' See \href{https://developers.schoology.com/api-documentation/rest-api-v1/building}{API Documentation} for a description 
-#' of each parameter.
-#' @concept Buildings
-#' @return A named list of building attributes.
-#' @section References:
-#' \href{https://developers.schoology.com/api-documentation/rest-api-v1/building}{API Documentation}
-#' @export
-createBuildingObject = function(title = NULL, address1 = NULL, address2 = NULL, city = NULL, state = NULL, postal_code = NULL, country = NULL, website = NULL, phone = NULL, fax = NULL, picture_url = NULL){
-  
-  buildingObject <- as.list(environment())
-  buildingObject <- buildingObject[as.character(buildingObject) != 'NULL']
-  
-  return(buildingObject)
-}
-
 #' List Buildings for School
 #' 
 #' This function lists all buildings for a school district.
@@ -34,14 +13,23 @@ createBuildingObject = function(title = NULL, address1 = NULL, address2 = NULL, 
 #' @export
 listBuildings = function(schoolId){
   
+  params <- list()
+  
   endpoint = paste0('schools/', schoolId, '/buildings')
   
-  resource = getObject(endpoint)
+  toReturn <- data.frame()
+  total <- 1000000
+  while(nrow(toReturn) < total - 1){
+    params$start <- nrow(toReturn) + 1
+    params$limit <- 200
+    resource <- makeRequest(endpoint, params, verb = 'GET')
+    total <- as.integer(resource$total)
+    newData <- jsonlite::fromJSON(toJSON(resource$building), flatten = TRUE)
+    toReturn <- bind_rows(toReturn, characterizeDataFrame(newData))
+    if(length(total) == 0) break()
+  }
   
-  resource <- fromJSON(toJSON(resource), flatten = TRUE)
-  resource <- characterizeDataFrame(resource)
-  
-  return(resource)
+  return(toReturn)
 }
 
 #' Get Building Details
@@ -58,7 +46,7 @@ viewBuilding = function(buildingId){
   
   endpoint = paste0('schools/', buildingId)
   
-  resource = getObject(endpoint)
+  resource = makeRequest(endpoint, verb = 'GET')
   
   # If there's no error...
   if(!exists('status_code', where = resource)){
@@ -77,42 +65,35 @@ viewBuilding = function(buildingId){
 #' This function modifies one or more attributes of a school building.
 #' 
 #' @param buildingId Can be found by navigating to the Schoology building information page.
-#' @param object Must be created via createBuildingObject().
+#' @param title,address1,address2,city,state,postal_code,country,website,phone,fax,picture_url
+#' See \href{https://developers.schoology.com/api-documentation/rest-api-v1/building}{API Documentation} for a description 
+#' of each parameter.
 #' @concept Buildings
 #' @return A dataframe of updated building details.
 #' @section References:
 #' \href{https://developers.schoology.com/api-documentation/rest-api-v1/building}{API Documentation}
 #' @export
-updateBuilding = function(buildingId, object = createBuildingObject()){
+updateBuilding = function(buildingId, title = NULL, address1 = NULL, address2 = NULL, city = NULL, state = NULL, postal_code = NULL, country = NULL, website = NULL, phone = NULL, fax = NULL, picture_url = NULL){
   
-  if(length(object) == 0){
+  params <- as.list(environment())[-1]
+  params <- as.list(unlist(params))
+  
+  if(length(params) == 0){
     stop('ERROR: No changes requested.')
   }
   
   endpoint = paste0('schools/', buildingId)
   
-  response = updateObject(endpoint, fromJSON(toJSON(object, pretty = TRUE)))
+  response = makeRequest(endpoint, verb = 'PUT', payload = fromJSON(toJSON(params, pretty = TRUE)))
   
-  # If there's no error...
-  if(substr(response$status_code, 1, 1) == '2'){
-    # ... Return updated school info.
-    response2 <- viewSchool(schoolId)
+  if(is.null(response)){
     
-    # If there's no error...
-    if(!exists('status_code', where = response2)){
-      # ... Return resource.
-      
-      resource = fromJSON(toJSON(response2), flatten = TRUE)
-      resource = characterizeDataFrame(resource)
-      return(resource)
-    }else{
-      # Otherwise return server response if there's an error.
-      return(response2)
-    }
-  }
-  else{
-    # Otherwise return server response if there's an error.
+    return(viewBuilding(buildingId))
+    
+  }else{
+    
     return(response)
+    
   }
 }
 
@@ -121,22 +102,27 @@ updateBuilding = function(buildingId, object = createBuildingObject()){
 #' This function creates a new school building.
 #' 
 #' @param schoolId The ID of the school to which the building will be added.
-#' @param object Must be created via createBuildingObject().
+#' @param title,address1,address2,city,state,postal_code,country,website,phone,fax,picture_url
+#' See \href{https://developers.schoology.com/api-documentation/rest-api-v1/building}{API Documentation} for a description 
+#' of each parameter.
 #' @concept Buildings
 #' @return A dataframe of details for the newly created building.
 #' @section References:
 #' \href{https://developers.schoology.com/api-documentation/rest-api-v1/building}{API Documentation}
 #' @export
 # Creates a building in a school.
-createBuilding = function(schoolId, object = createBuildingObject()){
+createBuilding = function(schoolId, title = NULL, address1 = NULL, address2 = NULL, city = NULL, state = NULL, postal_code = NULL, country = NULL, website = NULL, phone = NULL, fax = NULL, picture_url = NULL){
  
-     if(length(object) == 0){
+    params <- as.list(environment())[-1]
+    params <- as.list(unlist(params))
+  
+     if(length(params) == 0){
           stop('ERROR: No changes requested.')
      }
      
      endpoint = paste0('schools/', schoolId, '/buildings/')
     
-     response = createObject(endpoint, fromJSON(toJSON(object, pretty = TRUE)))
+     response = makeRequest(endpoint, verb = 'POST', payload = fromJSON(toJSON(params, pretty = TRUE)))
      
      # If there's no error...
      if(!exists('status_code', where = response)){
@@ -167,7 +153,7 @@ deleteBuilding = function(buildingId){
      userResponse = readline(prompt = paste0("Are you SURE you want to delete ", buildingName, "? This cannot be undone! \nType '", buildingName, "' to delete, anything else not to delete."))
      
      if(userResponse == buildingName){
-          response = deleteObject(endpoint)
+          response = makeRequest(endpoint, verb = 'DELETE')
           return(paste(buildingName, 'successfully deleted.'))
      }else{
           return("Building deletion canceled.")

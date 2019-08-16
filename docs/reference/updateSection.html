@@ -110,7 +110,11 @@
     
     </div>
 
-    <pre class="usage"><span class='fu'>updateSection</span>(<span class='no'>sectionId</span>, <span class='kw'>object</span> <span class='kw'>=</span> <span class='fu'><a href='createSectionObject.html'>createSectionObject</a></span>())</pre>
+    <pre class="usage"><span class='fu'>updateSection</span>(<span class='no'>sectionId</span>, <span class='kw'>section_title</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>section_code</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>section_school_code</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>access_code</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>grading_periods</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>description</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>profile_url</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>location</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>meeting_days</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>start_time</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>end_time</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>class_periods</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>synced</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -120,8 +124,48 @@
       <td><p>Can be found by navigating to the Schoology section information page.</p></td>
     </tr>
     <tr>
-      <th>object</th>
-      <td><p>Must be created via createSectionObject().</p></td>
+      <th>section_title</th>
+      <td><p>The section title (e.g. Section 10b).</p></td>
+    </tr>
+    <tr>
+      <th>section_code</th>
+      <td><p>The section code must be unique across the course and grading period (e.g. "Spring 2010" can only have one "10b" for course "ENG101").</p></td>
+    </tr>
+    <tr>
+      <th>section_school_code</th>
+      <td><p>The section school code must be unique across the school.</p></td>
+    </tr>
+    <tr>
+      <th>grading_periods</th>
+      <td><p>The grading period IDs with which this course is associated.</p></td>
+    </tr>
+    <tr>
+      <th>description</th>
+      <td><p>The section description.</p></td>
+    </tr>
+    <tr>
+      <th>location</th>
+      <td><p>The location of the course section.</p></td>
+    </tr>
+    <tr>
+      <th>meeting_days</th>
+      <td><p>Days of the week that this course section meets. Each day is represented by a number (Sun is 0, Sat is 7).</p></td>
+    </tr>
+    <tr>
+      <th>start_time</th>
+      <td><p>The time this section starts on the specified meeting days, from 00:00 to 23:59 (local time). Not applicable if your school uses class period blocks (i.e. sections meet at different times on different days).</p></td>
+    </tr>
+    <tr>
+      <th>end_time</th>
+      <td><p>The time this section ends on the specified meeting days.</p></td>
+    </tr>
+    <tr>
+      <th>class_periods</th>
+      <td><p>The class period IDs with which this course is associated. Not applicable if your school does not use class period blocks (see start_time).</p></td>
+    </tr>
+    <tr>
+      <th>synced</th>
+      <td><p>Whether or not this course section was synced with an external system (eg, Student Information System). The default value is 0. For synced course sections, the Section School Code field is not editable through Schoology.</p></td>
     </tr>
     </table>
     

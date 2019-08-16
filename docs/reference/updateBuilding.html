@@ -110,7 +110,10 @@
     
     </div>
 
-    <pre class="usage"><span class='fu'>updateBuilding</span>(<span class='no'>buildingId</span>, <span class='kw'>object</span> <span class='kw'>=</span> <span class='fu'><a href='createBuildingObject.html'>createBuildingObject</a></span>())</pre>
+    <pre class="usage"><span class='fu'>updateBuilding</span>(<span class='no'>buildingId</span>, <span class='kw'>title</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>address1</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>address2</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>city</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>state</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>postal_code</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>country</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>website</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>phone</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>fax</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>picture_url</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -120,8 +123,9 @@
       <td><p>Can be found by navigating to the Schoology building information page.</p></td>
     </tr>
     <tr>
-      <th>object</th>
-      <td><p>Must be created via createBuildingObject().</p></td>
+      <th>title, address1, address2, city, state, postal_code, country, website, phone, fax, picture_url</th>
+      <td><p>See <a href='https://developers.schoology.com/api-documentation/rest-api-v1/building'>API Documentation</a> for a description 
+of each parameter.</p></td>
     </tr>
     </table>
     
