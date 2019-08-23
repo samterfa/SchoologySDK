@@ -44,11 +44,12 @@ listSections <- function(course_id, include_past = 0){
   toReturn <- data.frame()
   total <- 1000000
   while(nrow(toReturn) < total - 1){
-    params$start <- nrow(toReturn) + 1
+    params$start <- nrow(toReturn) + 0
     params$limit <- 200
     resource <- makeRequest(endpoint, params, verb = 'GET')
     total <- as.integer(resource$total)
-    newData <- jsonlite::fromJSON(toJSON(resource$course), flatten = TRUE)
+    newData <- jsonlite::fromJSON(toJSON(resource$section), flatten = TRUE)
+    if(length(newData) == 0) break()
     toReturn <- bind_rows(toReturn, characterizeDataFrame(newData))
     if(length(total) == 0) break()
   }
@@ -105,38 +106,15 @@ viewSection = function(sectionId){
 updateSection = function(sectionId, section_title = NULL, section_code = NULL, section_school_code = NULL, access_code = NULL, grading_periods = NULL, description = NULL, profile_url = NULL, location = NULL, meeting_days = NULL, start_time = NULL, end_time = NULL, class_periods = NULL, synced = NULL){
   
   params = as.list(environment())[-1]
-  params <- as.list(unlist(params))
-  
+  params <- params[!is.null(params)]
+ 
   if(length(params) == 0){
     stop('ERROR: No changes requested.')
   }
   
   endpoint = paste0('sections/', sectionId)
   
-#  response = updateObject(endpoint, fromJSON(toJSON(object, pretty = TRUE)))
   response <- makeRequest(endpoint, verb = 'PUT', payload = fromJSON(toJSON(params, pretty = TRUE)))
   
   return(response)
-  
-  # If there's no error...
-  if(substr(response$status_code, 1, 1) == '2'){
-    # ... Return updated section info.
-    response2 <- viewSection(sectionId)
-    
-    # If there's no error...
-    if(!exists('status_code', where = response2)){
-      # ... Return resource.
-      
-      resource = fromJSON(toJSON(response2), flatten = TRUE)
-      resource = characterizeDataFrame(resource)
-      return(resource)
-    }else{
-      # Otherwise return server response if there's an error.
-      return(response2)
-    }
-  }
-  else{
-    # Otherwise return server response if there's an error.
-    return(response)
-  }
 }

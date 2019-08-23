@@ -44,7 +44,7 @@ createUserObject = function(id = NULL, school_id = NULL, building_id = NULL, sch
 #' \href{https://developers.schoology.com/api-documentation/rest-api-v1/user}{API Documentation}
 #' @export
 # This function returns a data frame of users.
-listUsers <- function(active = T, start = 0, limit = 200, building_id = NULL, role_ids = NULL, parent_access_codes = NULL, school_uids = NULL, extended = NULL){
+listUsers <- function(active = T, building_id = NULL, role_ids = NULL, parent_access_codes = NULL, school_uids = NULL, extended = NULL){
   
   params = as.list(environment())[-1]
   
@@ -54,13 +54,20 @@ listUsers <- function(active = T, start = 0, limit = 200, building_id = NULL, ro
     endpoint = paste0('/users/inactive')
   }
   
-  resource = getObject(addParameters(endpoint, params))
+  toReturn <- data.frame()
+  total <- 1000000
+  while(nrow(toReturn) < total - 1){
+    params$start <- nrow(toReturn) + 0
+    params$limit <- 200
+    resource <- makeRequest(endpoint, params, verb = 'GET')
+    total <- as.integer(resource$total)
+    newData <- jsonlite::fromJSON(toJSON(resource$user), flatten = TRUE)
+    if(length(newData) == 0) break()
+    toReturn <- bind_rows(toReturn, characterizeDataFrame(newData))
+    if(length(total) == 0) break()
+  }
   
-  # ... Return resource.
-  resource = fromJSON(toJSON(resource), flatten = TRUE)
-  resource = characterizeDataFrame(resource)
-  
-  return(resource)
+  return(toReturn)
 }
 
 #' Get User Details
@@ -75,7 +82,7 @@ listUsers <- function(active = T, start = 0, limit = 200, building_id = NULL, ro
 #' @section References:
 #' \href{https://developers.schoology.com/api-documentation/rest-api-v1/user}{API Documentation}
 #' @export
-viewUser = function(userId, active = T, extended = F){
+viewUser = function(userId, active = T, extended = 0){
   
   if(active){
     endpoint = paste0('users/', userId)
@@ -84,10 +91,10 @@ viewUser = function(userId, active = T, extended = F){
   }
   
   if(!extended){
-    resource = getObject(endpoint)
+    resource = makeRequest(endpoint, verb = 'GET')
   }else{
     params = as.list(environment())['extended']
-    resource = getObject(addParameters(endpoint, params))
+    resource = makeRequest(endpoint, verb = 'GET', paramsList = params)
   }
   
   # ... Return resource.

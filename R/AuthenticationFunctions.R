@@ -167,7 +167,7 @@ makeRequest <- function(endpt, paramsList = NULL, verb = 'GET', payload = NULL){
   
   checkAuthentication()
   
-  Sys.sleep(.1)  
+  Sys.sleep(.2)  
   
   # See https://github.com/r-lib/httr/blob/master/demo/oauth1-nounproject.r for Oauth1.0 1-leg fix.
   Schoology_app <- oauth_app("Schoology",
