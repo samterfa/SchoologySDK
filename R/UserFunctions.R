@@ -115,36 +115,27 @@ viewUser = function(userId, active = T, extended = 0){
 #' @section References:
 #' \href{https://developers.schoology.com/api-documentation/rest-api-v1/user}{API Documentation}
 #' @export
-updateUser = function(userId, object = createUserObject()){
+updateUser = function(userId, school_id = NULL, building_id = NULL, school_uid = NULL, name_title = NULL, name_title_show = NULL, name_first = NULL, name_first_preferred = NULL, name_middle = NULL, name_middle_show = NULL, name_last = NULL, name_display = NULL, username = NULL, primary_email = NULL, position = NULL, gender = NULL, grad_year = NULL, birthday_date = NULL, password = NULL, role_id = NULL, email_login_info = NULL, profiel_url = NULL, tz_name = NULL, parents = NULL, parent_uids = NULL, advisor_uids = NULL, child_uids = NULL, send_message = NULL, synced = NULL, profile_picture_fid = NULL, additional_buildings = NULL){
   
-  if(length(object) == 0){
+  params <- as.list(environment())[-1]
+  params <- params[!is.null(params)]
+  
+  if(length(params) == 0){
     stop('ERROR: No changes requested.')
   }
   
   endpoint = paste0('users/', userId)
   
-  response = updateObject(endpoint, fromJSON(toJSON(object, pretty = TRUE)))
+  response = makeRequest(endpoint, verb = 'PUT', payload = fromJSON(toJSON(params, pretty = TRUE)))
   
-  # If there's no error...
-  if(substr(response$status_code, 1, 1) == '2'){
-    # ... Return updated user info.
-    response2 <- viewUser(userId)
+  if(is.null(response)){
     
-    # If there's no error...
-    if(!exists('status_code', where = response2)){
-      # ... Return resource.
-      
-      resource = fromJSON(toJSON(response2), flatten = TRUE)
-      resource = characterizeDataFrame(resource)
-      return(resource)
-    }else{
-      # Otherwise return server response if there's an error.
-      return(response2)
-    }
-  }
-  else{
-    # Otherwise return server response if there's an error.
+    return(viewUser(userId))
+    
+  }else{
+    
     return(response)
+    
   }
 }
 

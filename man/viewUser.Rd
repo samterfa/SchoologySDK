@@ -4,7 +4,7 @@
 \alias{viewUser}
 \title{Get User Details}
 \usage{
-viewUser(userId, active = T, extended = F)
+viewUser(userId, active = T, extended = 0)
 }
 \arguments{
 \item{userId}{Can be found by navigating to the Schoology user's information page.}

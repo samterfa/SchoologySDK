@@ -4,17 +4,11 @@
 \alias{listUsers}
 \title{List Users for a School}
 \usage{
-listUsers(active = T, start = 0, limit = 200, building_id = NULL,
-  role_ids = NULL, parent_access_codes = NULL, school_uids = NULL,
-  extended = NULL)
+listUsers(active = T, building_id = NULL, role_ids = NULL,
+  parent_access_codes = NULL, school_uids = NULL, extended = NULL)
 }
 \arguments{
 \item{active}{Whether to return active users only. Defaults to True.}
-
-\item{start}{Index of first record to return. Min value is 0.}
-
-\item{limit}{Number of records to return. 
-Default is 20. Max value is 200.}
 
 \item{building_id}{Specifies the building from which to return students. Leave NULL to return users from all school buildings.}
 
@@ -25,6 +19,11 @@ Default is 20. Max value is 200.}
 \item{school_uids}{Specifies whether school uids should be returned for students.}
 
 \item{extended}{Whether to return extended details about a user.}
+
+\item{start}{Index of first record to return. Min value is 0.}
+
+\item{limit}{Number of records to return. 
+Default is 20. Max value is 200.}
 }
 \value{
 A dataframe of user details.
