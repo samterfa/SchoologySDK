@@ -1,28 +1,5 @@
 source('R/AuthenticationFunctions.R')
 
-#' Create User Object
-#' 
-#' This function creates a Schoology user object.
-#' 
-#' A user object is necessary for creation and modification of a Schoology user. 
-#' @param id,school_id,building_id,school_uid,name_title,name_title_show,name_first,name_first_preferred,name_middle,name_middle_show,name_last,name_display,username,primary_email,position,gender,grad_year,birthday_date,password,role_id,email_login_info,profiel_url,tz_name,parents,parent_uids,advisor_uids,child_uids,send_message,synced,profile_picture_fid,additional_buildings
-#' See \href{https://developers.schoology.com/api-documentation/rest-api-v1/user}{API Documentation} for a description 
-#' of each parameter.
-#' @concept Users
-#' @return A named list of user attributes.
-#' @section References:
-#' \href{https://developers.schoology.com/api-documentation/rest-api-v1/user}{API Documentation}
-#' 
-#' NOTE: Documentation is incorrect. id NOT school_uid is required for bulk updating users.
-#' @export
-createUserObject = function(id = NULL, school_id = NULL, building_id = NULL, school_uid = NULL, name_title = NULL, name_title_show = NULL, name_first = NULL, name_first_preferred = NULL, name_middle = NULL, name_middle_show = NULL, name_last = NULL, name_display = NULL, username = NULL, primary_email = NULL, position = NULL, gender = NULL, grad_year = NULL, birthday_date = NULL, password = NULL, role_id = NULL, email_login_info = NULL, profiel_url = NULL, tz_name = NULL, parents = NULL, parent_uids = NULL, advisor_uids = NULL, child_uids = NULL, send_message = NULL, synced = NULL, profile_picture_fid = NULL, additional_buildings = NULL){
-     
-     userObject = as.list(environment())
-     userObject = userObject[as.character(userObject) != 'NULL']
-     
-     return(userObject)
-}
-
 #' List Users for a School
 #' 
 #' This function returns a potentially filtered list of users for a school district or building.
@@ -149,25 +126,27 @@ updateUser = function(userId, school_id = NULL, building_id = NULL, school_uid =
 #' @section References:
 #' \href{https://developers.schoology.com/api-documentation/rest-api-v1/user}{API Documentation}
 #' @export
-updateUsers = function(userObjects = list(createUserObject())){
+updateUsers = function(userId_list, school_id_list = NULL, building_id_list = NULL, school_uid_list = NULL, name_title_list = NULL, name_title_show_list = NULL, name_first_list = NULL, name_first_preferred_list = NULL, name_middle_list = NULL, name_middle_show_list = NULL, name_last_list = NULL, name_display_list = NULL, username_list = NULL, primary_email_list = NULL, position_list = NULL, gender_list = NULL, grad_year_list = NULL, birthday_date_list = NULL, password_list = NULL, role_id_list = NULL, email_login_info_list = NULL, profiel_url_list = NULL, tz_name_list = NULL, parents_list = NULL, parent_uids_list = NULL, advisor_uids_list = NULL, child_uids_list = NULL, send_message_list = NULL, synced_list = NULL, profile_picture_fid_list = NULL, additional_buildings_list = NULL){
      
-     indicesToRemove = integer()
-     for(i in 1:length(userObjects)){
-          if(length(userObjects[[i]]) == 0){
-               print(paste('No User Information found. Skipping userObjects index', i))
-               indicesToRemove[[length(indicesToRemove) + 1]] <- i
-          }
-     }
+     # indicesToRemove = integer()
+     # for(i in 1:length(userObjects)){
+     #      if(length(userObjects[[i]]) == 0){
+     #           print(paste('No User Information found. Skipping userObjects index', i))
+     #           indicesToRemove[[length(indicesToRemove) + 1]] <- i
+     #      }
+     # }
+     # 
+     # if(length(indicesToRemove) > 0){
+     #      userObjects = userObjects[-indicesToRemove]
+     # }
      
-     if(length(indicesToRemove) > 0){
-          userObjects = userObjects[-indicesToRemove]
-     }
-     
+      
+  
      userObjects = paste0('{"users":{"user":', toJSON(userObjects), '}}')
 
      endpoint = 'users/'
      
-     response = updateObject(endpoint, fromJSON(userObjects))
+     response = makeRequest(endpoint, payload = fromJSON(userObjects))
      
      # If there's no error...
      if(substr(response$status_code, 1, 1) == '2'){
