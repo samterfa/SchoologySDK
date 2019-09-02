@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>List Sections for a Course — listSections • schoologysdk</title>
+<title>Update Group Details — updateGroup • schoologysdk</title>
 
 <!-- jquery -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
@@ -30,9 +30,9 @@
 
 
 
-<meta property="og:title" content="List Sections for a Course — listSections" />
+<meta property="og:title" content="Update Group Details — updateGroup" />
 
-<meta property="og:description" content="This function returns a list of sections for a course past and present." />
+<meta property="og:description" content="This function modifies one or more attributes of a group." />
 <meta name="twitter:card" content="summary" />
 
 
@@ -99,40 +99,97 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>List Sections for a Course</h1>
-    <small class="dont-index">Source: <a href='https://github.com/samterfa/schoologysdk/blob/master/R/SectionFunctions.R'><code>R/SectionFunctions.R</code></a></small>
-    <div class="hidden name"><code>listSections.Rd</code></div>
+    <h1>Update Group Details</h1>
+    <small class="dont-index">Source: <a href='https://github.com/samterfa/schoologysdk/blob/master/R/GroupFunctions.R'><code>R/GroupFunctions.R</code></a></small>
+    <div class="hidden name"><code>updateGroup.Rd</code></div>
     </div>
 
     <div class="ref-description">
     
-    <p>This function returns a list of sections for a course past and present.</p>
+    <p>This function modifies one or more attributes of a group.</p>
     
     </div>
 
-    <pre class="usage"><span class='fu'>listSections</span>(<span class='no'>course_id</span>, <span class='kw'>include_past</span> <span class='kw'>=</span> <span class='fl'>0</span>)</pre>
+    <pre class="usage"><span class='fu'>updateGroup</span>(<span class='no'>groupId</span>, <span class='kw'>building_id</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>school_id</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>title</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>picture_url</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>description</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>website</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>access_code</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>privacy_level</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>category</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>options_invite_type</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>options_member_post</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>options_member_post_comment</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>options_create_discussion</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>options_create_files</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>include_past</th>
-      <td><p>Whether to return past sections or only current sections.</p></td>
+      <th>groupId</th>
+      <td><p>Can be found by navigating to the Schoology group information page.</p></td>
+    </tr>
+    <tr>
+      <th>building_id</th>
+      <td><p>The internal Schoology ID of the school building to which the group belongs.</p></td>
+    </tr>
+    <tr>
+      <th>school_id</th>
+      <td><p>The internal Schoology ID of the school to which the group belongs.</p></td>
+    </tr>
+    <tr>
+      <th>title</th>
+      <td><p>The title of the group.</p></td>
+    </tr>
+    <tr>
+      <th>picture_url</th>
+      <td><p>The URL of the group's profile picture.</p></td>
+    </tr>
+    <tr>
+      <th>description</th>
+      <td><p>The group description.</p></td>
+    </tr>
+    <tr>
+      <th>website</th>
+      <td><p>The group website.</p></td>
+    </tr>
+    <tr>
+      <th>access_code</th>
+      <td><p>The access code that users can use to join the group (only admins can see this value).</p></td>
+    </tr>
+    <tr>
+      <th>privacy_level</th>
+      <td><p>The privacy of the group. One of 'everyone', 'school', 'building', or 'group'.</p></td>
+    </tr>
+    <tr>
+      <th>category</th>
+      <td><p>The category of the group.</p></td>
+    </tr>
+    <tr>
+      <th>options_invite_type</th>
+      <td><p>How members can join the group. 0: Invite only, 1: Request to join, 2: Anyone can join. Default 0.</p></td>
+    </tr>
+    <tr>
+      <th>options_member_post</th>
+      <td><p>Whether or not a group member can post a group update. Default 1.</p></td>
+    </tr>
+    <tr>
+      <th>options_member_post_comment</th>
+      <td><p>Whether or not a group member can post comments to group udpates. Default 1.</p></td>
+    </tr>
+    <tr>
+      <th>options_create_discussion</th>
+      <td><p>Whether or not a group member can create a discussion thread. Default 0.</p></td>
+    </tr>
+    <tr>
+      <th>options_create_files</th>
+      <td><p>Whether or not members can create resources for the group. Default 0.</p></td>
     </tr>
     </table>
     
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>A dataframe of section details.</p>
-    
-    <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
-
-    <p>A section is a course meeting.</p>
+    <p>A dataframe of updated group details.</p>
     
     <h2 class="hasAnchor" id="references"><a class="anchor" href="#references"></a>References</h2>
 
     
-    <p><a href='https://developers.schoology.com/api-documentation/rest-api-v1/course-section'>API Documentation</a></p>
+    <p><a href='https://developers.schoology.com/api-documentation/rest-api-v1/groups'>API Documentation</a></p>
     
 
   </div>
@@ -142,8 +199,6 @@
       <li><a href="#arguments">Arguments</a></li>
       
       <li><a href="#value">Value</a></li>
-
-      <li><a href="#details">Details</a></li>
 
       <li><a href="#references">References</a></li>
           </ul>

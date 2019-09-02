@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>List Sections for a Course — listSections • schoologysdk</title>
+<title>Update Enrollment Details — updateEnrollment • schoologysdk</title>
 
 <!-- jquery -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
@@ -30,9 +30,9 @@
 
 
 
-<meta property="og:title" content="List Sections for a Course — listSections" />
+<meta property="og:title" content="Update Enrollment Details — updateEnrollment" />
 
-<meta property="og:description" content="This function returns a list of sections for a course past and present." />
+<meta property="og:description" content="This function modifies one or more attributes of a enrollment." />
 <meta name="twitter:card" content="summary" />
 
 
@@ -99,40 +99,80 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>List Sections for a Course</h1>
-    <small class="dont-index">Source: <a href='https://github.com/samterfa/schoologysdk/blob/master/R/SectionFunctions.R'><code>R/SectionFunctions.R</code></a></small>
-    <div class="hidden name"><code>listSections.Rd</code></div>
+    <h1>Update Enrollment Details</h1>
+    <small class="dont-index">Source: <a href='https://github.com/samterfa/schoologysdk/blob/master/R/EnrollmentFunctions.R'><code>R/EnrollmentFunctions.R</code></a></small>
+    <div class="hidden name"><code>updateEnrollment.Rd</code></div>
     </div>
 
     <div class="ref-description">
     
-    <p>This function returns a list of sections for a course past and present.</p>
+    <p>This function modifies one or more attributes of a enrollment.</p>
     
     </div>
 
-    <pre class="usage"><span class='fu'>listSections</span>(<span class='no'>course_id</span>, <span class='kw'>include_past</span> <span class='kw'>=</span> <span class='fl'>0</span>)</pre>
+    <pre class="usage"><span class='fu'>updateEnrollment</span>(<span class='no'>enrollmentId</span>, <span class='kw'>enrollment_title</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>enrollment_code</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>enrollment_school_code</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>access_code</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>grading_periods</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>description</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>profile_url</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>location</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>meeting_days</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>start_time</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>end_time</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>class_periods</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>synced</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>include_past</th>
-      <td><p>Whether to return past sections or only current sections.</p></td>
+      <th>enrollmentId</th>
+      <td><p>Can be found by navigating to the Schoology enrollment information page.</p></td>
+    </tr>
+    <tr>
+      <th>enrollment_title</th>
+      <td><p>The enrollment title (e.g. Enrollment 10b).</p></td>
+    </tr>
+    <tr>
+      <th>enrollment_code</th>
+      <td><p>The enrollment code must be unique across the course and grading period (e.g. "Spring 2010" can only have one "10b" for course "ENG101").</p></td>
+    </tr>
+    <tr>
+      <th>enrollment_school_code</th>
+      <td><p>The enrollment school code must be unique across the school.</p></td>
+    </tr>
+    <tr>
+      <th>grading_periods</th>
+      <td><p>The grading period IDs with which this course is associated.</p></td>
+    </tr>
+    <tr>
+      <th>description</th>
+      <td><p>The enrollment description.</p></td>
+    </tr>
+    <tr>
+      <th>location</th>
+      <td><p>The location of the course enrollment.</p></td>
+    </tr>
+    <tr>
+      <th>meeting_days</th>
+      <td><p>Days of the week that this course enrollment meets. Each day is represented by a number (Sun is 0, Sat is 7).</p></td>
+    </tr>
+    <tr>
+      <th>start_time</th>
+      <td><p>The time this enrollment starts on the specified meeting days, from 00:00 to 23:59 (local time). Not applicable if your school uses class period blocks (i.e. enrollments meet at different times on different days).</p></td>
+    </tr>
+    <tr>
+      <th>end_time</th>
+      <td><p>The time this enrollment ends on the specified meeting days.</p></td>
+    </tr>
+    <tr>
+      <th>class_periods</th>
+      <td><p>The class period IDs with which this course is associated. Not applicable if your school does not use class period blocks (see start_time).</p></td>
+    </tr>
+    <tr>
+      <th>synced</th>
+      <td><p>Whether or not this course enrollment was synced with an external system (eg, Student Information System). The default value is 0. For synced course enrollments, the Enrollment School Code field is not editable through Schoology.</p></td>
     </tr>
     </table>
     
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>A dataframe of section details.</p>
-    
-    <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
-
-    <p>A section is a course meeting.</p>
-    
-    <h2 class="hasAnchor" id="references"><a class="anchor" href="#references"></a>References</h2>
-
-    
-    <p><a href='https://developers.schoology.com/api-documentation/rest-api-v1/course-section'>API Documentation</a></p>
+    <p>A dataframe of updated enrollment details.</p>
     
 
   </div>
@@ -142,10 +182,6 @@
       <li><a href="#arguments">Arguments</a></li>
       
       <li><a href="#value">Value</a></li>
-
-      <li><a href="#details">Details</a></li>
-
-      <li><a href="#references">References</a></li>
           </ul>
 
   </div>

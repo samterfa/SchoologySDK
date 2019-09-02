@@ -110,9 +110,8 @@
     
     </div>
 
-    <pre class="usage"><span class='fu'>listUsers</span>(<span class='kw'>active</span> <span class='kw'>=</span> <span class='no'>T</span>, <span class='kw'>start</span> <span class='kw'>=</span> <span class='fl'>0</span>, <span class='kw'>limit</span> <span class='kw'>=</span> <span class='fl'>200</span>, <span class='kw'>building_id</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>role_ids</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>parent_access_codes</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>school_uids</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>extended</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)</pre>
+    <pre class="usage"><span class='fu'>listUsers</span>(<span class='kw'>active</span> <span class='kw'>=</span> <span class='no'>T</span>, <span class='kw'>building_id</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>role_ids</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>parent_access_codes</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>school_uids</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>extended</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -120,15 +119,6 @@
     <tr>
       <th>active</th>
       <td><p>Whether to return active users only. Defaults to True.</p></td>
-    </tr>
-    <tr>
-      <th>start</th>
-      <td><p>Index of first record to return. Min value is 0.</p></td>
-    </tr>
-    <tr>
-      <th>limit</th>
-      <td><p>Number of records to return. 
-Default is 20. Max value is 200.</p></td>
     </tr>
     <tr>
       <th>building_id</th>
@@ -149,6 +139,15 @@ Default is 20. Max value is 200.</p></td>
     <tr>
       <th>extended</th>
       <td><p>Whether to return extended details about a user.</p></td>
+    </tr>
+    <tr>
+      <th>start</th>
+      <td><p>Index of first record to return. Min value is 0.</p></td>
+    </tr>
+    <tr>
+      <th>limit</th>
+      <td><p>Number of records to return. 
+Default is 20. Max value is 200.</p></td>
     </tr>
     </table>
     

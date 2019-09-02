@@ -140,7 +140,7 @@ updateUsers = function(userId_list, school_id_list = NULL, building_id_list = NU
      #      userObjects = userObjects[-indicesToRemove]
      # }
      
-      
+    for(i in 1:length(userId_list))  
   
      userObjects = paste0('{"users":{"user":', toJSON(userObjects), '}}')
 

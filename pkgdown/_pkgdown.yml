@@ -1,29 +1,41 @@
 url: https://samterfa.github.io/SchoologySDK/
-
+                    
 author: Sam Terfa
 
 reference:
-  - title: Users
-    desc:  Functions involving Schoology users.
-    contents:
-    - has_concept("Users")
-  - title: Schools
-    desc:  Functions involving Schoology Schools (Districts).
-    contents:
-    - has_concept("Schools")
-  - title: Buildings
-    desc:  Functions involving Schoology Buildings.
-    contents:
-    - has_concept("Buildings")
-  - title: Requests
-    desc:  Functions involving Schoology requests.
-    contents:
-    - has_concept("Requests")
-  - title: Courses
-    desc:  Functions involving Schoology courses.
-    contents:
-    - has_concept("Courses")
-  - title: Sections
-    desc:  Functions involving Schoology sections.
-    contents:
-    - has_concept("Sections")
+ - title: Attendances
+   desc:  Functions involving Attendances.
+   contents:
+   - has_concept("Attendances")
+ - title: Buildings
+   desc:  Functions involving Buildings.
+   contents:
+   - has_concept("Buildings")
+ - title: Courses
+   desc:  Functions involving Courses.
+   contents:
+   - has_concept("Courses")
+ - title: Enrollments
+   desc:  Functions involving Enrollments.
+   contents:
+   - has_concept("Enrollments")
+ - title: Groups
+   desc:  Functions involving Groups.
+   contents:
+   - has_concept("Groups")
+ - title: Roles
+   desc:  Functions involving Roles.
+   contents:
+   - has_concept("Roles")
+ - title: Schools
+   desc:  Functions involving Schools.
+   contents:
+   - has_concept("Schools")
+ - title: Sections
+   desc:  Functions involving Sections.
+   contents:
+   - has_concept("Sections")
+ - title: Users
+   desc:  Functions involving Users.
+   contents:
+   - has_concept("Users")

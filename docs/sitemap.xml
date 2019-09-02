@@ -7,13 +7,7 @@
     <loc>https://samterfa.github.io/SchoologySDK//reference/createBuilding.html</loc>
   </url>
   <url>
-    <loc>https://samterfa.github.io/SchoologySDK//reference/createObject.html</loc>
-  </url>
-  <url>
     <loc>https://samterfa.github.io/SchoologySDK//reference/createUser.html</loc>
-  </url>
-  <url>
-    <loc>https://samterfa.github.io/SchoologySDK//reference/createUserObject.html</loc>
   </url>
   <url>
     <loc>https://samterfa.github.io/SchoologySDK//reference/createUsers.html</loc>
@@ -22,19 +16,25 @@
     <loc>https://samterfa.github.io/SchoologySDK//reference/deleteBuilding.html</loc>
   </url>
   <url>
-    <loc>https://samterfa.github.io/SchoologySDK//reference/deleteObject.html</loc>
-  </url>
-  <url>
     <loc>https://samterfa.github.io/SchoologySDK//reference/deleteUser.html</loc>
   </url>
   <url>
-    <loc>https://samterfa.github.io/SchoologySDK//reference/getObject.html</loc>
+    <loc>https://samterfa.github.io/SchoologySDK//reference/listAttendances.html</loc>
   </url>
   <url>
     <loc>https://samterfa.github.io/SchoologySDK//reference/listBuildings.html</loc>
   </url>
   <url>
     <loc>https://samterfa.github.io/SchoologySDK//reference/listCourses.html</loc>
+  </url>
+  <url>
+    <loc>https://samterfa.github.io/SchoologySDK//reference/listEnrollments.html</loc>
+  </url>
+  <url>
+    <loc>https://samterfa.github.io/SchoologySDK//reference/listGroups.html</loc>
+  </url>
+  <url>
+    <loc>https://samterfa.github.io/SchoologySDK//reference/listRoles.html</loc>
   </url>
   <url>
     <loc>https://samterfa.github.io/SchoologySDK//reference/listSchools.html</loc>
@@ -49,13 +49,19 @@
     <loc>https://samterfa.github.io/SchoologySDK//reference/makeRequest.html</loc>
   </url>
   <url>
+    <loc>https://samterfa.github.io/SchoologySDK//reference/updateAttendance.html</loc>
+  </url>
+  <url>
     <loc>https://samterfa.github.io/SchoologySDK//reference/updateBuilding.html</loc>
   </url>
   <url>
     <loc>https://samterfa.github.io/SchoologySDK//reference/updateCourse.html</loc>
   </url>
   <url>
-    <loc>https://samterfa.github.io/SchoologySDK//reference/updateObject.html</loc>
+    <loc>https://samterfa.github.io/SchoologySDK//reference/updateEnrollment.html</loc>
+  </url>
+  <url>
+    <loc>https://samterfa.github.io/SchoologySDK//reference/updateGroup.html</loc>
   </url>
   <url>
     <loc>https://samterfa.github.io/SchoologySDK//reference/updateSchool.html</loc>
@@ -74,6 +80,15 @@
   </url>
   <url>
     <loc>https://samterfa.github.io/SchoologySDK//reference/viewCourse.html</loc>
+  </url>
+  <url>
+    <loc>https://samterfa.github.io/SchoologySDK//reference/viewEnrollment.html</loc>
+  </url>
+  <url>
+    <loc>https://samterfa.github.io/SchoologySDK//reference/viewGroup.html</loc>
+  </url>
+  <url>
+    <loc>https://samterfa.github.io/SchoologySDK//reference/viewRole.html</loc>
   </url>
   <url>
     <loc>https://samterfa.github.io/SchoologySDK//reference/viewSchool.html</loc>

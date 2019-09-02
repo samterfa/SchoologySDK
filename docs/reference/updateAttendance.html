@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>List Sections for a Course — listSections • schoologysdk</title>
+<title>Update Attendance Details — updateAttendance • schoologysdk</title>
 
 <!-- jquery -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
@@ -30,9 +30,9 @@
 
 
 
-<meta property="og:title" content="List Sections for a Course — listSections" />
+<meta property="og:title" content="Update Attendance Details — updateAttendance" />
 
-<meta property="og:description" content="This function returns a list of sections for a course past and present." />
+<meta property="og:description" content="This function modifies one or more attributes of a attendance." />
 <meta name="twitter:card" content="summary" />
 
 
@@ -99,40 +99,43 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>List Sections for a Course</h1>
-    <small class="dont-index">Source: <a href='https://github.com/samterfa/schoologysdk/blob/master/R/SectionFunctions.R'><code>R/SectionFunctions.R</code></a></small>
-    <div class="hidden name"><code>listSections.Rd</code></div>
+    <h1>Update Attendance Details</h1>
+    <small class="dont-index">Source: <a href='https://github.com/samterfa/schoologysdk/blob/master/R/AttendanceFunctions.R'><code>R/AttendanceFunctions.R</code></a></small>
+    <div class="hidden name"><code>updateAttendance.Rd</code></div>
     </div>
 
     <div class="ref-description">
     
-    <p>This function returns a list of sections for a course past and present.</p>
+    <p>This function modifies one or more attributes of a attendance.</p>
     
     </div>
 
-    <pre class="usage"><span class='fu'>listSections</span>(<span class='no'>course_id</span>, <span class='kw'>include_past</span> <span class='kw'>=</span> <span class='fl'>0</span>)</pre>
+    <pre class="usage"><span class='fu'>updateAttendance</span>(<span class='no'>section_id</span>, <span class='no'>enrollment_id</span>, <span class='no'>date</span>, <span class='no'>status</span>, <span class='kw'>comment</span> <span class='kw'>=</span> <span class='st'>""</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>include_past</th>
-      <td><p>Whether to return past sections or only current sections.</p></td>
+      <th>section_id</th>
+      <td><p>The id of the section for which the attendance entry will be added.</p></td>
+    </tr>
+    <tr>
+      <th>enrollment_id</th>
+      <td><p>The id of the enrollment for the student in the course section.</p></td>
+    </tr>
+    <tr>
+      <th>date</th>
+      <td><p>The date of the attendance entry in YYYY-MM-DD format.</p></td>
+    </tr>
+    <tr>
+      <th>status</th>
+      <td><p>1, 2, 3, or 4 corresponding to 'present', 'absent', 'late', or 'excused'.</p></td>
     </tr>
     </table>
     
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>A dataframe of section details.</p>
-    
-    <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
-
-    <p>A section is a course meeting.</p>
-    
-    <h2 class="hasAnchor" id="references"><a class="anchor" href="#references"></a>References</h2>
-
-    
-    <p><a href='https://developers.schoology.com/api-documentation/rest-api-v1/course-section'>API Documentation</a></p>
+    <p>An array of attendance ids and statuses</p>
     
 
   </div>
@@ -142,10 +145,6 @@
       <li><a href="#arguments">Arguments</a></li>
       
       <li><a href="#value">Value</a></li>
-
-      <li><a href="#details">Details</a></li>
-
-      <li><a href="#references">References</a></li>
           </ul>
 
   </div>
