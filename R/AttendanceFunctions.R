@@ -40,6 +40,8 @@ listAttendances <- function(section_id, start = NULL, end = NULL, enrollment_id 
       
       attendancesForDate <- resource$date[[dateIndex]]
       
+      if(length(attendancesForDate$statuses$status) == 0) next() # Happens if students were marked non-present, but then later marked present.
+      
       for(statusTypeIndex in 1:length(attendancesForDate$statuses$status)){
         
         newAttendanceEntries <- attendancesForDate$statuses$status[[statusTypeIndex]]$attendances$attendance %>% toJSON() %>% fromJSON()
