@@ -7,6 +7,9 @@
     <loc>https://samterfa.github.io/SchoologySDK//reference/createBuilding.html</loc>
   </url>
   <url>
+    <loc>https://samterfa.github.io/SchoologySDK//reference/createGradingPeriod.html</loc>
+  </url>
+  <url>
     <loc>https://samterfa.github.io/SchoologySDK//reference/createUser.html</loc>
   </url>
   <url>
@@ -14,6 +17,9 @@
   </url>
   <url>
     <loc>https://samterfa.github.io/SchoologySDK//reference/deleteBuilding.html</loc>
+  </url>
+  <url>
+    <loc>https://samterfa.github.io/SchoologySDK//reference/deleteGradingPeriod.html</loc>
   </url>
   <url>
     <loc>https://samterfa.github.io/SchoologySDK//reference/deleteUser.html</loc>
@@ -29,6 +35,9 @@
   </url>
   <url>
     <loc>https://samterfa.github.io/SchoologySDK//reference/listEnrollments.html</loc>
+  </url>
+  <url>
+    <loc>https://samterfa.github.io/SchoologySDK//reference/listGradingPeriods.html</loc>
   </url>
   <url>
     <loc>https://samterfa.github.io/SchoologySDK//reference/listGroups.html</loc>
@@ -61,6 +70,9 @@
     <loc>https://samterfa.github.io/SchoologySDK//reference/updateEnrollment.html</loc>
   </url>
   <url>
+    <loc>https://samterfa.github.io/SchoologySDK//reference/updateGradingPeriods.html</loc>
+  </url>
+  <url>
     <loc>https://samterfa.github.io/SchoologySDK//reference/updateGroup.html</loc>
   </url>
   <url>
@@ -83,6 +95,9 @@
   </url>
   <url>
     <loc>https://samterfa.github.io/SchoologySDK//reference/viewEnrollment.html</loc>
+  </url>
+  <url>
+    <loc>https://samterfa.github.io/SchoologySDK//reference/viewGradingPeriod.html</loc>
   </url>
   <url>
     <loc>https://samterfa.github.io/SchoologySDK//reference/viewGroup.html</loc>

@@ -13,7 +13,7 @@ attendanceStatuses <- c('present', 'absent', 'late', 'excused')
 #' @param enrollment_id Filter statuses for a given enrollment.
 #' @concept Attendances
 #' @return A dataframe of attendance details.
-#' @attendance References:
+#' @section References:
 #' \href{https://developers.schoology.com/api-documentation/rest-api-v1/course-attendance}{API Documentation}
 #' @export
 # This function returns a data frame of attendances.
@@ -66,7 +66,7 @@ listAttendances <- function(section_id, start = NULL, end = NULL, enrollment_id 
 #' @param status 1, 2, 3, or 4 corresponding to 'present', 'absent', 'late', or 'excused'.
 #' @concept Attendances
 #' @return An array of attendance ids and statuses
-#' @attendance References:
+#' @section References:
 #' \href{https://developers.schoology.com/api-documentation/rest-api-v1/course-attendance}{API Documentation}
 #' @export
 updateAttendance = function(section_id, enrollment_id, date, status, comment = ''){

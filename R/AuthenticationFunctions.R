@@ -155,9 +155,9 @@ makeRequest <- function(endpt, paramsList = NULL, verb = 'GET', payload = NULL){
   }
 }
 
-allModules <- c("Attendances", "Buildings", "Courses", "Enrollments", "Groups", "Roles", "Schools", "Sections", "Users")
+allSubjects <- c("Attendances", "Buildings", "Courses", "Enrollments", "Grading Periods", "Groups", "Roles", "Schools", "Sections", "Users")
 
-generatePkgdownYmlFile <- function(modules = allModules){
+generatePkgdownYmlFile <- function(subjects = allSubjects){
   
   # Update _pkgdown.yml to aid in reference navigation.
   ymlText <- paste0('url: https://samterfa.github.io/SchoologySDK/
@@ -166,13 +166,13 @@ author: Sam Terfa
 
 reference:')
   
-  for(module in allModules){
+  for(subject in subjects){
     
     ymlText <- paste0(ymlText,'
- - title: ', stringr::str_to_title(module) ,'
-   desc:  Functions involving ', module, '.
+ - title: ', str_to_title(subject) %>% str_replace_all(' ', ''),'
+   desc:  Functions involving ', subject %>% str_replace_all(' ', ''), '.
    contents:
-   - has_concept("', module, '")')
+   - has_concept("', subject %>% str_replace_all(' ', ''), '")')
   }
   
   writeLines(ymlText, 'pkgdown/_pkgdown.yml')

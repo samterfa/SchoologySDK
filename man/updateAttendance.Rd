@@ -21,4 +21,9 @@ An array of attendance ids and statuses
 \description{
 This function modifies one or more attributes of a attendance.
 }
+\section{References}{
+
+\href{https://developers.schoology.com/api-documentation/rest-api-v1/course-attendance}{API Documentation}
+}
+
 \concept{Attendances}

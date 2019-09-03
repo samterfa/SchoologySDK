@@ -19,6 +19,10 @@ reference:
    desc:  Functions involving Enrollments.
    contents:
    - has_concept("Enrollments")
+ - title: Gradingperiods
+   desc:  Functions involving GradingPeriods.
+   contents:
+   - has_concept("GradingPeriods")
  - title: Groups
    desc:  Functions involving Groups.
    contents:

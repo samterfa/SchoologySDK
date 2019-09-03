@@ -42,4 +42,9 @@ A dataframe of updated enrollment details.
 \description{
 This function modifies one or more attributes of a enrollment.
 }
+\section{References}{
+
+\href{https://developers.schoology.com/api-documentation/rest-api-v1/course-enrollment}{API Documentation}
+}
+
 \concept{Enrollments}

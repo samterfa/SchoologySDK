@@ -29,4 +29,9 @@ This function returns a list of enrollments for a course past and present.
 \details{
 A enrollment is specific user assigned to the realm object.
 }
+\section{References}{
+
+\href{https://developers.schoology.com/api-documentation/rest-api-v1/course-enrollment}{API Documentation}
+}
+
 \concept{Enrollments}

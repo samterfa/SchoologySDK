@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>List Enrollments for a Course — listEnrollments • schoologysdk</title>
+<title>Create a School GradingPeriods — createGradingPeriod • schoologysdk</title>
 
 <!-- jquery -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
@@ -30,9 +30,9 @@
 
 
 
-<meta property="og:title" content="List Enrollments for a Course — listEnrollments" />
+<meta property="og:title" content="Create a School GradingPeriods — createGradingPeriod" />
 
-<meta property="og:description" content="This function returns a list of enrollments for a course past and present." />
+<meta property="og:description" content="This function creates a new school gradingPeriods." />
 <meta name="twitter:card" content="summary" />
 
 
@@ -99,61 +99,44 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>List Enrollments for a Course</h1>
-    <small class="dont-index">Source: <a href='https://github.com/samterfa/schoologysdk/blob/master/R/EnrollmentFunctions.R'><code>R/EnrollmentFunctions.R</code></a></small>
-    <div class="hidden name"><code>listEnrollments.Rd</code></div>
+    <h1>Create a School GradingPeriods</h1>
+    <small class="dont-index">Source: <a href='https://github.com/samterfa/schoologysdk/blob/master/R/GradingPeriodFunctions.R'><code>R/GradingPeriodFunctions.R</code></a></small>
+    <div class="hidden name"><code>createGradingPeriod.Rd</code></div>
     </div>
 
     <div class="ref-description">
     
-    <p>This function returns a list of enrollments for a course past and present.</p>
+    <p>This function creates a new school gradingPeriods.</p>
     
     </div>
 
-    <pre class="usage"><span class='fu'>listEnrollments</span>(<span class='no'>realm</span>, <span class='no'>realm_id</span>, <span class='kw'>uid</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>enrollment_status</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>type</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>picture_size</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)</pre>
+    <pre class="usage"><span class='fu'>createGradingPeriod</span>(<span class='no'>title</span>, <span class='no'>start</span>, <span class='no'>end</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>realm</th>
-      <td><p>One of 'schools', 'buildings', 'users', 'groups', 'courses', or 'sections'.</p></td>
+      <th>title</th>
+      <td><p>The grading period title. This title must be unique across all grading periods in the school.</p></td>
     </tr>
     <tr>
-      <th>realm_id</th>
-      <td><p>The id of the realm object.</p></td>
+      <th>start</th>
+      <td><p>The grading period start date YYYY-MM-DD</p></td>
     </tr>
     <tr>
-      <th>uid</th>
-      <td><p>Filter enrollments for a given user.</p></td>
-    </tr>
-    <tr>
-      <th>enrollment_status</th>
-      <td><p>Filter enrollments for a given enrollment status 1-5.</p></td>
-    </tr>
-    <tr>
-      <th>type</th>
-      <td><p>Filter enrollments by an enrollment type. Possible values: 'admin' or 'member'.</p></td>
-    </tr>
-    <tr>
-      <th>picture_size</th>
-      <td><p>Specify size of profile picture returned with this user. Possible values: 'big', 'reg', 'sm', or 'tiny'.</p></td>
+      <th>end</th>
+      <td><p>The grading period end date YYYY-MM-DD</p></td>
     </tr>
     </table>
     
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>A dataframe of enrollment details.</p>
-    
-    <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
-
-    <p>A enrollment is specific user assigned to the realm object.</p>
+    <p>A dataframe of details for the newly created gradingPeriod.</p>
     
     <h2 class="hasAnchor" id="references"><a class="anchor" href="#references"></a>References</h2>
 
     
-    <p><a href='https://developers.schoology.com/api-documentation/rest-api-v1/course-enrollment'>API Documentation</a></p>
+    <p><a href='https://developers.schoology.com/api-documentation/rest-api-v1/gradingPeriods'>API Documentation</a></p>
     
 
   </div>
@@ -163,8 +146,6 @@
       <li><a href="#arguments">Arguments</a></li>
       
       <li><a href="#value">Value</a></li>
-
-      <li><a href="#details">Details</a></li>
 
       <li><a href="#references">References</a></li>
           </ul>

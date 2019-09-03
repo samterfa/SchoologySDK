@@ -13,7 +13,7 @@ source('R/AuthenticationFunctions.R')
 #' @param picture_size Specify size of profile picture returned with this user. Possible values: 'big', 'reg', 'sm', or 'tiny'.
 #' @concept Enrollments
 #' @return A dataframe of enrollment details.
-#' @enrollment References:
+#' @section References:
 #' \href{https://developers.schoology.com/api-documentation/rest-api-v1/course-enrollment}{API Documentation}
 #' @export
 # This function returns a data frame of enrollments.
@@ -49,7 +49,7 @@ listEnrollments <- function(realm, realm_id, uid = NULL, enrollment_status = NUL
 #' @param enrollmentId Can be found by navigating to the Schoology enrollment's information page.
 #' @concept Enrollments
 #' @return A dataframe of enrollment details.
-#' @enrollment References:
+#' @section References:
 #' \href{https://developers.schoology.com/api-documentation/rest-api-v1/course-enrollment}{API Documentation}
 #' @export
 viewEnrollment = function(realm, realm_id, enrollmentId){
@@ -84,7 +84,7 @@ viewEnrollment = function(realm, realm_id, enrollmentId){
 #' @param synced Whether or not this course enrollment was synced with an external system (eg, Student Information System). The default value is 0. For synced course enrollments, the Enrollment School Code field is not editable through Schoology.
 #' @concept Enrollments
 #' @return A dataframe of updated enrollment details.
-#' @enrollment References:
+#' @section References:
 #' \href{https://developers.schoology.com/api-documentation/rest-api-v1/course-enrollment}{API Documentation}
 #' @export
 updateEnrollment = function(enrollmentId, enrollment_title = NULL, enrollment_code = NULL, enrollment_school_code = NULL, access_code = NULL, grading_periods = NULL, description = NULL, profile_url = NULL, location = NULL, meeting_days = NULL, start_time = NULL, end_time = NULL, class_periods = NULL, synced = NULL){

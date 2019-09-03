@@ -25,4 +25,9 @@ This function returns a list of attendances for a course past and present.
 \details{
 An attendance entry is a student record of being absent, late or excused late.
 }
+\section{References}{
+
+\href{https://developers.schoology.com/api-documentation/rest-api-v1/course-attendance}{API Documentation}
+}
+
 \concept{Attendances}

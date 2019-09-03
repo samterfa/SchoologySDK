@@ -19,4 +19,9 @@ A dataframe of enrollment details.
 \description{
 This function returns details about a Schoology enrollment.
 }
+\section{References}{
+
+\href{https://developers.schoology.com/api-documentation/rest-api-v1/course-enrollment}{API Documentation}
+}
+
 \concept{Enrollments}
