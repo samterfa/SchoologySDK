@@ -104,3 +104,27 @@ updateGroup = function(groupId, building_id = NULL, school_id = NULL, title = NU
     return(response)
   }
 }
+
+listGroupEnrollmentsViaCSVexport <- function(uid = T, school_uid = T, name_first = T, name_last = T, mail = T, title = T, group_code = T, type = T, status = T){
+  
+  require(xml2)
+  require(tidyverse)
+  
+  params <- as.list(environment())
+  params <- params[unlist(params)]
+  
+  endpoint <- 'csvexport/group_enrollments'
+  
+  if(length(params) > 0){
+    
+    endpoint <- paste0(endpoint, '?fields=')
+    
+    endpoint <- paste0(endpoint, paste(names(params), collapse = ','))
+  }
+  
+  resource <- makeRequest(endpoint)
+  
+  users <- xml_text(resource) %>% read_csv()
+  
+  return(users)
+}

@@ -396,7 +396,7 @@ listLanguages = function(){
      source('R/Helper Functions.R')
      
      endpoint = 'users/languages'
-     resource = getObject(endpoint)
+     resource = makeRequest(endpoint)
      
      # If there's no error...
      if(!exists('status_code', where = resource)){
@@ -408,4 +408,28 @@ listLanguages = function(){
           # Otherwise return server response if there's an error.
           return(resource)
      }
+}
+
+listUsersViaCSVexport <- function(uid = T, school_uid = T, building_nid = T, name_title = T, name_first = T, name_first_preferred = T, name_middle = T, name_last = T, role_name = T, name = T, mail = T, position = T, grad_year = T, birthday = T, gender = T, bio = T, subjects_taught = T, grades_taught = T, phone = T, address = T, website = T, interests = T, activities = T){
+  
+  require(xml2)
+  require(tidyverse)
+  
+  params <- as.list(environment())
+  params <- params[unlist(params)]
+  
+  endpoint <- 'csvexport/users'
+  
+  if(length(params) > 0){
+    
+    endpoint <- paste0(endpoint, '?fields=')
+    
+    endpoint <- paste0(endpoint, paste(names(params), collapse = ','))
+  }
+
+  resource <- makeRequest(endpoint)
+  
+  users <- xml_text(resource) %>% read_csv()
+  
+  return(users)
 }

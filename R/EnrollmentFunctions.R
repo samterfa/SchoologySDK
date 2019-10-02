@@ -66,6 +66,31 @@ viewEnrollment = function(realm, realm_id, enrollmentId){
 }
 
 
+#' Create Enrollment
+#' 
+#' This function modifies one or more attributes of a enrollment.
+#' 
+#' @param realm One of 'schools', 'buildings', 'users', 'groups', 'courses', or 'sections'.
+#' @param realm_id The id of the realm object.
+#' @param uid The Schoology ID of the user.
+#' @param admin Whether this user is an administrator (e.g. teacher) as opposed to a regular member (e.g. student)
+#' @param status The current status of the enrollment. 1: Active, 2: Expired (i.e. past course), 3: Invite pending, 4: Request Pending, 5: Archived (Course specific status members can be placed in before being fully unenrolled)
+#' @concept Enrollments
+#' @return A dataframe of updated enrollment details.
+#' @section References:
+#' \href{https://developers.schoology.com/api-documentation/rest-api-v1/course-enrollment}{API Documentation}
+#' @export
+createEnrollment = function(realm, realm_id, uid, admin, status){
+  
+  params = as.list(environment())[-(1:2)]
+  
+  endpoint = paste0(realm, '/', realm_id, '/enrollments')
+  
+  response <- makeRequest(endpoint, verb = 'POST', payload = fromJSON(toJSON(params, pretty = TRUE)))
+  
+  return(response)
+}
+
 #' Update Enrollment Details
 #' 
 #' This function modifies one or more attributes of a enrollment.
