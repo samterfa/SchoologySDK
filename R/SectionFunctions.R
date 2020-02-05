@@ -95,3 +95,29 @@ updateSection = function(sectionId, section_title = NULL, section_code = NULL, s
   
   return(response)
 }
+
+#' Deletes a school section.
+#' 
+#' @param sectionId The ID of the section which will be deleted.
+#' @concept Sections
+#' @return The success status of the DELETE request.
+#' @section References:
+#' \href{https://developers.schoology.com/api-documentation/rest-api-v1/section}{API Documentation}
+#' @export
+deleteSection = function(sectionId){
+  
+  endpoint = paste0('schools/', sectionId)
+  
+  section = viewSection(sectionId)
+  
+  sectionName <- paste(section$course_title[[1]], section$section_title[[1]])
+  
+  userResponse = readline(prompt = paste0("Are you SURE you want to delete ", sectionName, "? This cannot be undone! \nType '", sectionName, "' to delete, anything else not to delete."))
+  
+  if(userResponse == sectionName){
+    response = makeRequest(endpoint, verb = 'DELETE')
+    return(paste(sectionName, 'successfully deleted.'))
+  }else{
+    return("Section deletion canceled.")
+  }
+}

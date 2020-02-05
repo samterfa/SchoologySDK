@@ -348,15 +348,22 @@ createAssociations = function(associationObjects = list(createAssociationObject(
      return(response)
 }
 
-# This function returns the current API user.
+#' This function returns the current API user.
+#' 
+#' @param currentAccessToken The currentAccessToken of the current API user.
+#' @param currentAccessTokenSecret The currentAccessTokenSecret of the current API user.
+#' @param currentConsumerKey The currentConsumerKey of the application.
+#' @param currentConsumerSecret The currentConsumerSecret of the application.
+#' @concept Users
+#' @return User information for the current API user.
+#' @section References:
+#' \href{https://developers.schoology.com/api-documentation/rest-api-v1/user}{API Documentation}
+#' @export
 viewApiUser = function(currentAccessToken, currentAccessTokenSecret, currentConsumerKey, currentConsumerSecret){
      
-     require(jsonlite)
-     source('R/Helper Functions.R')
-     
      endpoint = 'users/me'  
-     resource = getObject(endpoint, consumerKey = currentConsumerKey, consumerSecret = currentConsumerSecret, token = currentAccessToken, tokenSecret = currentAccessTokenSecret)
-  
+     resource = makeRequest(endpoint, verb = 'GET')
+ 
      # If there's no error...
      if(!exists('status_code', where = resource)){
           # ... Return resource.

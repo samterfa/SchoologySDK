@@ -151,6 +151,7 @@ makeRequest <- function(endpt, paramsList = NULL, verb = 'GET', payload = NULL){
   if(response$status_code < 300){
     return(content(response))
   }else{
+    #return(response)
     stop(content(response))
   }
 }

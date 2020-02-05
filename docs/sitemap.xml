@@ -7,7 +7,13 @@
     <loc>https://samterfa.github.io/SchoologySDK//reference/createBuilding.html</loc>
   </url>
   <url>
+    <loc>https://samterfa.github.io/SchoologySDK//reference/createEnrollment.html</loc>
+  </url>
+  <url>
     <loc>https://samterfa.github.io/SchoologySDK//reference/createGradingPeriod.html</loc>
+  </url>
+  <url>
+    <loc>https://samterfa.github.io/SchoologySDK//reference/createMessage.html</loc>
   </url>
   <url>
     <loc>https://samterfa.github.io/SchoologySDK//reference/createUser.html</loc>
@@ -20,6 +26,12 @@
   </url>
   <url>
     <loc>https://samterfa.github.io/SchoologySDK//reference/deleteGradingPeriod.html</loc>
+  </url>
+  <url>
+    <loc>https://samterfa.github.io/SchoologySDK//reference/deleteMessage.html</loc>
+  </url>
+  <url>
+    <loc>https://samterfa.github.io/SchoologySDK//reference/deleteSection.html</loc>
   </url>
   <url>
     <loc>https://samterfa.github.io/SchoologySDK//reference/deleteUser.html</loc>
@@ -41,6 +53,9 @@
   </url>
   <url>
     <loc>https://samterfa.github.io/SchoologySDK//reference/listGroups.html</loc>
+  </url>
+  <url>
+    <loc>https://samterfa.github.io/SchoologySDK//reference/listMessages.html</loc>
   </url>
   <url>
     <loc>https://samterfa.github.io/SchoologySDK//reference/listRoles.html</loc>
@@ -76,6 +91,9 @@
     <loc>https://samterfa.github.io/SchoologySDK//reference/updateGroup.html</loc>
   </url>
   <url>
+    <loc>https://samterfa.github.io/SchoologySDK//reference/updateMessage.html</loc>
+  </url>
+  <url>
     <loc>https://samterfa.github.io/SchoologySDK//reference/updateSchool.html</loc>
   </url>
   <url>
@@ -86,6 +104,9 @@
   </url>
   <url>
     <loc>https://samterfa.github.io/SchoologySDK//reference/updateUsers.html</loc>
+  </url>
+  <url>
+    <loc>https://samterfa.github.io/SchoologySDK//reference/viewApiUser.html</loc>
   </url>
   <url>
     <loc>https://samterfa.github.io/SchoologySDK//reference/viewBuilding.html</loc>
@@ -101,6 +122,9 @@
   </url>
   <url>
     <loc>https://samterfa.github.io/SchoologySDK//reference/viewGroup.html</loc>
+  </url>
+  <url>
+    <loc>https://samterfa.github.io/SchoologySDK//reference/viewMessage.html</loc>
   </url>
   <url>
     <loc>https://samterfa.github.io/SchoologySDK//reference/viewRole.html</loc>
