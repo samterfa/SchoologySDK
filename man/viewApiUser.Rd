@@ -4,8 +4,12 @@
 \alias{viewApiUser}
 \title{This function returns the current API user.}
 \usage{
-viewApiUser(currentAccessToken, currentAccessTokenSecret,
-  currentConsumerKey, currentConsumerSecret)
+viewApiUser(
+  currentAccessToken,
+  currentAccessTokenSecret,
+  currentConsumerKey,
+  currentConsumerSecret
+)
 }
 \arguments{
 \item{currentAccessToken}{The currentAccessToken of the current API user.}

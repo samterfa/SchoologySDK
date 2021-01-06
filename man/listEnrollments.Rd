@@ -4,8 +4,14 @@
 \alias{listEnrollments}
 \title{List Enrollments for a Course}
 \usage{
-listEnrollments(realm, realm_id, uid = NULL, enrollment_status = NULL,
-  type = NULL, picture_size = NULL)
+listEnrollments(
+  realm,
+  realm_id,
+  uid = NULL,
+  enrollment_status = NULL,
+  type = NULL,
+  picture_size = NULL
+)
 }
 \arguments{
 \item{realm}{One of 'schools', 'buildings', 'users', 'groups', 'courses', or 'sections'.}

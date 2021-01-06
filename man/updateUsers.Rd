@@ -4,21 +4,39 @@
 \alias{updateUsers}
 \title{Update Multiple Users}
 \usage{
-updateUsers(userId_list, school_id_list = NULL,
-  building_id_list = NULL, school_uid_list = NULL,
-  name_title_list = NULL, name_title_show_list = NULL,
-  name_first_list = NULL, name_first_preferred_list = NULL,
-  name_middle_list = NULL, name_middle_show_list = NULL,
-  name_last_list = NULL, name_display_list = NULL,
-  username_list = NULL, primary_email_list = NULL,
-  position_list = NULL, gender_list = NULL, grad_year_list = NULL,
-  birthday_date_list = NULL, password_list = NULL,
-  role_id_list = NULL, email_login_info_list = NULL,
-  profiel_url_list = NULL, tz_name_list = NULL, parents_list = NULL,
-  parent_uids_list = NULL, advisor_uids_list = NULL,
-  child_uids_list = NULL, send_message_list = NULL,
-  synced_list = NULL, profile_picture_fid_list = NULL,
-  additional_buildings_list = NULL)
+updateUsers(
+  userId_list,
+  school_id_list = NULL,
+  building_id_list = NULL,
+  school_uid_list = NULL,
+  name_title_list = NULL,
+  name_title_show_list = NULL,
+  name_first_list = NULL,
+  name_first_preferred_list = NULL,
+  name_middle_list = NULL,
+  name_middle_show_list = NULL,
+  name_last_list = NULL,
+  name_display_list = NULL,
+  username_list = NULL,
+  primary_email_list = NULL,
+  position_list = NULL,
+  gender_list = NULL,
+  grad_year_list = NULL,
+  birthday_date_list = NULL,
+  password_list = NULL,
+  role_id_list = NULL,
+  email_login_info_list = NULL,
+  profiel_url_list = NULL,
+  tz_name_list = NULL,
+  parents_list = NULL,
+  parent_uids_list = NULL,
+  advisor_uids_list = NULL,
+  child_uids_list = NULL,
+  send_message_list = NULL,
+  synced_list = NULL,
+  profile_picture_fid_list = NULL,
+  additional_buildings_list = NULL
+)
 }
 \arguments{
 \item{userObjects}{A list of userObjects. These must be created via createUserObject().}

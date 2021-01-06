@@ -4,8 +4,14 @@
 \alias{listUsers}
 \title{List Users for a School}
 \usage{
-listUsers(active = T, building_id = NULL, role_ids = NULL,
-  parent_access_codes = NULL, school_uids = NULL, extended = NULL)
+listUsers(
+  active = T,
+  building_id = NULL,
+  role_ids = NULL,
+  parent_access_codes = NULL,
+  school_uids = NULL,
+  extended = NULL
+)
 }
 \arguments{
 \item{active}{Whether to return active users only. Defaults to True.}

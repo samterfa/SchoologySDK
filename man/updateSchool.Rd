@@ -4,10 +4,20 @@
 \alias{updateSchool}
 \title{Update School Details}
 \usage{
-updateSchool(schoolId, title = NULL, address1 = NULL,
-  address2 = NULL, city = NULL, state = NULL, postal_code = NULL,
-  country = NULL, website = NULL, phone = NULL, fax = NULL,
-  picture_url = NULL)
+updateSchool(
+  schoolId,
+  title = NULL,
+  address1 = NULL,
+  address2 = NULL,
+  city = NULL,
+  state = NULL,
+  postal_code = NULL,
+  country = NULL,
+  website = NULL,
+  phone = NULL,
+  fax = NULL,
+  picture_url = NULL
+)
 }
 \arguments{
 \item{schoolId}{Can be found by navigating to the Schoology district information page.}

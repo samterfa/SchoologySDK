@@ -4,9 +4,12 @@
 \alias{createUsers}
 \title{Create Multiple Users}
 \usage{
-createUsers(userObjects = list(createUserObject()),
-  update_existing = F, ignore_email_conflicts = F,
-  email_conflict_resolution = T)
+createUsers(
+  userObjects = list(createUserObject()),
+  update_existing = F,
+  ignore_email_conflicts = F,
+  email_conflict_resolution = T
+)
 }
 \arguments{
 \item{userObjects}{A list of userObjects. These must be created via createUserObject().}

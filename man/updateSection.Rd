@@ -4,11 +4,22 @@
 \alias{updateSection}
 \title{Update Section Details}
 \usage{
-updateSection(sectionId, section_title = NULL, section_code = NULL,
-  section_school_code = NULL, access_code = NULL,
-  grading_periods = NULL, description = NULL, profile_url = NULL,
-  location = NULL, meeting_days = NULL, start_time = NULL,
-  end_time = NULL, class_periods = NULL, synced = NULL)
+updateSection(
+  sectionId,
+  section_title = NULL,
+  section_code = NULL,
+  section_school_code = NULL,
+  access_code = NULL,
+  grading_periods = NULL,
+  description = NULL,
+  profile_url = NULL,
+  location = NULL,
+  meeting_days = NULL,
+  start_time = NULL,
+  end_time = NULL,
+  class_periods = NULL,
+  synced = NULL
+)
 }
 \arguments{
 \item{sectionId}{Can be found by navigating to the Schoology section information page.}

@@ -35,6 +35,23 @@ listSections <- function(course_id, include_past = 0){
 }
 
 
+#' List Section Grades
+#' 
+#' Return all grades for all enrollments of a section.
+#' @param section_id The id of the course section.
+#' @return A list of section grades.
+#' @export
+listSectionGrades <- function(section_id, return_response = F){
+  
+  endpoint = glue::glue('/sections/{section_id}/grades')
+  
+  params <- list(start = 0, limit = 200)
+  resource <- makeRequest(endpoint, params, verb = 'GET')
+  
+  return(resource)
+}
+
+
 #' Get Section Details
 #' 
 #' This function returns details about a Schoology section.

@@ -4,12 +4,22 @@
 \alias{updateEnrollment}
 \title{Update Enrollment Details}
 \usage{
-updateEnrollment(enrollmentId, enrollment_title = NULL,
-  enrollment_code = NULL, enrollment_school_code = NULL,
-  access_code = NULL, grading_periods = NULL, description = NULL,
-  profile_url = NULL, location = NULL, meeting_days = NULL,
-  start_time = NULL, end_time = NULL, class_periods = NULL,
-  synced = NULL)
+updateEnrollment(
+  enrollmentId,
+  enrollment_title = NULL,
+  enrollment_code = NULL,
+  enrollment_school_code = NULL,
+  access_code = NULL,
+  grading_periods = NULL,
+  description = NULL,
+  profile_url = NULL,
+  location = NULL,
+  meeting_days = NULL,
+  start_time = NULL,
+  end_time = NULL,
+  class_periods = NULL,
+  synced = NULL
+)
 }
 \arguments{
 \item{enrollmentId}{Can be found by navigating to the Schoology enrollment information page.}

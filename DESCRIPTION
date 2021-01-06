@@ -13,4 +13,4 @@ URL: http://github.com/samterfa/schoologysdk
 BugReports: http://github.com/samterfa/schoologysdk/issues
 Imports:
   tidyverse,jsonlite,httr
-RoxygenNote: 6.1.1
+RoxygenNote: 7.0.2

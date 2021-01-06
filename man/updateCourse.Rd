@@ -4,11 +4,22 @@
 \alias{updateCourse}
 \title{Update Course Details}
 \usage{
-updateCourse(courseId, course_title = NULL, course_code = NULL,
-  course_school_code = NULL, access_code = NULL,
-  grading_periods = NULL, description = NULL, profile_url = NULL,
-  location = NULL, meeting_days = NULL, start_time = NULL,
-  end_time = NULL, class_periods = NULL, synced = NULL)
+updateCourse(
+  courseId,
+  course_title = NULL,
+  course_code = NULL,
+  course_school_code = NULL,
+  access_code = NULL,
+  grading_periods = NULL,
+  description = NULL,
+  profile_url = NULL,
+  location = NULL,
+  meeting_days = NULL,
+  start_time = NULL,
+  end_time = NULL,
+  class_periods = NULL,
+  synced = NULL
+)
 }
 \arguments{
 \item{courseId}{Can be found by navigating to the Schoology course information page.}

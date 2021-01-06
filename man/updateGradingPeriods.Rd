@@ -4,8 +4,7 @@
 \alias{updateGradingPeriods}
 \title{Update GradingPeriods Details}
 \usage{
-updateGradingPeriods(gradingPeriodId, title = NULL, start = NULL,
-  end = NULL)
+updateGradingPeriods(gradingPeriodId, title = NULL, start = NULL, end = NULL)
 }
 \arguments{
 \item{title}{The grading period title. This title must be unique across all grading periods in the school.}

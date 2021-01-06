@@ -4,10 +4,20 @@
 \alias{updateMessage}
 \title{Update Message Details}
 \usage{
-updateMessage(messageId, title = NULL, address1 = NULL,
-  address2 = NULL, city = NULL, state = NULL, postal_code = NULL,
-  country = NULL, website = NULL, phone = NULL, fax = NULL,
-  picture_url = NULL)
+updateMessage(
+  messageId,
+  title = NULL,
+  address1 = NULL,
+  address2 = NULL,
+  city = NULL,
+  state = NULL,
+  postal_code = NULL,
+  country = NULL,
+  website = NULL,
+  phone = NULL,
+  fax = NULL,
+  picture_url = NULL
+)
 }
 \arguments{
 \item{messageId}{Can be found by navigating to the Schoology message information page.}

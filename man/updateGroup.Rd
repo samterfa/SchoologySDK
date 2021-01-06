@@ -4,12 +4,23 @@
 \alias{updateGroup}
 \title{Update Group Details}
 \usage{
-updateGroup(groupId, building_id = NULL, school_id = NULL,
-  title = NULL, picture_url = NULL, description = NULL,
-  website = NULL, access_code = NULL, privacy_level = NULL,
-  category = NULL, options_invite_type = NULL,
-  options_member_post = NULL, options_member_post_comment = NULL,
-  options_create_discussion = NULL, options_create_files = NULL)
+updateGroup(
+  groupId,
+  building_id = NULL,
+  school_id = NULL,
+  title = NULL,
+  picture_url = NULL,
+  description = NULL,
+  website = NULL,
+  access_code = NULL,
+  privacy_level = NULL,
+  category = NULL,
+  options_invite_type = NULL,
+  options_member_post = NULL,
+  options_member_post_comment = NULL,
+  options_create_discussion = NULL,
+  options_create_files = NULL
+)
 }
 \arguments{
 \item{groupId}{Can be found by navigating to the Schoology group information page.}

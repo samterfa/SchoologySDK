@@ -4,8 +4,7 @@
 \alias{listAttendances}
 \title{List Attendances for a Course}
 \usage{
-listAttendances(section_id, start = NULL, end = NULL,
-  enrollment_id = NULL)
+listAttendances(section_id, start = NULL, end = NULL, enrollment_id = NULL)
 }
 \arguments{
 \item{section_id}{The id of the section for which the attendance entries are requested.}

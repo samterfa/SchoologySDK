@@ -4,10 +4,20 @@
 \alias{updateBuilding}
 \title{Update Building Details}
 \usage{
-updateBuilding(buildingId, title = NULL, address1 = NULL,
-  address2 = NULL, city = NULL, state = NULL, postal_code = NULL,
-  country = NULL, website = NULL, phone = NULL, fax = NULL,
-  picture_url = NULL)
+updateBuilding(
+  buildingId,
+  title = NULL,
+  address1 = NULL,
+  address2 = NULL,
+  city = NULL,
+  state = NULL,
+  postal_code = NULL,
+  country = NULL,
+  website = NULL,
+  phone = NULL,
+  fax = NULL,
+  picture_url = NULL
+)
 }
 \arguments{
 \item{buildingId}{Can be found by navigating to the Schoology building information page.}

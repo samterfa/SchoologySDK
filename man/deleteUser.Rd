@@ -4,8 +4,12 @@
 \alias{deleteUser}
 \title{Deletes a User.}
 \usage{
-deleteUser(userId, option_comment = "", option_keep_enrollments = 1,
-  email_notification = 0)
+deleteUser(
+  userId,
+  option_comment = "",
+  option_keep_enrollments = 1,
+  email_notification = 0
+)
 }
 \arguments{
 \item{userId}{The ID of the user which will be deleted.}
