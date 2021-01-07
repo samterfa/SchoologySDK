@@ -41,7 +41,7 @@ listSections <- function(course_id, include_past = 0){
 #' @param section_id The id of the course section.
 #' @return A list of section grades.
 #' @export
-listSectionGrades <- function(section_id, return_response = F){
+listSectionGrades <- function(section_id){
   
   endpoint = glue::glue('/sections/{section_id}/grades')
   
