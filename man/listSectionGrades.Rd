@@ -4,7 +4,7 @@
 \alias{listSectionGrades}
 \title{List Section Grades}
 \usage{
-listSectionGrades(section_id, return_response = F)
+listSectionGrades(section_id)
 }
 \arguments{
 \item{section_id}{The id of the course section.}
