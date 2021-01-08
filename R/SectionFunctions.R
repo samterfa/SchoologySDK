@@ -56,7 +56,7 @@ listSectionGrades <- function(section_id){
 #' Set/modify comments for students for a grading period and the overall course.
 #' @param section_id The id of the course section.
 #' @param grades The updated grades object using patch semantics.
-#' @return The updated section grades.
+#' @return The updated final comments.
 #' @export
 updateFinalComments <- function(section_id, period_id, enrollment_ids, comments, comment_statuses){
   
