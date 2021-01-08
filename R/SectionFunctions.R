@@ -51,6 +51,35 @@ listSectionGrades <- function(section_id){
   return(resource)
 }
 
+#' Update Final Comments
+#' 
+#' Set/modify comments for students for a grading period and the overall course.
+#' @param section_id The id of the course section.
+#' @param grades The updated grades object using patch semantics.
+#' @return The updated section grades.
+#' @export
+updateFinalComments <- function(section_id, period_id, enrollment_ids, comments, comment_statuses){
+  
+  assertthat::assert_that(length(enrollment_ids) == length(comments) & length(comments == length(comment_statuses)))
+  
+  payload <- list(final_comments = list(final_comment = list()))
+  
+  for(i in 1:length(enrollment_ids)){
+    
+    payload$final_comments$final_comment <- payload$final_comments$final_comment %>% append( 
+             list(list(enrollment_id = enrollment_ids[[i]], 
+                  period_id = period_id, 
+                  comment = comments[[i]], 
+                  comment_status = comment_statuses[[i]])))
+  }
+  
+  endpoint = glue::glue('/sections/{section_id}/grades')
+  
+  resource <- makeRequest(endpoint, verb = 'PUT', payload = payload)
+  
+  return(resource)
+}
+
 
 #' Get Section Details
 #' 
