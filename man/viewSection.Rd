@@ -20,4 +20,5 @@ This function returns details about a Schoology section.
 \href{https://developers.schoology.com/api-documentation/rest-api-v1/course-section}{API Documentation}
 }
 
+\concept{Section}
 \concept{Sections}
